@@ -57,6 +57,7 @@ public class AuthenticationController extends ExceptionHandlingController {
         authentication(username, password);
         User loggedUser = userServiceBean.findUserByUsername(username);
         UserPrincipal userPrincipal = new UserPrincipal(loggedUser);
+        System.out.println(userPrincipal.getUsername());
         HttpHeaders jwtHeader = getJwtHeader(userPrincipal);
         return  new ResponseEntity<>(loggedUser, jwtHeader, OK);
     }
