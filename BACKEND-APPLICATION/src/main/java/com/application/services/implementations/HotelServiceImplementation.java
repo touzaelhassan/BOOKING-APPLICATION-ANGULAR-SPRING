@@ -25,6 +25,8 @@ public class HotelServiceImplementation implements HotelServiceSpecification {
     @Override
     public List<Hotel> getHotels() { return hotelRepositoryBean.findAll(); }
     @Override
+    public List<Hotel> findHotelsByOwnerId(Integer ownerId) { return hotelRepositoryBean.findByOwnerId(ownerId); }
+    @Override
     public void deleteHotel() { }
 
 }

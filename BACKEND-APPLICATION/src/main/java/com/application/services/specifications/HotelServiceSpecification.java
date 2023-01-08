@@ -9,5 +9,6 @@ public interface HotelServiceSpecification {
     Hotel updateHotel(Hotel hotel);
     Hotel getHotelById(String id);
     List<Hotel>  getHotels();
+    List<Hotel> findHotelsByOwnerId(Integer ownerId);
     void deleteHotel();
 }
