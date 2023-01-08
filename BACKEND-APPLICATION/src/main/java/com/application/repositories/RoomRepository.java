@@ -1,8 +1,8 @@
 package com.application.repositories;
 
-import com.application.entities.Hotel;
+import com.application.entities.Room;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-@Repository("hotelRepositoryBean")
-public interface HotelRepository extends JpaRepository<Hotel, Integer> { }
+@Repository("roomRepositoryBean")
+public interface RoomRepository extends JpaRepository<Room, Integer> { }

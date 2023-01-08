@@ -1,5 +1,7 @@
 package com.application.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
@@ -12,6 +14,7 @@ import java.util.List;
 public class Owner extends User{
 
     @OneToMany(mappedBy = "owner")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Hotel> hotels = new ArrayList<>();
 
     public Owner() {}

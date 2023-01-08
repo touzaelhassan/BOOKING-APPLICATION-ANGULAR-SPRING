@@ -11,7 +11,7 @@ public class User implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Integer id;
     private String userId;
     private String firstname;
     private String lastname;
@@ -46,7 +46,7 @@ public class User implements Serializable {
         this.authorities = authorities;
     }
 
-    public User(Long id, String userId, String firstname, String lastname, String username, String email, String password, String profileImageUrl, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, boolean isActive, boolean isNotLocked, String role) {
+    public User(Integer id, String userId, String firstname, String lastname, String username, String email, String password, String profileImageUrl, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, boolean isActive, boolean isNotLocked, String role) {
         this.id = id;
         this.userId = userId;
         this.firstname = firstname;
@@ -63,7 +63,7 @@ public class User implements Serializable {
         this.role = role;
     }
 
-    public void setId(Long id) { this.id = id; }
+    public void setId(Integer id) { this.id = id; }
     public void setUserId(String userId) { this.userId = userId; }
     public void setFirstname(String firstname) { this.firstname = firstname; }
     public void setLastname(String lastname) { this.lastname = lastname; }
@@ -79,7 +79,7 @@ public class User implements Serializable {
     public void setRole(String role) { this.role = role; }
     public void setAuthorities(String[] authorities) { this.authorities = authorities; }
 
-    public Long getId() { return id; }
+    public Integer getId() { return id; }
     public String getUserId() { return userId; }
     public String getFirstname() { return firstname; }
     public String getLastname() { return lastname; }

@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
+@Service("hotelServiceBean")
 public class HotelServiceImplementation implements HotelServiceSpecification {
 
     private final HotelRepository hotelRepositoryBean;

@@ -174,7 +174,7 @@ public class UserServiceImplementation implements UserServiceSpecification, User
     }
 
     @Override
-    public void updateUserRole(Long id, String role) {
+    public void updateUserRole(Integer id, String role) {
         User user = userRepositoryBean.findById(id).orElse(null);
         user.setRole(getRoleEnumName(role).name());
         user.setAuthorities(getRoleEnumName(role).getAuthorities());

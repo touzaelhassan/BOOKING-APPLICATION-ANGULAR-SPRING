@@ -1,5 +1,7 @@
 package com.application.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +17,9 @@ public class Room {
     private boolean isAvailable;
     @ManyToOne
     private Hotel hotel;
+
     @OneToMany(mappedBy = "room")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Reservation> reservations = new ArrayList<>();
 
     public Room() { }

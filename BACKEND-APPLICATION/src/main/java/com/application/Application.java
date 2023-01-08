@@ -4,6 +4,8 @@ import com.application.entities.*;
 import com.application.repositories.CityRepository;
 import com.application.repositories.UserRepository;
 import com.application.services.specifications.HotelServiceSpecification;
+import com.application.services.specifications.ReservationServiceSpecification;
+import com.application.services.specifications.RoomServiceSpecification;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -34,6 +36,8 @@ public class Application {
             UserRepository userRepositoryBean,
             CityRepository cityRepositoryBean,
             HotelServiceSpecification hotelServiceBean,
+            RoomServiceSpecification roomServiceBean,
+            ReservationServiceSpecification reservationServiceBean,
             BCryptPasswordEncoder bCryptPasswordEncoder
     ){
 
@@ -122,9 +126,35 @@ public class Application {
             room1.setName("room1");
             room1.setAvailable(true);
             room1.setHotel(hotel1);
+            roomServiceBean.addRoom(room1);
 
+            Room room2 = new Room();
+            room2.setName("room2");
+            room2.setAvailable(true);
+            room2.setHotel(hotel1);
+            roomServiceBean.addRoom(room2);
 
+            Room room3 = new Room();
+            room3.setName("room3");
+            room3.setAvailable(true);
+            room3.setHotel(hotel2);
+            roomServiceBean.addRoom(room3);
 
+            Room room4 = new Room();
+            room4.setName("room4");
+            room4.setAvailable(true);
+            room4.setHotel(hotel3);
+            roomServiceBean.addRoom(room4);
+
+            Reservation reservation1 = new Reservation();
+            reservation1.setClient(client);
+            reservation1.setRoom(room1);
+            reservationServiceBean.addReservation(reservation1);
+
+            Reservation reservation2 = new Reservation();
+            reservation2.setRoom(room2);
+            reservation2.setClient(client);
+            reservationServiceBean.addReservation(reservation2);
 
         };
 
