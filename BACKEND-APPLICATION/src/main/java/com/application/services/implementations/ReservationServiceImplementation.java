@@ -6,6 +6,8 @@ import com.application.services.specifications.ReservationServiceSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service("reservationServiceBean")
 public class ReservationServiceImplementation implements ReservationServiceSpecification {
 
@@ -16,5 +18,8 @@ public class ReservationServiceImplementation implements ReservationServiceSpeci
 
     @Override
     public Reservation addReservation(Reservation reservation) { return reservationRepositoryBean.save(reservation); }
+
+    @Override
+    public List<Reservation> getReservations() { return reservationRepositoryBean.findAll(); }
 
 }

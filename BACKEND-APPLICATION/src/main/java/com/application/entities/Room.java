@@ -16,6 +16,7 @@ public class Room {
     private String name;
     private boolean isAvailable;
     @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Hotel hotel;
 
     @OneToMany(mappedBy = "room")

@@ -13,6 +13,7 @@ public class Reservation {
     private Client client;
     @ManyToOne
     private Room room;
+    boolean isApproved;
 
     public Reservation() { }
 
@@ -30,9 +31,11 @@ public class Reservation {
     public void setId(Integer id) { this.id = id; }
     public void setClient(Client client) { this.client = client; }
     public void setRoom(Room room) { this.room = room; }
+    public void setApproved(boolean approved) { isApproved = approved; }
 
     public Integer getId() { return id; }
     public Client getClient() { return client; }
     public Room getRoom() { return room; }
+    public boolean isApproved() { return isApproved; }
 
 }
