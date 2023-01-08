@@ -24,6 +24,8 @@ public class RoomServiceImplementation implements RoomServiceSpecification {
     @Override
     public List<Room> getRooms() { return roomRepositoryBean.findAll(); }
     @Override
+    public List<Room> getRoomsByHotelId(Integer hotelId) { return roomRepositoryBean.findByHotelId(hotelId); }
+    @Override
     public void deleteRoom() { }
 
 }

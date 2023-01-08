@@ -5,6 +5,7 @@ import com.application.services.specifications.ReservationServiceSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,6 +24,12 @@ public class ReservationController {
     @GetMapping("/reservations")
     public ResponseEntity<List<Reservation>> getReservations() {
         List<Reservation> reservations = reservationServiceBean.getReservations();
+        return new ResponseEntity<>(reservations, OK);
+    }
+
+    @GetMapping("/client/reservations/{id}")
+    public ResponseEntity<List<Reservation>> getReservationsByClientId(@PathVariable Integer id) {
+        List<Reservation> reservations = reservationServiceBean.getReservationsByClientId(id);
         return new ResponseEntity<>(reservations, OK);
     }
 }

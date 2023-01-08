@@ -22,4 +22,7 @@ public class ReservationServiceImplementation implements ReservationServiceSpeci
     @Override
     public List<Reservation> getReservations() { return reservationRepositoryBean.findAll(); }
 
+    @Override
+    public List<Reservation> getReservationsByClientId(Integer clientId) { return reservationRepositoryBean.findByClientId(clientId); }
+
 }
