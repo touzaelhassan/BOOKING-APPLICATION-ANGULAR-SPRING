@@ -1,5 +1,7 @@
 package com.application.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -12,6 +14,7 @@ public class City {
     private Integer id;
     private String name;
     @OneToMany(mappedBy = "city")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Hotel> hotels = new ArrayList<>();
 
     public City() { }

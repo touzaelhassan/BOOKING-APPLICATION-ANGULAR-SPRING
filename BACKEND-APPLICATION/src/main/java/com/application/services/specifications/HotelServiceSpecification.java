@@ -8,6 +8,6 @@ public interface HotelServiceSpecification {
     Hotel addHotel(Hotel hotel);
     Hotel updateHotel(Hotel hotel);
     Hotel getHotelById(String id);
-    List<Hotel>  getHotels ();
+    List<Hotel>  getHotels();
     void deleteHotel();
 }

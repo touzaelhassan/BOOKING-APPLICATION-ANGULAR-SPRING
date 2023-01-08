@@ -23,7 +23,7 @@ public class HotelServiceImplementation implements HotelServiceSpecification {
     @Override
     public Hotel getHotelById(String id) { return null; }
     @Override
-    public List<Hotel> getHotels() { return null; }
+    public List<Hotel> getHotels() { return hotelRepositoryBean.findAll(); }
     @Override
     public void deleteHotel() { }
 

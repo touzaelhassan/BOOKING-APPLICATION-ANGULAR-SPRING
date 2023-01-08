@@ -1,5 +1,7 @@
 package com.application.entities;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,10 +17,12 @@ public class Hotel {
     private boolean isAvailable;
     private boolean isApproved;
     @ManyToOne
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Owner owner;
     @ManyToOne
     private City city;
     @OneToMany(mappedBy = "hotel")
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Room> rooms = new ArrayList<>();
 
     public Hotel() { }
