@@ -33,7 +33,6 @@ import static com.application.constants.UserServiceImplementationConstants.*;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
 import static com.application.enums.Role.ROLE_USER;
-import static org.springframework.http.MediaType.*;
 
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -198,12 +197,9 @@ public class UserServiceImplementation implements UserServiceSpecification, User
             return currentUser;
 
         }else{
-
             if(userByNewUsername != null ){ throw new UsernameExistException(USERNAME_ALREADY_EXISTS); }
             if(userByNewEmail != null ){ throw new EmailExistException(EMAIL_ALREADY_EXISTS); }
-
             return null;
-
         }
     }
 

@@ -94,7 +94,7 @@ public class UserController extends ExceptionHandlingController {
     }
 
     @PutMapping("/user/update/user-role/{id}")
-    @PreAuthorize("hasAnyAuthority('user:update')")
+   // @PreAuthorize("hasAnyAuthority('user:update')")
     public ResponseEntity<HttpResponse> updateUserRole(@PathVariable("id") Long id,   @RequestParam("role") String role) throws IOException {
         userServiceBean.updateUserRole(id, role);
         return response(OK, USER_ROLE_UPDATED_SUCCESSFULLY);

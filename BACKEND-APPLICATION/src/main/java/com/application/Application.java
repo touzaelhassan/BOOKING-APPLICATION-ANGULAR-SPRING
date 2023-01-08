@@ -1,5 +1,9 @@
 package com.application;
 
+import com.application.entities.User;
+import com.application.repositories.UserRepository;
+import com.application.services.specifications.UserServiceSpecification;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
@@ -11,16 +15,48 @@ import org.springframework.web.filter.CorsFilter;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.Date;
 
 import static com.application.constants.FileConstants.USER_FOLDER;
+import static com.application.enums.Role.ROLE_SUPER_ADMIN;
+import static com.application.enums.Role.ROLE_USER;
 
 @SpringBootApplication
 public class Application {
 
     public static void main(String[] args) {
-
         SpringApplication.run(Application.class, args);
         new File(USER_FOLDER).mkdirs();
+    }
+
+    @Bean
+    CommandLineRunner run(
+            UserRepository userRepositoryBean,
+            BCryptPasswordEncoder bCryptPasswordEncoder
+    ){
+
+        return args -> {
+
+           /*
+           User user = new User();
+            user.setUserId("534376");
+            user.setFirstname("hassan");
+            user.setLastname("touza");
+            user.setUsername("touzaelhassan");
+            user.setEmail("hassan@gmail.com");
+            user.setJoinDate(new Date());
+            user.setPassword(bCryptPasswordEncoder.encode("123456"));
+            user.setActive(true);
+            user.setNotLocked(true);
+            user.setRole(ROLE_SUPER_ADMIN.name());
+            user.setAuthorities(ROLE_SUPER_ADMIN.getAuthorities());
+            user.setProfileImageUrl("www.url.com/image-url");
+            userRepositoryBean.save(user);
+            System.out.println(user);
+            */
+
+        };
+
     }
 
     @Bean

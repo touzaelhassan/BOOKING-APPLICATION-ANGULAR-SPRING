@@ -5,6 +5,7 @@ import com.application.classes.UserPrincipal;
 import com.application.dtos.LoginRequest;
 import com.application.dtos.RegisterRequest;
 import com.application.entities.User;
+import com.application.exceptions.ExceptionHandlingController;
 import com.application.exceptions.classes.EmailExistException;
 import com.application.exceptions.classes.UserNotFoundException;
 import com.application.exceptions.classes.UsernameExistException;
@@ -26,7 +27,7 @@ import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/api/authentication")
-public class AuthenticationController {
+public class AuthenticationController extends ExceptionHandlingController {
 
     private final UserServiceSpecification userServiceBean;
     private final AuthenticationManager authenticationManager;
