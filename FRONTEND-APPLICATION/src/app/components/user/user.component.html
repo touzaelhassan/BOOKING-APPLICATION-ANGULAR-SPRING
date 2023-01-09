@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ANGULAR APPLICATION | HOME</title>
+  </head>
+  <body>
+    <div class="container m-5">
+      <div class="d-flex align-items-center">
+        <h3>WELCOME TO THE HOMEPAGE !!</h3>
+        <span class="ms-3" *ngIf="titleAction$ | async as title">{{
+          title
+        }}</span>
+      </div>
+
+      <nav class="navbar navbar-expand-lg navbar-light bg-light my-5">
+        <div class="container-fluid">
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+              <li class="nav-item">
+                <a class="nav-link" (click)="changeTitle('Users')">Users</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" (click)="changeTitle('Profile')">Profile</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" (click)="changeTitle('Settings')"
+                  >Settings</a
+                >
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <button
+        type="button"
+        class="btn btn-info"
+        data-bs-toggle="modal"
+        data-bs-target="#addUserModal"
+      >
+        <i class="fa fa-plus"></i>New User
+      </button>
+
+      <table class="table table-hover table-bordered">
+        <thead class="table-borderless">
+          <tr class="text-center">
+            <th>User ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Username</th>
+            <th>Email</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody *ngFor="let user of users">
+          <tr class="text-center">
+            <td>{{ user?.userId }}</td>
+            <td>{{ user?.firstname }}</td>
+            <td>{{ user?.lastname }}</td>
+            <td>{{ user?.username }}</td>
+            <td>{{ user?.email }}</td>
+            <td>
+              <span [hidden]="!user?.active" class="badge badge-success"
+                >Active</span
+              >
+              <span [hidden]="user?.active" class="badge badge-danger"
+                >Inactive</span
+              >
+            </td>
+            <td class="">
+              <div class="">
+                <button class="btn btn-sm btn-success">
+                  <i class="fas fa-edit"></i>
+                </button>
+                <button class="btn btn-sm btn-danger">
+                  <i class="fas fa-trash"></i>
+                </button>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+
+      <!-- START ADD USER MODEL -->
+      <div
+        class="modal draggable fade bd-example-modal-lg"
+        id="addUserModal"
+        tabindex="-1"
+        role="dialog"
+        aria-labelledby="exampleModalCenterTitle"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+
+            <div class="modal-header">
+              <h5 class="modal-title text-center">New User</h5>
+              <button
+                type="button"
+                class="close"
+                data-dismiss="modal"
+                aria-label="Close"
+              >
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+
+            <div class="modal-body">
+              <div>
+                <form #newUserForm="ngForm">
+                  <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input
+                      type="text"
+                      name="firstname"
+                      required
+                      ngModel
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="lastname">Last Name</label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      required
+                      ngModel
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input
+                      type="text"
+                      name="username"
+                      required
+                      ngModel
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input
+                      type="email"
+                      name="email"
+                      required
+                      ngModel
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="form-group">
+                    <label for="authority">Role</label>
+                    <select
+                      name="role"
+                      required
+                      ngModel="ROLE_USER"
+                      class="form-control"
+                    >
+                      <option value="ROLE_USER">USER</option>
+                      <option value="ROLE_HR">HR</option>
+                      <option value="ROLE_MANAGER">MANAGER</option>
+                      <option value="ROLE_ADMIN">ADMIN</option>
+                      <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
+                    </select>
+                  </div>
+                  <div class="form-group">
+                    <label for="authority">Role</label>
+                    <input
+                      type="text"
+                      name="role"
+                      required
+                      ngModel="USER"
+                      readonly
+                      class="form-control"
+                    />
+                  </div>
+                  <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                      <span class="input-group-text">Profile Picture </span>
+                    </div>
+                    <div class="custom-file">
+                      <input
+                        type="file"
+                        accept="image/*"
+                        name="profileImage"
+                        class="custom-file-input"
+                      />
+                      <label class="custom-file-label"
+                        ><span></span>
+                        <span>Choose File</span>
+                      </label>
+                    </div>
+                  </div>
+                  <fieldset class="form-group">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input
+                          type="checkbox"
+                          name="active"
+                          ngModel
+                          class="form-check-input"
+                        />
+                        Acitve
+                      </label>
+                    </div>
+                    <div class="form-check disabled">
+                      <label class="form-check-label">
+                        <input
+                          type="checkbox"
+                          name="notLocked"
+                          ngModel
+                          class="form-check-input"
+                        />
+                        Unlocked
+                      </label>
+                    </div>
+                  </fieldset>
+                  <button
+                    type="submit"
+                    style="display: none"
+                    id="new-user-save"
+                  ></button>
+                </form>
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button
+                type="button"
+                class="btn btn-secondary"
+                data-dismiss="modal"
+                id="new-user-close"
+              >
+                Close
+              </button>
+              <button
+                type="button"
+                [disabled]="newUserForm.invalid"
+                class="btn btn-primary"
+              >
+                Save changes
+              </button>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- END ADD USER MODEL -->
+    </div>
+  </body>
+</html>
