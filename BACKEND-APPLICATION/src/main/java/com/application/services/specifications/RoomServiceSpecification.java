@@ -7,7 +7,7 @@ import java.util.List;
 public interface RoomServiceSpecification {
     Room addRoom(Room room);
     Room updateRoom(Room room);
-    Room getRoomById(String id);
+    Room getRoomById(Integer id);
     List<Room> getRooms();
     List<Room> getRoomsByHotelId(Integer hotelId);
     void deleteRoom();

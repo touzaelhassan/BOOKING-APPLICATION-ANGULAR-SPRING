@@ -20,7 +20,7 @@ public class RoomServiceImplementation implements RoomServiceSpecification {
     @Override
     public Room updateRoom(Room room) { return null; }
     @Override
-    public Room getRoomById(String id) { return null; }
+    public Room getRoomById(Integer id) { return roomRepositoryBean.findById(id).orElse(null); }
     @Override
     public List<Room> getRooms() { return roomRepositoryBean.findAll(); }
     @Override

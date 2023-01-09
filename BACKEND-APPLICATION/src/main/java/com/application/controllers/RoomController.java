@@ -1,6 +1,5 @@
 package com.application.controllers;
 
-import com.application.entities.Hotel;
 import com.application.entities.Room;
 import com.application.services.specifications.RoomServiceSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,4 +34,9 @@ public class RoomController {
         return new ResponseEntity<>(rooms, OK);
     }
 
+    @GetMapping("/room/{id}")
+    public ResponseEntity<Room> getRoomById(@PathVariable Integer id) {
+        Room room = roomServiceBean.getRoomById(id);
+        return new ResponseEntity<>(room, OK);
+    }
 }
