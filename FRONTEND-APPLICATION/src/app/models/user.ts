@@ -1,4 +1,5 @@
 export class User {
+    public id: number | undefined;
     public userId: string;
     public firstname: string;
     public lastname: string;
@@ -14,6 +15,7 @@ export class User {
     public authorities: [];
 
   constructor() {
+    this.id = undefined;
     this.userId = '';
     this.firstname = '';
     this.lastname = '';
