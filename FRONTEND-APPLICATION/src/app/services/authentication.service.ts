@@ -16,10 +16,12 @@ export class AuthenticationService {
 
     constructor(private http: HttpClient) { }
 
-    public register(user: User) :Observable<User> { return this.http.post<User>(`${this.host}/api/register`, user); }
+    public register(user: User) :Observable<User> { 
+        return this.http.post<User>(`${this.host}/api/authentication/register`, user); 
+    }
 
     public login(user: User) :Observable<HttpResponse<User>> { 
-        return this.http.post<User>(`${this.host}/api/login`, user, { observe:'response' }); 
+        return this.http.post<User>(`${this.host}/api/authentication/login`, user, { observe:'response' }); 
     }
 
     public logout() : void {
@@ -47,9 +49,7 @@ export class AuthenticationService {
         }
     }
 
-    public saveTokenInLocalStorage(token : string): void { 
-        this.token = token; localStorage.setItem('token', token); 
-    }
+    public saveTokenInLocalStorage(token : string): void { this.token = token; localStorage.setItem('token', token); }
     public loadToken(): void { this.token = localStorage.getItem('token'); }
     public getToken(): string { return this.token; }
     public saveUserInLocalStorage(user: User): void { localStorage.setItem('user', JSON.stringify(user)); }

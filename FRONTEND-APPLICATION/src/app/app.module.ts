@@ -12,15 +12,17 @@ import { NotificationModule } from './notification.module';
 import { NotificationService } from './services/notification.service';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/register/register.component';
-import { UserComponent } from './components/user/user.component';
+import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
+import { RoomComponent } from './components/room/room.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    UserComponent
+    HomeComponent,
+    RoomComponent
   ],
   imports: [
     BrowserModule,

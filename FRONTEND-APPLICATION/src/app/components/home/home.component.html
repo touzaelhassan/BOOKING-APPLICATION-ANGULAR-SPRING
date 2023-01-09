@@ -1,0 +1,7 @@
+<!DOCTYPE html>
+<h1>home works!</h1>
+<div *ngFor="let room of rooms">
+  <p>{{ room.id }}</p>
+  <p>{{ room.name }}</p>
+  <a [routerLink]="['room', room.id]">Details</a>
+</div>
