@@ -1,7 +1,12 @@
 package com.application.controllers;
 
+import com.application.entities.Client;
 import com.application.entities.Reservation;
+import com.application.entities.Room;
+import com.application.entities.User;
 import com.application.services.specifications.ReservationServiceSpecification;
+import com.application.services.specifications.RoomServiceSpecification;
+import com.application.services.specifications.UserServiceSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +23,18 @@ import static org.springframework.http.HttpStatus.OK;
 public class ReservationController {
 
     private final ReservationServiceSpecification reservationServiceBean;
+    private final UserServiceSpecification userServiceBean;
+    private final RoomServiceSpecification roomServiceBean;
+
     @Autowired
-    public ReservationController(ReservationServiceSpecification reservationServiceBean) { this.reservationServiceBean = reservationServiceBean; }
+    public ReservationController(
+            ReservationServiceSpecification reservationServiceBean,
+            UserServiceSpecification userServiceBean,
+            RoomServiceSpecification roomServiceBean) {
+        this.reservationServiceBean = reservationServiceBean;
+        this.userServiceBean = userServiceBean;
+        this.roomServiceBean = roomServiceBean;
+    }
 
     @GetMapping("/reservations")
     public ResponseEntity<List<Reservation>> getReservations() {
@@ -32,4 +47,16 @@ public class ReservationController {
         List<Reservation> reservations = reservationServiceBean.getReservationsByClientId(id);
         return new ResponseEntity<>(reservations, OK);
     }
+
+    @GetMapping("/reservation/add/{client_id}/{room_id}")
+    public void addReservation(@PathVariable("client_id") Integer client_id, @PathVariable("room_id") Integer room_id) {
+        User client = userServiceBean.findUserById(client_id);
+        Room room = roomServiceBean.getRoomById(room_id);
+        Reservation reservation = new Reservation();
+        reservation.setClient((Client) client);
+        reservation.setRoom(room);
+        reservation.setApproved(false);
+        reservationServiceBean.addReservation(reservation);
+    }
+
 }

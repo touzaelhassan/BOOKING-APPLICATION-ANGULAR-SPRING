@@ -14,6 +14,7 @@ public interface UserServiceSpecification {
     User updateUser(String currentUsername, String newFirstname, String newLastname, String newUsername, String newEmail, String role, boolean isNotLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, EmailExistException, UsernameExistException, IOException, NotAnImageFileException;
     User updateProfileImage(String username, MultipartFile newProfileImage) throws UserNotFoundException, EmailExistException, UsernameExistException, IOException, NotAnImageFileException;
     void resetPassword(String email) throws EmailNotFoundException;
+    User findUserById(Integer id);
     User findUserByUsername(String username);
     User findUserByEmail(String email);
     List<User> getUsers();

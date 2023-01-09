@@ -155,6 +155,9 @@ public class UserServiceImplementation implements UserServiceSpecification, User
     }
 
     @Override
+    public User findUserById(Integer id) { return userRepositoryBean.findById(id).orElse(null); }
+
+    @Override
     public User findUserByUsername(String username) { return userRepositoryBean.findUserByUsername(username);}
     @Override
     public User findUserByEmail(String email) {
