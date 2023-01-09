@@ -15,12 +15,14 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { RoomComponent } from './components/room/room.component';
+import { LogoutComponent } from './components/logout/logout.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     RegisterComponent,
+    LoginComponent,
+    LogoutComponent,
     HomeComponent,
     RoomComponent
   ],

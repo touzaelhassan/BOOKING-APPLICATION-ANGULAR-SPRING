@@ -11,12 +11,12 @@ export class RoomService {
 
     constructor(private http: HttpClient) { }
 
-    public getRooms(): Observable<Room[]>{
-        return this.http.get<Room[]>(`${this.host}/api/rooms`); 
-    }
+    public getRooms(): Observable<Room[]>{ return this.http.get<Room[]>(`${this.host}/api/rooms`); }
 
-    public getRoomById(roomId: number): Observable<Room>{
-        return this.http.get<Room>(`${this.host}/api/room/roomId`); 
+    public getRoomById(id: number): Observable<Room>{ 
+        
+        return this.http.get<Room>(`${this.host}/api/room/${id}`); 
+    
     }
 
 }

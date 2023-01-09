@@ -13,7 +13,7 @@ import { RoomService } from 'src/app/services/room.service';
 
 export class RoomComponent implements OnInit {
 
-  public roomId:any | undefined;
+  public id:any | undefined;
   public room: Room | undefined;
   private subscriptions: Subscription[] = [];
 
@@ -21,13 +21,13 @@ export class RoomComponent implements OnInit {
   constructor(private route : ActivatedRoute, private roomService: RoomService) {}
   
   ngOnInit(): void { 
-    this.roomId = this.route.snapshot.params['id'];
-    this.getRoomById(this.roomId);
+    this.id = this.route.snapshot.params['id'];
+    this.getRoomById(this.id);
   }
 
-      public getRoomById(roomId: number): void{
+      public getRoomById(id: number): void{
       this.subscriptions.push(
-        this.roomService.getRoomById(roomId).subscribe(
+        this.roomService.getRoomById(id).subscribe(
           (response: Room) => {
             this.room = response;
             console.log(this.room)

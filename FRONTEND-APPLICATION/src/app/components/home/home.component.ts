@@ -25,7 +25,6 @@ export class HomeComponent implements OnInit{
         this.roomService.getRooms().subscribe(
           (response: Room[]) => {
             this.rooms = response;
-            console.log(this.rooms)
           },
           (httpErrorResponse: HttpErrorResponse) => {
             console.log(httpErrorResponse.error.message)
