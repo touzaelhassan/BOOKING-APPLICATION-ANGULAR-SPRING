@@ -1,22 +1,18 @@
 import { Injectable } from '@angular/core';
-import { HttpClient} from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEvent, HttpResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
 import { Room } from '../models/room';
 import { Observable } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
-export class RoomService {
+export class ReservationService {
 
     private host = environment.APIEnpointsURL;
 
     constructor(private http: HttpClient) { }
 
-    public getRooms(): Observable<Room[]>{ return this.http.get<Room[]>(`${this.host}/api/rooms`); }
-
-    public getRoomById(id: number): Observable<Room>{ 
-        
-        return this.http.get<Room>(`${this.host}/api/room/${id}`); 
-    
+    public addReservation(client_id:number, room_id:number): Observable<any>{
+      return this.http.get<any>(`${this.host}/api/reservation/add?client_id=${client_id}&room_id=${room_id}`); 
     }
 
 }

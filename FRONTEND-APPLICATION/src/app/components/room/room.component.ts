@@ -5,7 +5,6 @@ import { Subscription } from 'rxjs';
 import { Room } from 'src/app/models/room';
 import { User } from 'src/app/models/user';
 import { RoomService } from 'src/app/services/room.service';
-import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-room',
@@ -19,7 +18,6 @@ export class RoomComponent implements OnInit {
   public client_id:any | undefined;
   public room: Room | undefined;
   private subscriptions: Subscription[] = [];
-
 
   constructor(private route : ActivatedRoute, private roomService: RoomService) {}
   
