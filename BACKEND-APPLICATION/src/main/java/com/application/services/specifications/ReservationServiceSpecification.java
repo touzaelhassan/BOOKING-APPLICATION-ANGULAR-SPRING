@@ -8,5 +8,5 @@ public interface ReservationServiceSpecification {
     Reservation addReservation(Reservation reservation);
     List<Reservation> getReservations();
     List<Reservation> getReservationsByClientId(Integer clientId);
-
+    List<Reservation> findReservationByOwnerId(Integer ownerId);
 }

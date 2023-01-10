@@ -25,4 +25,7 @@ public class ReservationServiceImplementation implements ReservationServiceSpeci
     @Override
     public List<Reservation> getReservationsByClientId(Integer clientId) { return reservationRepositoryBean.findByClientId(clientId); }
 
+    @Override
+    public List<Reservation> findReservationByOwnerId(Integer ownerId) { return reservationRepositoryBean.findByOwnerId(ownerId); }
+
 }

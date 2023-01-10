@@ -58,35 +58,65 @@ public class Application {
             admin.setProfileImageUrl("www.url.com/image-url");
             userRepositoryBean.save(admin);
 
-            Owner owner = new Owner();
-            owner.setUserId("534345");
-            owner.setFirstname("karim");
-            owner.setLastname("lampa");
-            owner.setUsername("lampakarim");
-            owner.setEmail("karim@gmail.com");
-            owner.setJoinDate(new Date());
-            owner.setPassword(bCryptPasswordEncoder.encode("123456"));
-            owner.setActive(true);
-            owner.setNotLocked(true);
-            owner.setRole(ROLE_OWNER.name());
-            owner.setAuthorities(ROLE_OWNER.getAuthorities());
-            owner.setProfileImageUrl("www.url.com/image-url");
-            userRepositoryBean.save(owner);
+            Owner owner1 = new Owner();
+            owner1.setUserId("534345");
+            owner1.setFirstname("karim");
+            owner1.setLastname("lam");
+            owner1.setUsername("lamkarim");
+            owner1.setEmail("karim@gmail.com");
+            owner1.setJoinDate(new Date());
+            owner1.setPassword(bCryptPasswordEncoder.encode("123456"));
+            owner1.setActive(true);
+            owner1.setNotLocked(true);
+            owner1.setRole(ROLE_OWNER.name());
+            owner1.setAuthorities(ROLE_OWNER.getAuthorities());
+            owner1.setProfileImageUrl("www.url.com/image-url1");
+            userRepositoryBean.save(owner1);
 
-            Client client = new Client();
-            client.setUserId("534329");
-            client.setFirstname("ismail");
-            client.setLastname("damo");
-            client.setUsername("damoismail");
-            client.setEmail("ismail@gmail.com");
-            client.setJoinDate(new Date());
-            client.setPassword(bCryptPasswordEncoder.encode("123456"));
-            client.setActive(true);
-            client.setNotLocked(true);
-            client.setRole(ROLE_CLIENT.name());
-            client.setAuthorities(ROLE_CLIENT.getAuthorities());
-            client.setProfileImageUrl("www.url.com/image-url");
-            userRepositoryBean.save(client);
+            Owner owner2 = new Owner();
+            owner2.setUserId("534345");
+            owner2.setFirstname("amine");
+            owner2.setLastname("kal");
+            owner2.setUsername("kalamine");
+            owner2.setEmail("amine@gmail.com");
+            owner2.setJoinDate(new Date());
+            owner2.setPassword(bCryptPasswordEncoder.encode("123456"));
+            owner2.setActive(true);
+            owner2.setNotLocked(true);
+            owner2.setRole(ROLE_OWNER.name());
+            owner2.setAuthorities(ROLE_OWNER.getAuthorities());
+            owner2.setProfileImageUrl("www.url.com/image-url2");
+            userRepositoryBean.save(owner2);
+
+            Client client1 = new Client();
+            client1.setUserId("534329");
+            client1.setFirstname("ismail");
+            client1.setLastname("damo");
+            client1.setUsername("damoismail");
+            client1.setEmail("ismail@gmail.com");
+            client1.setJoinDate(new Date());
+            client1.setPassword(bCryptPasswordEncoder.encode("123456"));
+            client1.setActive(true);
+            client1.setNotLocked(true);
+            client1.setRole(ROLE_CLIENT.name());
+            client1.setAuthorities(ROLE_CLIENT.getAuthorities());
+            client1.setProfileImageUrl("www.url.com/image-url");
+            userRepositoryBean.save(client1);
+
+            Client client2 = new Client();
+            client2.setUserId("534329");
+            client2.setFirstname("adil");
+            client2.setLastname("yam");
+            client2.setUsername("yamadil");
+            client2.setEmail("adil@gmail.com");
+            client2.setJoinDate(new Date());
+            client2.setPassword(bCryptPasswordEncoder.encode("123456"));
+            client2.setActive(true);
+            client2.setNotLocked(true);
+            client2.setRole(ROLE_CLIENT.name());
+            client2.setAuthorities(ROLE_CLIENT.getAuthorities());
+            client2.setProfileImageUrl("www.url.com/image-url");
+            userRepositoryBean.save(client2);
 
             City city1 = new City();
             city1.setName("Fes");
@@ -102,7 +132,7 @@ public class Application {
             hotel1.setName("VERONEX-5");
             hotel1.setAvailable(true);
             hotel1.setApproved(false);
-            hotel1.setOwner(owner);
+            hotel1.setOwner(owner1);
             hotel1.setCity(city1);
             hotelServiceBean.addHotel(hotel1);
 
@@ -110,7 +140,7 @@ public class Application {
             hotel2.setName("MALERT-457");
             hotel2.setAvailable(true);
             hotel2.setApproved(false);
-            hotel2.setOwner(owner);
+            hotel2.setOwner(owner1);
             hotel2.setCity(city2);
             hotelServiceBean.addHotel(hotel2);
 
@@ -118,7 +148,7 @@ public class Application {
             hotel3.setName("B-HOUSE 55");
             hotel3.setAvailable(true);
             hotel3.setApproved(false);
-            hotel3.setOwner(owner);
+            hotel3.setOwner(owner2);
             hotel3.setCity(city3);
             hotelServiceBean.addHotel(hotel3);
 
@@ -146,6 +176,7 @@ public class Application {
             room4.setHotel(hotel3);
             roomServiceBean.addRoom(room4);
 
+            /*
             Reservation reservation1 = new Reservation();
             reservation1.setClient(client);
             reservation1.setRoom(room1);
@@ -155,6 +186,7 @@ public class Application {
             reservation2.setRoom(room2);
             reservation2.setClient(client);
             reservationServiceBean.addReservation(reservation2);
+             */
 
         };
 
