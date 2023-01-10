@@ -19,4 +19,8 @@ export class ReservationService {
       return this.http.get<any>(`${this.host}/api/client/reservations/${clientId}`); 
     }
 
+     public getReservationsByOwnerId(ownerId: number): Observable<any>{
+      return this.http.get<any>(`${this.host}/api/owner/reservations/${ownerId}`); 
+    }
+
 }

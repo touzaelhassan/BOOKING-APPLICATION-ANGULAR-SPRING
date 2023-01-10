@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ReservationService } from 'src/app/services/reservation.service';
 
@@ -15,12 +15,13 @@ export class ReservationComponent implements OnInit {
   public room_id:any | undefined;
   private subscriptions: Subscription[] = [];
 
-  constructor(private route : ActivatedRoute, private reservationService: ReservationService) {}
+  constructor(private route : ActivatedRoute, private router : Router, private reservationService: ReservationService) {}
   
   ngOnInit(): void { 
     this.client_id = this.route.snapshot.params['client_id'];
     this.room_id = this.route.snapshot.params['room_id'];
     this.addReservation(this.client_id, this.room_id)
+    this.router.navigateByUrl('/my-reservations');
   }
 
   public addReservation(client_id: number, room_id: number): void{
