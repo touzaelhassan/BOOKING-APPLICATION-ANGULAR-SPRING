@@ -12,7 +12,7 @@ export class ReservationService {
     constructor(private http: HttpClient) { }
 
     public addReservation(client_id:number, room_id:number): Observable<any>{
-      return this.http.get<any>(`${this.host}/api/reservation/add?client_id=${client_id}&room_id=${room_id}`); 
+      return this.http.get<any>(`${this.host}/api/reservation/add/${client_id}/${room_id}`); 
     }
 
 }
