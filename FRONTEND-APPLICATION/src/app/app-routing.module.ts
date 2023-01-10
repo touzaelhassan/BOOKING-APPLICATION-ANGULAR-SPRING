@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ClientreservationsComponent } from './components/clientreservations/clientreservations.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
 import { LogoutComponent } from './components/logout/logout.component';
@@ -14,6 +15,7 @@ const routes: Routes = [
     { path: 'logout', component: LogoutComponent},
     { path: 'room/:id', component: RoomComponent},
     { path: 'reservation/:client_id/:room_id', component: ReservationComponent},
+    { path: 'my-reservations', component: ClientreservationsComponent},
 ];
 
 @NgModule({
