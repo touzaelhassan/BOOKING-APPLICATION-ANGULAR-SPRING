@@ -18,7 +18,6 @@ const routes: Routes = [
     { path: 'reservation/:client_id/:room_id', component: ReservationComponent},
     { path: 'my-reservations', component: ClientreservationsComponent},
     { path: 'owner/reservations', component: OwnerreservationsComponent},
-
 ];
 
 @NgModule({

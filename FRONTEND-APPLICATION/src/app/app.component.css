@@ -1,0 +1,39 @@
+* {
+  box-sizing: border-box;
+}
+
+h4 {
+  margin-bottom: 0;
+}
+
+ul {
+  list-style: none;
+  margin-bottom: 0;
+}
+
+a {
+  color: #344854;
+  text-decoration: none;
+}
+
+.header__top {
+  padding: 10px;
+  color: #eee;
+  background-color: #344854;
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.header__content {
+  padding: 30px 0;
+}
+
+.header__logo {
+  font-size: 19px;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.nav__item {
+  margin-left: 25px;
+}

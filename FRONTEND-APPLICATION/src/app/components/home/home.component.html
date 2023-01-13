@@ -1,5 +1,104 @@
-<!DOCTYPE html>
-<h1>home works!</h1>
+<section class="d-flex align-items-center hero__section">
+  <div class="container">
+    <form action="#" class="col-md-5 hero__form">
+      <div class="row">
+        <div class="col-md-12 mb-4">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Choose The City"
+            />
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="form-group">
+            <div class="input-wrap">
+              <div class="icon"><span class="ion-md-calendar"></span></div>
+              <input
+                type="date"
+                class="form-control appointment_date-check-in"
+                placeholder="Check-In"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="form-group">
+            <div class="input-wrap">
+              <div class="icon"><span class="ion-md-calendar"></span></div>
+              <input
+                type="date"
+                class="form-control appointment_date-check-out"
+                placeholder="Check-Out"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="form-group">
+            <div class="form-field">
+              <div class="select-wrap">
+                <select name="" id="" class="form-control">
+                  <option value="">Adults</option>
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option>
+                  <option value="">4</option>
+                  <option value="">5</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6 mb-4">
+          <div class="form-group">
+            <div class="form-field">
+              <div class="select-wrap">
+                <select name="" id="" class="form-control">
+                  <option value="">Children</option>
+                  <option value="">1</option>
+                  <option value="">2</option>
+                  <option value="">3</option>
+                  <option value="">4</option>
+                  <option value="">5</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Phone number"
+            />
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <div class="input-wrap">
+              <div class="icon"><span class="ion-ios-clock"></span></div>
+              <input
+                type="text"
+                class="form-control appointment_time ui-timepicker-input"
+                placeholder="Time"
+                autocomplete="off"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-md-12">
+          <button type="submit" class="hero__form__btn">
+            CHECK ROOM AVAILABILTY
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</section>
+
 <div *ngFor="let room of rooms">
   <p>{{ room.id }}</p>
   <p>{{ room.name }}</p>

@@ -1,0 +1,28 @@
+.hero__section {
+  height: 84.4vh;
+  background-image: url("/assets/images/hero-image.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.hero__form {
+  border-radius: 4px;
+  padding: 40px;
+  background-color: rgba(255, 255, 255, 0.9);
+}
+
+.hero__form__btn {
+  margin-top: 40px;
+  padding: 17px;
+  border: none;
+  border-radius: 4px;
+  width: 100%;
+  color: #fff;
+  background-color: #344854;
+}
+
+.hero__form__btn:hover {
+  background-color: #253139;
+}
