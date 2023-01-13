@@ -14,16 +14,16 @@ import { RoomService } from 'src/app/services/room.service';
 
 export class RoomComponent implements OnInit {
 
-  public room_id:any | undefined;
-  public client_id:any | undefined;
-  public room: Room | undefined;
+  public client_id?:number;
+  public room_id!: number;
+  public room: Room = new Room();
   private subscriptions: Subscription[] = [];
 
   constructor(private route : ActivatedRoute, private roomService: RoomService) {}
   
   ngOnInit(): void { 
+    this.client_id = this.getUserFromLocalStorage()?.id
     this.room_id = this.route.snapshot.params['id'];
-    this.client_id = this.getUserFromLocalStorage().id
     this.getRoomById(this.room_id);
   }
 
@@ -36,6 +36,13 @@ export class RoomComponent implements OnInit {
     )
   }
 
-  public getUserFromLocalStorage(): User { return JSON.parse(localStorage.getItem('user') || ''); }
+  public getUserFromLocalStorage(): User | null { 
+    let userData = localStorage.getItem('user');
+    if(!userData){
+      return null;
+    } else{
+      return JSON.parse(userData); 
+    }
+  }
 
 }

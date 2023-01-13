@@ -99,8 +99,72 @@
   </div>
 </section>
 
-<div *ngFor="let room of rooms">
-  <p>{{ room.id }}</p>
-  <p>{{ room.name }}</p>
-  <a [routerLink]="['room', room.id]">Details</a>
-</div>
+<section class="hotels__section">
+  <div class="container">
+    <div class="hotels__section__title">
+      <h5>Discover Our Hotels Collection</h5>
+      <span></span>
+    </div>
+    <div class="row hotels__content">
+      <div *ngFor="let hotel of hotels" class="col-3 hotel__item">
+        <div class="hotel__image">
+          <img src="{{ hotel.imageUrl }}" class="w-100" />
+        </div>
+        <h3 class="my-3">{{ hotel.name }}</h3>
+        <p class="hotel__description">{{ hotel.description }}</p>
+        <a routerLink="/hotel/rooms/{{ hotel.id }}" class="see__all_rooms_btn"
+          >SEE ALL ROOMS</a
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="offer__section">
+  <div>
+    <h2>Get 10% off On Your Next Booking</h2>
+    <p>
+      When you book your accommodation through this Booking.com discount link,
+      you will get 10% cash back in the form of a refund to your credit or debit
+      card after you have completed your stay booked through Booking.com. Is
+      there a catch here? Not really. It is pretty straightforward.
+    </p>
+    <button>Get Started</button>
+  </div>
+</section>
+
+<section class="rooms__section">
+  <div class="container">
+    <div class="hotels__section__title">
+      <h5>Discover Our Featured Rooms</h5>
+      <span></span>
+    </div>
+    <div class="row gap-5 rooms__layout">
+      <div class="col-8 rooms__content">
+        <div *ngFor="let room of rooms" class="room__item">
+          <div class="row align-items-shrenk">
+            <div class="col-3 room__image">
+              <img src="{{ room.imageUrl }}" class="w-100" />
+            </div>
+            <div class="col-9 room__text">
+              <h5 class="room__name">{{ room.name }}</h5>
+              <p class="room__description">{{ room.description }}</p>
+              <div class="d-flex justify-content-between">
+                <p>
+                  Price :
+                  <span class="room__price">{{
+                    room.price | currency : "USD"
+                  }}</span>
+                </p>
+                <a [routerLink]="['room', room.id]" class="room__details__link"
+                  >Details</a
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-3 rooms__sidebar"></div>
+    </div>
+  </div>
+</section>

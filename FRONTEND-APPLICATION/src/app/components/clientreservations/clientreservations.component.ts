@@ -16,11 +16,13 @@ export class ClientreservationsComponent implements OnInit{
   public clientId: any | undefined;
   public reservations: Reservation[] = [];
   private subscriptions: Subscription[] = [];
+  public lastname?: string;
 
   constructor(private reservationService: ReservationService) {}
 
   ngOnInit(): void {
     this.clientId = this.getUserFromLocalStorage().id
+    this.lastname = this.getUserFromLocalStorage().lastname
     this.getReservationsByClientId(this.clientId);
   }
 

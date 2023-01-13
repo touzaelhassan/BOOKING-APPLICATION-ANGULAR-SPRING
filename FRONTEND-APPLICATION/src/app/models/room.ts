@@ -1,13 +1,10 @@
 export class Room {
 
-  public id: number | undefined;
-  public name: string;
-  public isAvailable: boolean;
-
-  constructor() {
-    this.name = '';
-    this.isAvailable = true;
-    this.id = undefined;
-  }
+  public id?: number;
+  public name?: string;
+  public description?: string;
+  public imageUrl?: string;
+  public price?: number;
+  public isAvailable?: boolean;
 
 }

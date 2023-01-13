@@ -16,6 +16,10 @@ a {
   text-decoration: none;
 }
 
+.header {
+  border: 1px solid #eee;
+}
+
 .header__top {
   padding: 10px;
   color: #eee;

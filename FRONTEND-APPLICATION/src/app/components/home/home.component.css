@@ -26,3 +26,140 @@
 .hero__form__btn:hover {
   background-color: #253139;
 }
+
+.hotels__section {
+  height: 100vh;
+}
+
+.hotels__section__title {
+  margin: 90px 0;
+}
+
+.hotels__section__title h5 {
+  color: #344854;
+}
+
+.hotels__section__title span {
+  margin-top: 10px;
+  display: block;
+  width: 113px;
+  height: 8px;
+  background-color: #253139;
+}
+
+.hotels__content {
+  gap: 50px !important;
+  justify-content: space-between;
+}
+
+.hotel__item {
+  padding-right: 0;
+  padding-left: 0;
+  padding: 25px;
+  width: 400px;
+  text-align: center;
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+}
+
+.hotel__image {
+  border: 3px solid #eee;
+}
+
+.hotel__description {
+  color: #666;
+  font-size: 15px;
+}
+
+.see__all_rooms_btn {
+  margin: auto;
+  display: block;
+  padding: 17px 20px;
+  color: #fff;
+  background-color: #344854;
+  text-decoration: none;
+}
+
+.offer__section {
+  height: 60vh;
+  background-image: url("/assets/images/offer-bg.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-color: #253139;
+  background-blend-mode: overlay;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+}
+
+.offer__section h2 {
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.offer__section p {
+  margin: auto;
+  width: 50%;
+  line-height: 1.6;
+}
+
+.offer__section button {
+  margin-top: 40px;
+  padding: 15px 40px;
+  border: none;
+  border-radius: 3px;
+  color: #344854;
+  background-color: #fff;
+}
+
+.rooms__section {
+  height: 100vh;
+}
+
+.rooms__layout {
+  justify-content: space-between;
+}
+
+.rooms__sidebar {
+  padding: 20px;
+  border: 2px solid #eee;
+  background-color: rgba(224, 227, 238, 0.2);
+}
+
+.rooms__content {
+  padding: 30px;
+  padding-bottom: 0;
+  border: 2px solid #eee;
+  background-color: rgba(224, 227, 238, 0.2);
+}
+
+.room__item {
+  margin-bottom: 30px;
+  padding: 15px;
+  border: 2px solid #eee;
+  background-color: #fff;
+}
+
+.room__name {
+  color: #253139;
+  font-weight: 600;
+}
+
+.room__description {
+  color: #666;
+  line-height: 1.6;
+  font-size: 15px;
+}
+
+.room__price {
+  color: #344854;
+  font-weight: 600;
+}
+
+.room__details__link {
+  color: #253139;
+}

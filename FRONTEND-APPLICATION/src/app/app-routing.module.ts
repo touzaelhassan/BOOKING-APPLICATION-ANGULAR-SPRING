@@ -15,7 +15,7 @@ const routes: Routes = [
     { path: 'login', component: LoginComponent},
     { path: 'logout', component: LogoutComponent},
     { path: 'room/:id', component: RoomComponent},
-    { path: 'reservation/:client_id/:room_id', component: ReservationComponent},
+    { path: 'reservation/:room_id', component: ReservationComponent},
     { path: 'my-reservations', component: ClientreservationsComponent},
     { path: 'owner/reservations', component: OwnerreservationsComponent},
 ];
