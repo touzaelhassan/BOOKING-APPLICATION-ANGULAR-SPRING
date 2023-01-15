@@ -32,8 +32,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public selectedUser?: any;
     public editedUser = new User();
     private currentUsername?: string;
-    public filename: any;
     public profileImage: any;
+    public hotelImage: any;
 
     constructor(
       private authenticationService: AuthenticationService, 
@@ -106,19 +106,21 @@ export class DashboardComponent implements OnInit, OnDestroy {
       )
     }
 
-    public saveNewUser(): void{ 
-      document.getElementById("new-user-save")?.click(); 
+
+    public onProfileImageChange(event:any): void{
+      const files = event.target.files;
+      this.profileImage = files[0];
     }
 
+    public saveNewUser(): void{ document.getElementById("new-user-save")?.click(); }
+
     public onAddNewUser(userForm: any): void{
-      console.log("eeee");
-      const formData = this.userService.createUserFormDate(null, userForm, this.profileImage);
+      const formData = this.userService.createUserFormData(null, userForm, this.profileImage);
       this.subscriptions.push(
         this.userService.addUser(formData).subscribe(
           (response: any) =>{
             document.getElementById("new-user-close")?.click();
             this.getUsers(false);
-            this.filename = null;
             this.profileImage = null;
             userForm.reset()
             this.notificationService.notify(NotificationType.SUCCESS, `The new user was added successfully !!.`);
@@ -131,7 +133,31 @@ export class DashboardComponent implements OnInit, OnDestroy {
       )
     }
 
-    
+    public onHotelImageChange(event:any): void{
+      const files = event.target.files;
+      this.hotelImage = files[0];
+    }
+
+
+    public saveNewHotel(): void{ document.getElementById("new-hotel-save")?.click(); }
+    public onAddNewHotel(hotelForm: any): void{
+      const formData = this.hotelService.createHotelFormData(this.loggedInUser.username ,hotelForm, this.hotelImage);
+      this.subscriptions.push(
+        this.hotelService.addHotel(formData).subscribe(
+          (response: any) =>{
+            document.getElementById("new-hotel-close")?.click();
+            this.getUsers(false);
+            this.hotelImage = null;
+            this.notificationService.notify(NotificationType.SUCCESS, `The new hotel was added successfully !!.`);
+          },  
+          (httpErrorResponse: HttpErrorResponse) => {
+            this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
+            this.profileImage = null;
+          }
+        )
+      )
+    }
+
     public onEditUser(user: User): void{
       this.editedUser = user;
       this.currentUsername = user.username;
@@ -139,7 +165,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     public onUpdateUser(): void{
-      const formData = this.userService.createUserFormDate(this.currentUsername, this.editedUser , this.profileImage);
+      const formData = this.userService.createUserFormData(this.currentUsername, this.editedUser , this.profileImage);
       this.subscriptions.push(
         this.userService.updateUser(formData).subscribe(
           (response: any) =>{
@@ -147,7 +173,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
             this.sendErrorNotification(NotificationType.SUCCESS, `The user information were updated successfully !!.`);
             this.getUsers(false);
             this.profileImage = null;
-            this.filename = null;
           },  
           (httpErrorResponse: HttpErrorResponse) => {
             this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
@@ -169,12 +194,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
         )
       )
-    }
-
-    public onProfileImageChange(event:any): void{
-      const files = event.target.files;
-      this.profileImage = files[0];
-      this.filename = files[0].name;
     }
 
     public onSelectUser(selectedUser: User){

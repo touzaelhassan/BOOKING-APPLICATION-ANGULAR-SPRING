@@ -19,7 +19,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 50px;
+  margin-bottom: 60px;
   background-color: #fafafa;
 }
 
@@ -29,7 +29,7 @@ header {
 
 .nav__link {
   display: block;
-  padding: 20px;
+  padding: 20px 20px;
   color: #344854;
   cursor: pointer;
   font-size: 14px;
@@ -44,7 +44,7 @@ header {
 
 /* Start The Main Section */
 .table__header {
-  margin-bottom: 50px;
+  margin-bottom: 60px;
   display: flex;
   justify-content: space-between;
 }
@@ -79,7 +79,6 @@ table {
 /* Start Modals Styles */
 .close-btn-modal {
   border: none;
-  padding: 10px 20px;
   background-color: transparent;
   font-size: 25px;
 }

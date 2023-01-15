@@ -68,14 +68,13 @@ a {
 /* End Header Section */
 
 .login {
+  margin-top: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
 .login__content {
-  margin-bottom: 100px;
   border: 2px solid #eee;
   padding: 40px;
   border-radius: 5px;

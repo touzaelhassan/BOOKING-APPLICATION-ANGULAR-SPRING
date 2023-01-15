@@ -40,7 +40,7 @@
   <div class="container">
     <div class="tab-content main__content">
       <!-- Start Users Table -->
-      <div class="tab-pane fade show active" id="users">
+      <div class="tab-pane fade" id="users">
         <div class="table__header">
           <form class="form-inline my-2 my-lg-0 d-flex justify-content-center">
             <label class="d-flex justify-content-center align-items-center"
@@ -159,8 +159,119 @@
           </tbody>
         </table>
       </div>
-      <!-- Start Users Table -->
-      <div class="tab-pane fade" id="hotels"><h4>Hotels</h4></div>
+      <!-- End Users Table -->
+
+      <!-- Start Hotels Table -->
+      <div class="tab-pane fade show active" id="hotels">
+        <div class="table__header">
+          <form class="form-inline my-2 my-lg-0 d-flex justify-content-center">
+            <label class="d-flex justify-content-center align-items-center"
+              >SEARCH</label
+            >
+            <input
+              name="searchTerm"
+              #searchInput="ngModel"
+              class="form-control mr-sm-2"
+              ngModel
+              (ngModelChange)="searchInUsersList(searchInput.value)"
+              type="search"
+              placeholder="Search users..."
+            />
+          </form>
+          <div>
+            <button
+              type="button"
+              class="btn btn-success ms-5"
+              data-bs-toggle="modal"
+              data-bs-target="#addHotelModal"
+            >
+              Add Hotel
+            </button>
+          </div>
+        </div>
+        <table class="table table-hover table-bordered">
+          <thead class="table-borderless">
+            <tr class="text-center">
+              <th>#</th>
+              <th>Image</th>
+              <th>Name</th>
+              <th>Owner</th>
+              <th>Number of Rooms</th>
+              <th>City</th>
+              <th>Parking</th>
+              <th>Restaurant</th>
+              <th>Avilability</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let hotel of hotels" class="text-center">
+              <td>{{ hotel.id }}</td>
+              <td>
+                <img
+                  [hidden]="hotel.imageUrl"
+                  src="assets/images/hotels/hotel-1.jpg"
+                  style="width: 60px"
+                />
+                <img
+                  *ngIf="hotel.imageUrl"
+                  src="{{ hotel.imageUrl }}"
+                  style="width: 60px"
+                />
+              </td>
+              <td>{{ hotel.name }}</td>
+              <td>Owner</td>
+              <td>25</td>
+              <td>Toronto</td>
+              <td>
+                <i
+                  class="fa-sharp fa-solid fa-square-check text-success"
+                  style="font-size: 25px"
+                ></i>
+              </td>
+              <td>
+                <i
+                  class="fa-sharp fa-solid fa-square-check text-success"
+                  style="font-size: 25px"
+                ></i>
+              </td>
+              <td>
+                <span *ngIf="!hotel.isAvailable" class="btn btn-sm btn-success"
+                  ><i class="fa-solid fa-house"></i
+                ></span>
+                <span
+                  class="btn btn-sm btn-warning"
+                  [hidden]="!hotel.isAvailable"
+                  ><i class="fa-solid fa-shop-slash"></i
+                ></span>
+              </td>
+              <td>
+                <span *ngIf="!hotel.isApproved" class="btn btn-sm btn-warning"
+                  >Pending</span
+                >
+                <span
+                  [hidden]="!hotel.isApproved"
+                  class="btn btn-sm btn-success"
+                  >Approved</span
+                >
+              </td>
+              <td>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-sm btn-success">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn btn-sm btn-danger">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- End Hotels Table -->
+
       <div class="tab-pane fade" id="rooms"><h4>Rooms</h4></div>
       <div class="tab-pane fade" id="reservations"><h4>Reservations</h4></div>
     </div>
@@ -168,7 +279,9 @@
 </main>
 <!-- Start Main Section -->
 
-<!-- Start Headen Buttons For Displaying View and Edit Modal -->
+<!-- START USER MODALS ========================================================================================================== -->
+
+<!-- Start Headen Buttons For Displaying View and Edit User Modals -->
 <button
   [hidden]="true"
   type="button"
@@ -183,7 +296,7 @@
   data-bs-toggle="modal"
   data-bs-target="#editUserModal"
 ></button>
-<!-- Start Headen Buttons For Displaying View and Edit Modal -->
+<!-- End Headen Buttons For Displaying View and Edit Modal User Modals -->
 
 <!-- Start User Information Modal -->
 <div
@@ -638,3 +751,158 @@
   </div>
 </div>
 <!-- End Edit Modal -->
+
+<!-- End USER MODALS ============================================================================================================ -->
+<!-- START HOTEL MODALS ========================================================================================================= -->
+
+<!-- Start Headen Buttons For Displaying View and Edit Hotel Modals -->
+<button
+  [hidden]="true"
+  type="button"
+  id="openUserInfo"
+  data-bs-toggle="modal"
+  data-bs-target="#viewUserModal"
+></button>
+<button
+  [hidden]="true"
+  type="button"
+  id="openUserEdit"
+  data-bs-toggle="modal"
+  data-bs-target="#editUserModal"
+></button>
+<!-- End Headen Buttons For Displaying View and Edit Modal Hotel Modals -->
+
+<!-- START ADD HOTEL MODEL -->
+<div
+  class="modal draggable fade bd-example-modal-lg"
+  id="addHotelModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content px-3">
+      <div class="modal-header">
+        <h5 class="modal-title text-center">New Hotel</h5>
+        <button
+          type="button"
+          class="close close-btn-modal"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div>
+          <form
+            #newHotelForm="ngForm"
+            (ngSubmit)="onAddNewHotel(newHotelForm.value)"
+          >
+            <div class="form-group mb-2">
+              <label for="name" class="mb-1">Hotel Name</label>
+              <input
+                type="text"
+                name="name"
+                required
+                ngModel
+                class="form-control"
+              />
+            </div>
+            <div class="form-group mb-2">
+              <label for="description" class="mb-1">Description</label>
+              <textarea
+                class="form-control"
+                name="description"
+                required
+                ngModel
+                rows="3"
+              ></textarea>
+            </div>
+            <!-- <div class="form-group mb-2">
+              <label for="username" class="mb-1">Owner</label>
+              <input
+                type="text"
+                name="username"
+                required
+                [(ngModel)]="loggedInUser.username"
+                class="form-control"
+              />
+            </div> -->
+            <div class="form-group mb-2">
+              <label for="authority" class="mb-1">City</label>
+              <select name="role" required ngModel="Rabat" class="form-control">
+                <option value="Rabat">Rabat</option>
+                <option value="Fes">Fes</option>
+                <option value="Tanger">Tanger</option>
+              </select>
+            </div>
+            <div class="input-group mb-2">
+              <div class="custom-file">
+                <label class="mb-1 me-2 d-block">Hotel Image</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  name="hotelImgae"
+                  class="custom-file-input"
+                  (change)="onHotelImageChange($event)"
+                />
+              </div>
+            </div>
+            <div class="form-check mb-2">
+              <label class="form-check-label">
+                <input
+                  type="checkbox"
+                  name="isAvailable"
+                  ngModel
+                  class="form-check-input"
+                />
+                Available
+              </label>
+            </div>
+            <div class="form-check mb-2">
+              <label class="form-check-label">
+                <input
+                  type="checkbox"
+                  name="isApproved"
+                  ngModel
+                  class="form-check-input"
+                />
+                Approve
+              </label>
+            </div>
+            <button
+              type="submit"
+              style="display: none"
+              id="new-hotel-save"
+            ></button>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal-footer d-flex justify-content-between">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          id="new-hotel-close"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          [disabled]="newHotelForm.invalid"
+          class="btn btn-primary"
+          (click)="saveNewHotel()"
+        >
+          Add Hotel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END ADD HOTEL MODEL -->
+
+<!-- End HOTEL MODALS =========================================================================================================== -->
