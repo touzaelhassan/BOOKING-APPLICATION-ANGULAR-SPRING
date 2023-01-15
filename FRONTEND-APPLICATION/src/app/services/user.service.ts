@@ -16,7 +16,7 @@ export class UserService {
     }
 
     public updateUser(formData: FormData): Observable<User | HttpErrorResponse> { 
-        return this.http.post<User>(`${this.host}/api/user/update`, formData); 
+        return this.http.put<User>(`${this.host}/api/user/update`, formData); 
     }
 
     public resetUserPassword(email: string): Observable<any | HttpErrorResponse>{
@@ -29,8 +29,8 @@ export class UserService {
 
     public updateProfileImage(formData: FormData): Observable<HttpEvent<User> | HttpErrorResponse>{
         return this.http.post<User>(`${this.host}/api/user/update/profile-image`, formData, {
-          reportProgress : true,
-          observe: 'events'
+            reportProgress : true,
+            observe: 'events'
         }); 
     }
 

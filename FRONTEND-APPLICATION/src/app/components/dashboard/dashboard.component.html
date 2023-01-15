@@ -86,7 +86,16 @@
             <tr *ngFor="let user of users" class="text-center">
               <td>{{ user.userId }}</td>
               <td (click)="onSelectUser(user)">
-                <img src="{{ user.profileImageUrl }}" style="width: 60px" />
+                <img
+                  [hidden]="user.profileImageUrl"
+                  src="assets/images/profile-image.jpg"
+                  style="width: 60px"
+                />
+                <img
+                  *ngIf="user.profileImageUrl"
+                  src="{{ user.profileImageUrl }}"
+                  style="width: 60px"
+                />
               </td>
               <td (click)="onSelectUser(user)">{{ user.firstname }}</td>
               <td (click)="onSelectUser(user)">{{ user.lastname }}</td>
@@ -132,10 +141,16 @@
               </td>
               <td>
                 <div class="d-flex justify-content-between">
-                  <button class="btn btn-sm btn-success">
+                  <button
+                    class="btn btn-sm btn-success"
+                    (click)="onEditUser(user)"
+                  >
                     <i class="fas fa-edit"></i>
                   </button>
-                  <button class="btn btn-sm btn-danger">
+                  <button
+                    class="btn btn-sm btn-danger"
+                    (click)="onDelete(user.id)"
+                  >
                     <i class="fas fa-trash"></i>
                   </button>
                 </div>
@@ -183,12 +198,12 @@
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title text-center" id="exampleModalLongTitle">
-          {{ selectedUser?.firstname }}
           {{ selectedUser?.lastname }}
+          {{ selectedUser?.firstname }}
         </h5>
         <button
-          type="button"
-          class="close"
+          type="button close-btn-modal"
+          class="close close-btn-modal"
           data-bs-dismiss="modal"
           aria-label="Close"
         >
@@ -206,11 +221,18 @@
                       class="d-flex justify-content-center align-items-center rounded"
                     >
                       <img
+                        [hidden]="selectedUser?.profileImageUrl"
+                        class="rounded"
+                        height="120"
+                        width="120"
+                        src="assets/images/profile-image.jpg"
+                      />
+                      <img
+                        *ngIf="selectedUser?.profileImageUrl"
                         class="rounded"
                         height="120"
                         width="120"
                         src="{{ selectedUser?.profileImageUrl }}"
-                        alt="{{ selectedUser?.firstname }}"
                       />
                     </div>
                   </div>
@@ -218,22 +240,22 @@
                 <div
                   class="col d-flex flex-column flex-sm-row justify-content-between"
                 >
-                  <div class="text-center text-sm-left mb-sm-0">
+                  <div class="text-sm-left mb-sm-0">
                     <h6 class="pt-sm-2 pb-1 mb-0 text-nowrap">
-                      {{ selectedUser?.firstname }}
                       {{ selectedUser?.lastname }}
+                      {{ selectedUser?.firstname }}
                     </h6>
                     <p class="mb-1">{{ selectedUser?.username }}</p>
                     <div class="">
                       Status:
                       <span
                         [hidden]="!selectedUser?.active"
-                        class="btn btn-sm btn-success"
+                        class="text-success ms-2"
                         >Active</span
                       >
                       <span
                         [hidden]="selectedUser?.active"
-                        class="btn btn-sm btn-warning"
+                        class="text-warning ms-2"
                         >Inactive</span
                       >
                     </div>
@@ -263,33 +285,34 @@
               </div>
             </div>
             <ul class="list-group list-group-flush">
-              <li class="list-group-item"></li>
               <li class="list-group-item">
-                <i class="fa fa-id-badge float-right"></i
+                <i class="fa fa-id-badge float-right me-3"></i
                 >{{ selectedUser?.userId }}
               </li>
               <li class="list-group-item">
-                <i class="fa fa-envelope float-right"></i
+                <i class="fa fa-envelope float-right me-3"></i
                 >{{ selectedUser?.email }}
               </li>
               <li class="list-group-item">
-                <i class="fas fa-shield-alt float-right"></i
+                <i class="fas fa-shield-alt float-right me-3"></i
                 >{{ selectedUser?.role.substring(5) }}
               </li>
               <li
                 *ngIf="selectedUser?.lastLoginDateDisplay"
                 class="list-group-item"
               >
-                <i class="fas fa-sign-in-alt float-right"></i
+                <i class="fas fa-sign-in-alt float-right me-3"></i
                 >{{ selectedUser?.lastLoginDateDisplay | date : "medium" }}
               </li>
               <li class="list-group-item">
                 <span [hidden]="selectedUser?.notLocked">
-                  <i class="fa fa-lock float-right" style="color: red"> </i>
+                  <i class="fa fa-lock float-right me-3" style="color: red">
+                  </i>
                   Account Locked
                 </span>
                 <span [hidden]="!selectedUser?.notLocked">
-                  <i class="fa fa-unlock float-right" style="color: green"> </i>
+                  <i class="fa fa-unlock float-right me-3" style="color: green">
+                  </i>
                   Account Unlocked
                 </span>
               </li>
@@ -317,12 +340,12 @@
   aria-hidden="true"
 >
   <div class="modal-dialog" role="document">
-    <div class="modal-content">
+    <div class="modal-content px-3">
       <div class="modal-header">
         <h5 class="modal-title text-center">New User</h5>
         <button
           type="button"
-          class="close"
+          class="close close-btn-modal"
           data-bs-dismiss="modal"
           aria-label="Close"
         >
@@ -336,7 +359,7 @@
             #newUserForm="ngForm"
             (ngSubmit)="onAddNewUser(newUserForm.value)"
           >
-            <div class="form-group">
+            <div class="form-group mb-3">
               <label for="firstname">First Name</label>
               <input
                 type="text"
@@ -346,7 +369,7 @@
                 class="form-control"
               />
             </div>
-            <div class="form-group">
+            <div class="form-group mb-2">
               <label for="lastname">Last Name</label>
               <input
                 type="text"
@@ -356,7 +379,7 @@
                 class="form-control"
               />
             </div>
-            <div class="form-group">
+            <div class="form-group mb-2">
               <label for="username">Username</label>
               <input
                 type="text"
@@ -366,7 +389,7 @@
                 class="form-control"
               />
             </div>
-            <div class="form-group">
+            <div class="form-group mb-2">
               <label for="email">Email</label>
               <input
                 type="email"
@@ -376,7 +399,7 @@
                 class="form-control"
               />
             </div>
-            <div class="form-group">
+            <div class="form-group mb-2">
               <label for="authority">Role</label>
               <select
                 name="role"
@@ -386,24 +409,25 @@
               >
                 <option value="ROLE_CLIENT">CLIENT</option>
                 <option value="ROLE_OWNER">OWNER</option>
+                <option value="ROLE_ADMIN">ADMIN</option>
+                <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
               </select>
             </div>
-            <div class="form-group">
+            <div class="form-group mb-2">
               <label for="authority">Role</label>
               <input
+                [hidden]="true"
                 type="text"
                 name="role"
                 required
-                ngModel="USER"
+                ngModel="ROLE_CLIENT"
                 readonly
                 class="form-control"
               />
             </div>
-            <div class="input-group mb-2">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Profile Picture </span>
-              </div>
+            <div class="input-group mb-2 mt-2">
               <div class="custom-file">
+                <label class="me-2">Profile Image</label>
                 <input
                   type="file"
                   accept="image/*"
@@ -446,7 +470,7 @@
         </div>
       </div>
 
-      <div class="modal-footer">
+      <div class="modal-footer d-flex justify-content-between">
         <button
           type="button"
           class="btn btn-secondary"
@@ -468,3 +492,149 @@
   </div>
 </div>
 <!-- END ADD USER MODEL -->
+
+<!-- Start Edit Modal -->
+<div
+  class="modal draggable fade bd-example-modal-lg"
+  id="editUserModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content px-3">
+      <div class="modal-header">
+        <h5 class="modal-title text-center">
+          Edit {{ editedUser.firstname }} {{ editedUser.lastname }}
+        </h5>
+        <button
+          type="button"
+          class="close close-btn-modal"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div class="">
+          <form #editUserForm="ngForm" method="put">
+            <div class="form-group mb-2">
+              <label for="firstName">First Name</label>
+              <input
+                type="text"
+                name="firstName"
+                required
+                [(ngModel)]="editedUser.firstname"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group mb-2">
+              <label for="lastName">Last Name</label>
+              <input
+                type="text"
+                name="lastName"
+                required
+                [(ngModel)]="editedUser.lastname"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group mb-2">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                name="username"
+                required
+                [(ngModel)]="editedUser.username"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group mb-2">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                name="email"
+                required
+                [(ngModel)]="editedUser.email"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group mb-2">
+              <label for="authority">Role <small>(read only)</small></label>
+              <select
+                name="role"
+                [disabled]="false"
+                required
+                [(ngModel)]="editedUser.role"
+                class="form-control"
+              >
+                <option value="ROLE_CLIENT">CLIENT</option>
+                <option value="ROLE_OWNER">OWNER</option>
+                <option value="ROLE_ADMIN">ADMIN</option>
+                <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
+              </select>
+            </div>
+            <div class="input-group mb-2">
+              <label class="me-2">Profile Image</label>
+              <div class="custom-file">
+                <input
+                  type="file"
+                  accept="image/*"
+                  name="profileImage"
+                  (change)="onProfileImageChange($event)"
+                  class="custom-file-input"
+                />
+              </div>
+            </div>
+            <fieldset class="form-group mb-2">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    [disabled]="false"
+                    name="active"
+                    type="checkbox"
+                    [(ngModel)]="editedUser.active"
+                    class="form-check-input"
+                  />
+                  Active <small>(read only)</small>
+                </label>
+              </div>
+              <div class="form-check disabled">
+                <label class="form-check-label">
+                  <input
+                    [disabled]="false"
+                    name="locked"
+                    type="checkbox"
+                    [(ngModel)]="editedUser.notLocked"
+                    class="form-check-input"
+                  />
+                  Unlocked <small>(read only)</small>
+                </label>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          id="closeEditUserModalButton"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          (click)="onUpdateUser()"
+          [disabled]="editUserForm.invalid"
+          class="btn btn-primary"
+        >
+          Update User
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Edit Modal -->

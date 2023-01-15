@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NotificationType } from 'src/app/enums/notification-type.enum';
+import { CustomHttpRespone } from 'src/app/models/custom-http-response';
 import { Hotel } from 'src/app/models/hotel';
 import { Reservation } from 'src/app/models/reservation';
 import { Room } from 'src/app/models/room';
@@ -29,6 +30,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     public loggedInUser: any;
     public selectedUser?: any;
+    public editedUser = new User();
+    private currentUsername?: string;
     public filename: any;
     public profileImage: any;
 
@@ -128,6 +131,46 @@ export class DashboardComponent implements OnInit, OnDestroy {
       )
     }
 
+    
+    public onEditUser(user: User): void{
+      this.editedUser = user;
+      this.currentUsername = user.username;
+      document.getElementById("openUserEdit")?.click();
+    }
+
+    public onUpdateUser(): void{
+      const formData = this.userService.createUserFormDate(this.currentUsername, this.editedUser , this.profileImage);
+      this.subscriptions.push(
+        this.userService.updateUser(formData).subscribe(
+          (response: any) =>{
+            document.getElementById("closeEditUserModalButton")?.click();
+            this.sendErrorNotification(NotificationType.SUCCESS, `The user information were updated successfully !!.`);
+            this.getUsers(false);
+            this.profileImage = null;
+            this.filename = null;
+          },  
+          (httpErrorResponse: HttpErrorResponse) => {
+            this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
+            this.profileImage = null;
+          }
+        )
+      )
+    }
+
+    public onDelete(id: any){
+      this.subscriptions.push(
+        this.userService.deleteUser(id).subscribe(
+          (response: CustomHttpRespone)=>{
+            this.sendErrorNotification(NotificationType.SUCCESS, response.message);
+            this.getUsers(false);
+          },
+          (httpErrorResponse: HttpErrorResponse) => {
+            this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
+          }
+        )
+      )
+    }
+
     public onProfileImageChange(event:any): void{
       const files = event.target.files;
       this.profileImage = files[0];
@@ -136,6 +179,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     public onSelectUser(selectedUser: User){
       this.selectedUser  = selectedUser;
+      console.log(selectedUser.firstname);
+      console.log(selectedUser.profileImageUrl);
       document.getElementById("openUserInfo")?.click();
     }
 

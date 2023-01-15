@@ -19,7 +19,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 70px;
+  margin-bottom: 50px;
   background-color: #fafafa;
 }
 
@@ -44,7 +44,7 @@ header {
 
 /* Start The Main Section */
 .table__header {
-  margin-bottom: 25px;
+  margin-bottom: 50px;
   display: flex;
   justify-content: space-between;
 }
@@ -70,4 +70,17 @@ header {
 /* End The Main Section */
 
 /* Start Users Section */
+
+table {
+  background-color: #fafafa;
+}
 /* End Users Section */
+
+/* Start Modals Styles */
+.close-btn-modal {
+  border: none;
+  padding: 10px 20px;
+  background-color: transparent;
+  font-size: 25px;
+}
+/* End Modals Styles */
