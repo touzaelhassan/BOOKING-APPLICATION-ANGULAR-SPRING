@@ -1,0 +1,108 @@
+<!-- Start Header Section -->
+<header>
+  <div class="container">
+    <div class="header__content">
+      <div class="nav__right">
+        <ul class="nav nav__list">
+          <li class="nav__item">
+            <a class="nav__link active" data-bs-toggle="tab" href="#users"
+              >Users</a
+            >
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" data-bs-toggle="tab" href="#hotels">Hotels</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" data-bs-toggle="tab" href="#rooms">Rooms</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" data-bs-toggle="tab" href="#reservations"
+              >Reservations</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="nav__left">
+        <ul class="nav__list">
+          <li><a class="nav__link" href="">HOME</a></li>
+          <li>
+            <a class="nav__link" (click)="onLogout()">LOGOUT</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- End Header Section -->
+
+<!-- Start Main Section -->
+<main class="main">
+  <div class="container">
+    <div class="tab-content main__content">
+      <div class="tab-pane fade show active" id="users">
+        <table class="table table-hover table-bordered">
+          <thead class="table-borderless">
+            <tr class="text-center">
+              <th>User ID</th>
+              <th>User Image</th>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Username</th>
+              <th>Email</th>
+              <th>Role</th>
+              <th>User Status</th>
+              <th>Account Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let user of users" class="text-center">
+              <td>{{ user.userId }}</td>
+              <td>User Image</td>
+              <td>{{ user.firstname }}</td>
+              <td>{{ user.lastname }}</td>
+              <td>{{ user.username }}</td>
+              <td>{{ user.email }}</td>
+              <td>{{ user.role }}</td>
+              <td>
+                <span [hidden]="!user?.active" class="btn btn-sm btn-success"
+                  >Active</span
+                >
+                <span [hidden]="user?.active" class="btn btn-sm btn-warning"
+                  >Inactive</span
+                >
+              </td>
+              <td>
+                <span
+                  [hidden]="user?.notLocked"
+                  style="color: red; font-size: 22px"
+                  ><i class="fa-solid fa-lock"></i
+                ></span>
+                <span
+                  [hidden]="!user?.notLocked"
+                  style="color: green; font-size: 22px"
+                >
+                  <i class="fa-solid fa-lock-open"></i>
+                </span>
+              </td>
+              <td>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-sm btn-success">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button class="btn btn-sm btn-danger">
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="tab-pane fade" id="hotels"><h4>Hotels</h4></div>
+      <div class="tab-pane fade" id="rooms"><h4>Rooms</h4></div>
+      <div class="tab-pane fade" id="reservations"><h4>Reservations</h4></div>
+    </div>
+  </div>
+</main>
+<!-- Start Main Section -->

@@ -15,22 +15,22 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { RoomComponent } from './components/room/room.component';
-import { LogoutComponent } from './components/logout/logout.component';
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { ClientreservationsComponent } from './components/clientreservations/clientreservations.component';
 import { OwnerreservationsComponent } from './components/ownerreservations/ownerreservations.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     RegisterComponent,
     LoginComponent,
-    LogoutComponent,
     HomeComponent,
     RoomComponent,
     ReservationComponent,
     ClientreservationsComponent,
-    OwnerreservationsComponent
+    OwnerreservationsComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,

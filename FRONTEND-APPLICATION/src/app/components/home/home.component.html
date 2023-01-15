@@ -23,7 +23,7 @@
         </button>
         <a [hidden]="isUserLoggedIn" routerLink="/login">LOGIN</a>
         <a [hidden]="isUserLoggedIn" routerLink="/register">REGISTER</a>
-        <a *ngIf="isUserLoggedIn" href="">DASHBOARD</a>
+        <a *ngIf="isUserLoggedIn" routerLink="/dashboard">DASHBOARD</a>
       </div>
     </div>
   </div>

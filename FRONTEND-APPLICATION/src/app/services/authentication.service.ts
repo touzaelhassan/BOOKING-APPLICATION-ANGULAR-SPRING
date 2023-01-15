@@ -61,5 +61,4 @@ export class AuthenticationService {
             return JSON.parse(userData); 
         }
     }
-
 }

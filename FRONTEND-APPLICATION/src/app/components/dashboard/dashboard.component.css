@@ -1,0 +1,51 @@
+/* Start General Styles */
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+/* End General Styles */
+
+/* Start Header Styles */
+header {
+  margin-top: 70px;
+}
+
+.header__content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 70px;
+  background-color: #fafafa;
+}
+
+.nav__list {
+  display: flex;
+}
+
+.nav__link {
+  display: block;
+  padding: 20px;
+  color: #344854;
+  cursor: pointer;
+}
+
+.nav__link.active {
+  color: #fff;
+  background-color: #344854;
+}
+
+/* End Header Styles */
+
+/* Start The Main Section */
+.table {
+  cursor: pointer;
+}
+/* End The Main Section */
+
+/* Start Users Section */
+/* End Users Section */

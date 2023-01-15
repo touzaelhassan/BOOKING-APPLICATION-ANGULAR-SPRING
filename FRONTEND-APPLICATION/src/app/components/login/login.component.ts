@@ -16,27 +16,17 @@ import { NotificationService } from 'src/app/services/notification.service';
 
 export class LoginComponent implements OnInit, OnDestroy{
 
-    public showLoading: boolean = false;
     private subscriptions: Subscription[] = [];
 
     constructor(
-      private router : Router, 
       private authenticationService : AuthenticationService, 
+      private router : Router, 
       private notificationService: NotificationService
     ) {}
 
-    ngOnInit(): void { 
-        if(this.authenticationService.isUserLoggedIn()){
-            this.router.navigateByUrl(''); 
-        }else{
-            this.router.navigateByUrl('/login');
-        }
-    }
+    ngOnInit(): void { }
 
     public onLogin(user: User): void {
-
-        this.showLoading = true;
-
         this.subscriptions.push(
             this.authenticationService.login(user).subscribe(
               (response: HttpResponse<User>) => {
@@ -44,16 +34,13 @@ export class LoginComponent implements OnInit, OnDestroy{
                   this.authenticationService.saveTokenInLocalStorage(token);
                   this.authenticationService.saveUserInLocalStorage(response.body as User);
                   this.notificationService.notify(NotificationType.SUCCESS, "You've been successfully logged in !!.")
-                  this.router.navigateByUrl('');
+                  this.router.navigateByUrl('/dashboard');
               },
               (httpErrorResponse: HttpErrorResponse) => {
-                console.log("Error : " + httpErrorResponse);
                 this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
-                this.showLoading = false;
               }
             )
         );
-
     }
 
   private sendErrorNotification(notificationType: NotificationType, message: string) : void {
