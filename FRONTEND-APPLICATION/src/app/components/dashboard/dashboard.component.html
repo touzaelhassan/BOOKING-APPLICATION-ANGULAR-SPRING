@@ -39,7 +39,31 @@
 <main class="main">
   <div class="container">
     <div class="tab-content main__content">
+      <!-- Start Users Table -->
       <div class="tab-pane fade show active" id="users">
+        <div class="table__header">
+          <form class="form-inline my-2 my-lg-0 justify-content-center">
+            <input
+              name="searchTerm"
+              #searchInput="ngModel"
+              class="form-control mr-sm-2"
+              ngModel
+              (ngModelChange)="searchInUsersList(searchInput.value)"
+              type="search"
+              placeholder="Search users..."
+            />
+          </form>
+          <div class="d-flex justify-content-end">
+            <button
+              type="button"
+              class="btn btn-success ms-5"
+              data-bs-toggle="modal"
+              data-bs-target="#addUserModal"
+            >
+              Add User
+            </button>
+          </div>
+        </div>
         <table class="table table-hover table-bordered">
           <thead class="table-borderless">
             <tr class="text-center">
@@ -58,11 +82,13 @@
           <tbody>
             <tr *ngFor="let user of users" class="text-center">
               <td>{{ user.userId }}</td>
-              <td>User Image</td>
-              <td>{{ user.firstname }}</td>
-              <td>{{ user.lastname }}</td>
-              <td>{{ user.username }}</td>
-              <td>{{ user.email }}</td>
+              <td (click)="onSelectUser(user)">
+                <img src="{{ user.profileImageUrl }}" style="width: 60px" />
+              </td>
+              <td (click)="onSelectUser(user)">{{ user.firstname }}</td>
+              <td (click)="onSelectUser(user)">{{ user.lastname }}</td>
+              <td (click)="onSelectUser(user)">{{ user.username }}</td>
+              <td (click)="onSelectUser(user)">{{ user.email }}</td>
               <td>{{ user.role }}</td>
               <td>
                 <span [hidden]="!user?.active" class="btn btn-sm btn-success"
@@ -99,6 +125,8 @@
           </tbody>
         </table>
       </div>
+      <!-- Start Users Table -->
+
       <div class="tab-pane fade" id="hotels"><h4>Hotels</h4></div>
       <div class="tab-pane fade" id="rooms"><h4>Rooms</h4></div>
       <div class="tab-pane fade" id="reservations"><h4>Reservations</h4></div>
@@ -106,3 +134,157 @@
   </div>
 </main>
 <!-- Start Main Section -->
+
+<!-- Start Headen Buttons For Displaying View and Edit Modal -->
+<button
+  [hidden]="true"
+  type="button"
+  id="openUserInfo"
+  data-bs-toggle="modal"
+  data-bs-target="#viewUserModal"
+></button>
+<button
+  [hidden]="true"
+  type="button"
+  id="openUserEdit"
+  data-bs-toggle="modal"
+  data-bs-target="#editUserModal"
+></button>
+<!-- Start Headen Buttons For Displaying View and Edit Modal -->
+
+<!-- Start User Information Modal -->
+<div
+  class="modal fade bd-example-modal-lg"
+  id="viewUserModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLongTitle">
+          {{ selectedUser?.firstname }}
+          {{ selectedUser?.lastname }}
+        </h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12 col-sm-auto">
+                  <div class="mx-auto" style="width: 120px">
+                    <div
+                      class="d-flex justify-content-center align-items-center rounded"
+                    >
+                      <img
+                        class="rounded"
+                        height="120"
+                        width="120"
+                        src="{{ selectedUser?.profileImageUrl }}"
+                        alt="{{ selectedUser?.firstname }}"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col d-flex flex-column flex-sm-row justify-content-between"
+                >
+                  <div class="text-center text-sm-left mb-sm-0">
+                    <h6 class="pt-sm-2 pb-1 mb-0 text-nowrap">
+                      {{ selectedUser?.firstname }}
+                      {{ selectedUser?.lastname }}
+                    </h6>
+                    <p class="mb-1">{{ selectedUser?.username }}</p>
+                    <div class="">
+                      Status:
+                      <span
+                        [hidden]="!selectedUser?.active"
+                        class="btn btn-sm btn-success"
+                        >Active</span
+                      >
+                      <span
+                        [hidden]="selectedUser?.active"
+                        class="btn btn-sm btn-warning"
+                        >Inactive</span
+                      >
+                    </div>
+                    <div
+                      *ngIf="selectedUser?.lastLoginDateDisplay"
+                      class="text-muted"
+                    >
+                      <small
+                        >Last Login:
+                        {{
+                          selectedUser?.lastLoginDateDisplay | date : "medium"
+                        }}</small
+                      >
+                    </div>
+                  </div>
+                  <div class="text-center text-sm-right">
+                    <div class="text-muted">
+                      <small
+                        >Joined
+                        {{
+                          selectedUser?.joinDate | date : "mediumDate"
+                        }}</small
+                      >
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item"></li>
+              <li class="list-group-item">
+                <i class="fa fa-id-badge float-right"></i
+                >{{ selectedUser?.userId }}
+              </li>
+              <li class="list-group-item">
+                <i class="fa fa-envelope float-right"></i
+                >{{ selectedUser?.email }}
+              </li>
+              <li class="list-group-item">
+                <i class="fas fa-shield-alt float-right"></i
+                >{{ selectedUser?.role.substring(5) }}
+              </li>
+              <li
+                *ngIf="selectedUser?.lastLoginDateDisplay"
+                class="list-group-item"
+              >
+                <i class="fas fa-sign-in-alt float-right"></i
+                >{{ selectedUser?.lastLoginDateDisplay | date : "medium" }}
+              </li>
+              <li class="list-group-item">
+                <span [hidden]="selectedUser?.notLocked">
+                  <i class="fa fa-lock float-right" style="color: red"> </i>
+                  Account Locked
+                </span>
+                <span [hidden]="!selectedUser?.notLocked">
+                  <i class="fa fa-unlock float-right" style="color: green"> </i>
+                  Account Unlocked
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End User Information Modal -->

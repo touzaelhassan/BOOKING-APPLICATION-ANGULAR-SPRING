@@ -21,12 +21,14 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class DashboardComponent implements OnInit, OnDestroy {
 
-    public loggedInUser: any;
     public users: User[] = [];
     public hotels: Hotel[] = [];
     public rooms: Room[] = [];
     public reservations: Reservation[] = [];
     private subscriptions: Subscription[] = [];
+
+    public loggedInUser: any;
+    public selectedUser?: any;
 
     constructor(
       private authenticationService: AuthenticationService, 
@@ -51,6 +53,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.userService.getUsers().subscribe(
           (response: User[]) => {
             this.users = response;
+            this.userService.addUsersToLocalStorage(this.users);
           },
           (httpErrorResponse: HttpErrorResponse) => {
             this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
@@ -96,6 +99,26 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
         )
       )
+    }
+
+    public onSelectUser(selectedUser: User){
+      this.selectedUser  = selectedUser;
+      document.getElementById("openUserInfo")?.click();
+    }
+
+  public searchInUsersList(keyword: string){
+      const searchResults: User[] = [];
+      for (const user of this.userService.getUsersFromLocalStorage()){
+        if(
+          user.firstname.toLocaleLowerCase().indexOf(keyword.toLocaleLowerCase()) !== -1 || 
+          user.lastname.toLocaleLowerCase().indexOf(keyword.toLocaleLowerCase()) !== -1 ||
+          user.username.toLocaleLowerCase().indexOf(keyword.toLocaleLowerCase()) !== -1 
+        ){
+          searchResults.push(user);
+        }
+      }
+      this.users = searchResults;
+      if (searchResults.length == 0 || !keyword) { this.users = this.userService.getUsersFromLocalStorage(); }
     }
 
     public onLogout(){
