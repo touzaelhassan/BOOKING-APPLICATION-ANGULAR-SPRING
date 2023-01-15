@@ -12,7 +12,7 @@ public class SecurityConstants {
     public static final String FORBIDDEN_MESSAGE = "You need to login to access this endpoint";
     public static final String ACCESS_DENIED_MESSAGE = "You do not have permission to access this endpoint";
     public static final String OPTIONS_HTTP_METHOD = "OPTIONS";
-    public static final String[] PUBLIC_URLS = { "/api/authentication/register", "/api/authentication/login", "/api/rooms"};
+    public static final String[] PUBLIC_URLS = { "/api/authentication/register", "/api/authentication/login", "/api/user/image/**", "/api/hotels", "/api/rooms", "/api/room/**"};
     // public static final String[] PUBLIC_URLS = { "**" };
 
 }

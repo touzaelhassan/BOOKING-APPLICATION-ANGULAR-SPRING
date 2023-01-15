@@ -74,7 +74,6 @@ public class UserController extends ExceptionHandlingController {
     }
 
     @GetMapping("/users")
-    @PreAuthorize("hasAnyAuthority('user:read')")
     public ResponseEntity<List<User>> getUsers() {
         List<User> users = userServiceBean.getUsers();
         return new ResponseEntity<>(users, OK);
@@ -86,15 +85,14 @@ public class UserController extends ExceptionHandlingController {
         return response(OK, EMAIL_SENT + email);
     }
 
-    @DeleteMapping("/user/delete/{username}")
-    @PreAuthorize("hasAnyAuthority('user:delete')")
-    public ResponseEntity<HttpResponse> deleteUser(@PathVariable("username") String username) throws IOException {
-        userServiceBean.deleteUser(username);
+    @DeleteMapping("/user/delete/{id}")
+    //@PreAuthorize("hasAnyAuthority('user:delete')")
+    public ResponseEntity<HttpResponse> deleteUser(@PathVariable("id") Integer id) throws IOException {
+        userServiceBean.deleteUser(id);
         return response(OK, USER_DELETED_SUCCESSFULLY);
     }
 
     @PutMapping("/user/update/user-role/{id}")
-   //@PreAuthorize("hasAnyAuthority('user:update')")
     public ResponseEntity<HttpResponse> updateUserRole(@PathVariable("id") Integer id,   @RequestParam("role") String role) throws IOException {
         userServiceBean.updateUserRole(id, role);
         return response(OK, USER_ROLE_UPDATED_SUCCESSFULLY);

@@ -1,6 +1,9 @@
 package com.application.services.implementations;
 
 import com.application.classes.UserPrincipal;
+import com.application.entities.Admin;
+import com.application.entities.Client;
+import com.application.entities.Owner;
 import com.application.entities.User;
 import com.application.enums.Role;
 import com.application.exceptions.classes.*;
@@ -30,9 +33,9 @@ import java.util.List;
 
 import static com.application.constants.FileConstants.*;
 import static com.application.constants.UserServiceImplementationConstants.*;
+import static com.application.enums.Role.*;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
-import static com.application.enums.Role.ROLE_USER;
 
 import javax.transaction.Transactional;
 import org.springframework.stereotype.Service;
@@ -72,9 +75,81 @@ public class UserServiceImplementation implements UserServiceSpecification, User
     }
 
     @Override
-    public User register(String firstname, String lastname, String username, String email) throws UserNotFoundException, EmailExistException, UsernameExistException {
+    public User register(String firstname, String lastname, String username, String email, String role) throws UserNotFoundException, EmailExistException, UsernameExistException {
 
         validateNewUsernameAndEmail(EMPTY, username, email);
+
+        if(role.equals("ROLE_CLIENT")){
+
+            Client client = new Client();
+            client.setUserId(generateUserId());
+            String password = generatePassword();
+            String encodedPassword = encodePassword(password);
+
+            client.setFirstname(firstname);
+            client.setLastname(lastname);
+            client.setUsername(username);
+            client.setEmail(email);
+            client.setJoinDate(new Date());
+            client.setPassword(encodedPassword);
+            client.setActive(true);
+            client.setNotLocked(true);
+            client.setRole(ROLE_CLIENT.name());
+            client.setAuthorities(ROLE_CLIENT.getAuthorities());
+            client.setProfileImageUrl(getTemporaryProfileImageUrl(username));
+            userRepositoryBean.save(client);
+            LOGGER.info("The user password : " + password);
+            return client;
+
+        }
+
+        if(role.equals("ROLE_OWNER")){
+
+            Owner owner = new Owner();
+            owner.setUserId(generateUserId());
+            String password = generatePassword();
+            String encodedPassword = encodePassword(password);
+
+            owner.setFirstname(firstname);
+            owner.setLastname(lastname);
+            owner.setUsername(username);
+            owner.setEmail(email);
+            owner.setJoinDate(new Date());
+            owner.setPassword(encodedPassword);
+            owner.setActive(true);
+            owner.setNotLocked(true);
+            owner.setRole(ROLE_OWNER.name());
+            owner.setAuthorities(ROLE_OWNER.getAuthorities());
+            owner.setProfileImageUrl(getTemporaryProfileImageUrl(username));
+            userRepositoryBean.save(owner);
+            LOGGER.info("The user password : " + password);
+            return owner;
+
+        }
+
+        if(role.equals("ROLE_SUPER_ADMIN")){
+
+            Admin admin = new Admin();
+            admin.setUserId(generateUserId());
+            String password = generatePassword();
+            String encodedPassword = encodePassword(password);
+
+            admin.setFirstname(firstname);
+            admin.setLastname(lastname);
+            admin.setUsername(username);
+            admin.setEmail(email);
+            admin.setJoinDate(new Date());
+            admin.setPassword(encodedPassword);
+            admin.setActive(true);
+            admin.setNotLocked(true);
+            admin.setRole(ROLE_OWNER.name());
+            admin.setAuthorities(ROLE_OWNER.getAuthorities());
+            admin.setProfileImageUrl(getTemporaryProfileImageUrl(username));
+            userRepositoryBean.save(admin);
+            LOGGER.info("The user password : " + password);
+            return admin;
+
+        }
 
         User user = new User();
         user.setUserId(generateUserId());
@@ -169,11 +244,11 @@ public class UserServiceImplementation implements UserServiceSpecification, User
     }
 
     @Override
-    public void deleteUser(String username) throws IOException {
-        User user = userRepositoryBean.findUserByUsername(username);
+    public void deleteUser(Integer id) throws IOException {
+        User user = userRepositoryBean.findById(id).orElse(null);
         Path userFolder = Paths.get(USER_FOLDER + user.getUsername()).toAbsolutePath().normalize();
         FileUtils.deleteDirectory(new File(userFolder.toString()));
-        userRepositoryBean.deleteById(user.getId());
+        userRepositoryBean.deleteById(id);
     }
 
     @Override
@@ -226,12 +301,6 @@ public class UserServiceImplementation implements UserServiceSpecification, User
     private void saveProfileImage(User user, MultipartFile profileImage) throws IOException, NotAnImageFileException {
 
         if (profileImage != null) {
-            /*
-            if(!ArrayStoreException.asList(IMAGE_JPEG_VALUE, IMAGE_PNG_VALUE, IMAGE_GIF_VALUE).contains(profileImage.getContentType())) {
-                throw new NotAnImageFileException(profileImage.getOriginalFilename() + NOT_AN_IMAGE_FILE);
-            }
-             */
-
             Path userFolder = Paths.get(USER_FOLDER + user.getUsername()).toAbsolutePath().normalize();
             if(!Files.exists(userFolder)) {
                 Files.createDirectories(userFolder);

@@ -37,7 +37,6 @@ public class Application {
             CityRepository cityRepositoryBean,
             HotelServiceSpecification hotelServiceBean,
             RoomServiceSpecification roomServiceBean,
-            ReservationServiceSpecification reservationServiceBean,
             BCryptPasswordEncoder bCryptPasswordEncoder
     ){
 
@@ -45,8 +44,8 @@ public class Application {
 
             Admin admin = new Admin();
             admin.setUserId("534376");
-            admin.setFirstname("hassan");
-            admin.setLastname("touza");
+            admin.setFirstname("El Hassan");
+            admin.setLastname("Touza");
             admin.setUsername("touzaelhassan");
             admin.setEmail("hassan@gmail.com");
             admin.setJoinDate(new Date());
@@ -55,7 +54,6 @@ public class Application {
             admin.setNotLocked(true);
             admin.setRole(ROLE_SUPER_ADMIN.name());
             admin.setAuthorities(ROLE_SUPER_ADMIN.getAuthorities());
-            admin.setProfileImageUrl("www.url.com/image-url");
             userRepositoryBean.save(admin);
 
             Owner owner1 = new Owner();
@@ -70,7 +68,6 @@ public class Application {
             owner1.setNotLocked(true);
             owner1.setRole(ROLE_OWNER.name());
             owner1.setAuthorities(ROLE_OWNER.getAuthorities());
-            owner1.setProfileImageUrl("www.url.com/image-url1");
             userRepositoryBean.save(owner1);
 
             Owner owner2 = new Owner();
@@ -85,7 +82,6 @@ public class Application {
             owner2.setNotLocked(true);
             owner2.setRole(ROLE_OWNER.name());
             owner2.setAuthorities(ROLE_OWNER.getAuthorities());
-            owner2.setProfileImageUrl("www.url.com/image-url2");
             userRepositoryBean.save(owner2);
 
             Client client1 = new Client();
@@ -100,7 +96,6 @@ public class Application {
             client1.setNotLocked(true);
             client1.setRole(ROLE_CLIENT.name());
             client1.setAuthorities(ROLE_CLIENT.getAuthorities());
-            client1.setProfileImageUrl("www.url.com/image-url");
             userRepositoryBean.save(client1);
 
             Client client2 = new Client();
@@ -115,7 +110,6 @@ public class Application {
             client2.setNotLocked(true);
             client2.setRole(ROLE_CLIENT.name());
             client2.setAuthorities(ROLE_CLIENT.getAuthorities());
-            client2.setProfileImageUrl("www.url.com/image-url");
             userRepositoryBean.save(client2);
 
             City city1 = new City();
@@ -129,7 +123,9 @@ public class Application {
             cityRepositoryBean.save(city3);
 
             Hotel hotel1 = new Hotel();
-            hotel1.setName("VERONEX-5");
+            hotel1.setName("Millenium Hotels & Resorts");
+            hotel1.setDescription("A Boutique Hotel To Make Your Dreams of A Lush Island Getaway Come True. A Tropical Island Paradise On Mauritius’ Shores - La Maison D’Été.");
+            hotel1.setImageUrl("assets/images/hotels/hotel-1.jpg");
             hotel1.setAvailable(true);
             hotel1.setApproved(false);
             hotel1.setOwner(owner1);
@@ -137,7 +133,9 @@ public class Application {
             hotelServiceBean.addHotel(hotel1);
 
             Hotel hotel2 = new Hotel();
-            hotel2.setName("MALERT-457");
+            hotel2.setName("Waltzing Matilda Hotel");
+            hotel2.setDescription("The Panoramic Hotel is a modern, elegant, nice and glamorous 5-star hotel overlooking the sea, perfect for a romantic, charming and a nice vacation." );
+            hotel2.setImageUrl("assets/images/hotels/hotel-2.jpg");
             hotel2.setAvailable(true);
             hotel2.setApproved(false);
             hotel2.setOwner(owner1);
@@ -145,7 +143,9 @@ public class Application {
             hotelServiceBean.addHotel(hotel2);
 
             Hotel hotel3 = new Hotel();
-            hotel3.setName("B-HOUSE 55");
+            hotel3.setName("Sand Castle Inn & Suites");
+            hotel3.setDescription("While you enjoy a cocktail by the swimming pool on the rooftop terrace, you will be stunned by the breathtaking view of the bay of Isola Bella.");
+            hotel3.setImageUrl("assets/images/hotels/hotel-3.jpg");
             hotel3.setAvailable(true);
             hotel3.setApproved(false);
             hotel3.setOwner(owner2);
@@ -153,25 +153,37 @@ public class Application {
             hotelServiceBean.addHotel(hotel3);
 
             Room room1 = new Room();
-            room1.setName("room1");
+            room1.setName("Bright Velo - Mystic ");
+            room1.setDescription("The self check in boxes are a great idea. We arrived after 6pm, after hiking the beautiful Bright mountains all day, the owner had sent us a text early");
+            room1.setPrice(249.00F);
+            room1.setImageUrl("assets/images/rooms/room-1.jpg");
             room1.setAvailable(true);
             room1.setHotel(hotel1);
             roomServiceBean.addRoom(room1);
 
             Room room2 = new Room();
-            room2.setName("room2");
+            room2.setName("Alpine Hotel Bright");
+            room2.setDescription("Bright Velo - Heritage is a 4-star property located in Bright. This 4-star hotel features free WiFi and a restaurant. The nearest airport is Albury");
+            room2.setPrice(449.00F);
+            room2.setImageUrl("assets/images/rooms/room-2.jpg");
             room2.setAvailable(true);
             room2.setHotel(hotel1);
             roomServiceBean.addRoom(room2);
 
             Room room3 = new Room();
-            room3.setName("room3");
+            room3.setName("Discovery Parks - Bright");
+            room3.setDescription("Set in Bright, Alpine Hotel Bright features a restaurant, bar and free WiFi throughout the property. The room was great! It was very clean, great");
+            room3.setPrice(129.00F);
+            room3.setImageUrl("assets/images/rooms/room-3.jpg");
             room3.setAvailable(true);
             room3.setHotel(hotel2);
             roomServiceBean.addRoom(room3);
 
             Room room4 = new Room();
-            room4.setName("room4");
+            room4.setName("Tasman Holiday Parks");
+            room4.setDescription("Just a 5-minute drive from the heart of Bright and set on 12 acres on the banks of Ovens River, Discovery Parks - Bright boasts views of Mount");
+            room4.setPrice(349.00F);
+            room4.setImageUrl("assets/images/rooms/room-4.jpg");
             room4.setAvailable(true);
             room4.setHotel(hotel3);
             roomServiceBean.addRoom(room4);

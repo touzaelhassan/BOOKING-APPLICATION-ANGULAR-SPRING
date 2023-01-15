@@ -42,11 +42,15 @@ public class AuthenticationController extends ExceptionHandlingController {
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody RegisterRequest registerRequest) throws UserNotFoundException, EmailExistException, UsernameExistException {
+
+        System.out.println(registerRequest);
+
         String firstname = registerRequest.getFirstname();
         String lastname = registerRequest.getLastname();
         String username = registerRequest.getUsername();
         String email = registerRequest.getEmail();
-        User registeredUser =   userServiceBean.register(firstname, lastname, username, email);
+        String role = registerRequest.getRole();
+        User registeredUser =   userServiceBean.register(firstname, lastname, username, email, role);
         return  new ResponseEntity<>(registeredUser, OK);
     }
 

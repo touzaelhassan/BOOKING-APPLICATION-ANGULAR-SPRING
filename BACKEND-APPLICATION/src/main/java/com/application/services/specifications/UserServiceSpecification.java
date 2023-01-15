@@ -9,7 +9,7 @@ import java.util.List;
 
 public interface UserServiceSpecification {
 
-    User register(String firstname, String lastname, String username, String email) throws UserNotFoundException, EmailExistException, UsernameExistException;
+    User register(String firstname, String lastname, String username, String email, String role) throws UserNotFoundException, EmailExistException, UsernameExistException;
     User addUser(String firstname, String lastname, String username, String email, String role, boolean isNotLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, EmailExistException, UsernameExistException, IOException, NotAnImageFileException;
     User updateUser(String currentUsername, String newFirstname, String newLastname, String newUsername, String newEmail, String role, boolean isNotLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, EmailExistException, UsernameExistException, IOException, NotAnImageFileException;
     User updateProfileImage(String username, MultipartFile newProfileImage) throws UserNotFoundException, EmailExistException, UsernameExistException, IOException, NotAnImageFileException;
@@ -18,6 +18,6 @@ public interface UserServiceSpecification {
     User findUserByUsername(String username);
     User findUserByEmail(String email);
     List<User> getUsers();
-    void deleteUser(String username) throws IOException;
+    void deleteUser(Integer id) throws IOException;
     void updateUserRole(Integer id, String role);
 }
