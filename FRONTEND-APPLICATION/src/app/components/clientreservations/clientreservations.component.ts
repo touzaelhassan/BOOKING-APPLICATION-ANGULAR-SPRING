@@ -40,6 +40,7 @@ export class ClientreservationsComponent implements OnInit{
     )
   }
 
+
   public getUserFromLocalStorage(): User { return JSON.parse(localStorage.getItem('user') || ''); }
 
 }

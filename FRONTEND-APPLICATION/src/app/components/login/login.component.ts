@@ -19,7 +19,11 @@ export class LoginComponent implements OnInit, OnDestroy{
     public showLoading: boolean = false;
     private subscriptions: Subscription[] = [];
 
-    constructor(private router : Router, private authenticationService : AuthenticationService, private notifier: NotificationService) {}
+    constructor(
+      private router : Router, 
+      private authenticationService : AuthenticationService, 
+      private notificationService: NotificationService
+    ) {}
 
     ngOnInit(): void { 
         if(this.authenticationService.isUserLoggedIn()){
@@ -39,7 +43,7 @@ export class LoginComponent implements OnInit, OnDestroy{
                   const token : string = response.headers.get(HeaderType.JWT_TOKEN) as string;
                   this.authenticationService.saveTokenInLocalStorage(token);
                   this.authenticationService.saveUserInLocalStorage(response.body as User);
-                  this.showLoading = false; 
+                  this.notificationService.notify(NotificationType.SUCCESS, "You've been successfully logged in !!.")
                   this.router.navigateByUrl('');
               },
               (httpErrorResponse: HttpErrorResponse) => {
@@ -54,9 +58,9 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   private sendErrorNotification(notificationType: NotificationType, message: string) : void {
     if(message){
-      this.notifier.notify(notificationType, message);
+      this.notificationService.notify(notificationType, message);
     }else{
-      this.notifier.notify(notificationType, 'Opps !! error occured, Please try again.')
+      this.notificationService.notify(notificationType, 'Opps !! error occured, Please try again.')
     }
   }
 

@@ -1,3 +1,34 @@
+<header class="header">
+  <div class="container">
+    <div
+      class="d-flex justify-content-between align-items-center header__content"
+    >
+      <div class="d-flex align-items-center header__content__right">
+        <h4><a routerLink="" class="header__logo">BRIGHT HOTELS</a></h4>
+        <ul class="d-flex nav__list">
+          <li class="nav__item">
+            <a href="">Groups & Meetings</a>
+          </li>
+          <li class="nav__item">
+            <a href="">Support</a>
+          </li>
+          <li class="nav__item">
+            <a href="">Trips</a>
+          </li>
+        </ul>
+      </div>
+      <div class="header__content__left">
+        <button type="button" *ngIf="isUserLoggedIn" (click)="onLogout()">
+          LOGOUT
+        </button>
+        <a [hidden]="isUserLoggedIn" routerLink="/login">LOGIN</a>
+        <a [hidden]="isUserLoggedIn" routerLink="/register">REGISTER</a>
+        <a *ngIf="isUserLoggedIn" href="">DASHBOARD</a>
+      </div>
+    </div>
+  </div>
+</header>
+
 <section class="d-flex align-items-center hero__section">
   <div class="container">
     <form action="#" class="col-md-5 hero__form">
@@ -168,3 +199,5 @@
     </div>
   </div>
 </section>
+
+<footer></footer>

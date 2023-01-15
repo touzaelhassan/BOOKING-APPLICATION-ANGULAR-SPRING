@@ -7,6 +7,33 @@
     <title>ANGULAR APPLICATION | REGISTER</title>
   </head>
   <body>
+    <header class="header">
+      <div class="container">
+        <div
+          class="d-flex justify-content-between align-items-center header__content"
+        >
+          <div class="d-flex align-items-center header__content__right">
+            <h4><a routerLink="" class="header__logo">BRIGHT HOTELS</a></h4>
+            <ul class="d-flex nav__list">
+              <li class="nav__item">
+                <a href="">Groups & Meetings</a>
+              </li>
+              <li class="nav__item">
+                <a href="">Support</a>
+              </li>
+              <li class="nav__item">
+                <a href="">Trips</a>
+              </li>
+            </ul>
+          </div>
+          <div class="header__content__left">
+            <a routerLink="/login">LOGIN</a>
+            <a routerLink="/register">REGISTER</a>
+          </div>
+        </div>
+      </div>
+    </header>
+
     <div class="container">
       <div class="login">
         <div class="login__content">
@@ -58,6 +85,20 @@
                 ngModel
                 #emailInput="ngModel"
               />
+            </div>
+            <div class="col mb-3">
+              <div class="form-group">
+                <label for="authority">Role</label>
+                <select
+                  name="role"
+                  required
+                  ngModel="ROLE_CLIENT"
+                  class="form-control"
+                >
+                  <option value="ROLE_CLIENT">CLIENT</option>
+                  <option value="ROLE_OWNER">OWNER</option>
+                </select>
+              </div>
             </div>
             <button type="submit" class="w-100 btn btn-primary">Submit</button>
           </form>
