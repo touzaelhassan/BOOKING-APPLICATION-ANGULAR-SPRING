@@ -29,6 +29,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     public loggedInUser: any;
     public selectedUser?: any;
+    public filename: any;
+    public profileImage: any;
 
     constructor(
       private authenticationService: AuthenticationService, 
@@ -42,13 +44,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void { 
       this.loggedInUser = this.authenticationService.getUserFromLocalStorage();
-      this.getUsers();
+      this.getUsers(false);
       this.getHotels();
       this.getRooms();
       this.getReservations();
     }
 
-    public getUsers(): void{
+    public getUsers(displayNotification:boolean): void{
       this.subscriptions.push(
         this.userService.getUsers().subscribe(
           (response: User[]) => {
@@ -99,6 +101,37 @@ export class DashboardComponent implements OnInit, OnDestroy {
           }
         )
       )
+    }
+
+    public saveNewUser(): void{ 
+      document.getElementById("new-user-save")?.click(); 
+    }
+
+    public onAddNewUser(userForm: any): void{
+      console.log("eeee");
+      const formData = this.userService.createUserFormDate(null, userForm, this.profileImage);
+      this.subscriptions.push(
+        this.userService.addUser(formData).subscribe(
+          (response: any) =>{
+            document.getElementById("new-user-close")?.click();
+            this.getUsers(false);
+            this.filename = null;
+            this.profileImage = null;
+            userForm.reset()
+            this.notificationService.notify(NotificationType.SUCCESS, `The new user was added successfully !!.`);
+          },  
+          (httpErrorResponse: HttpErrorResponse) => {
+            this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
+            this.profileImage = null;
+          }
+        )
+      )
+    }
+
+    public onProfileImageChange(event:any): void{
+      const files = event.target.files;
+      this.profileImage = files[0];
+      this.filename = files[0].name;
     }
 
     public onSelectUser(selectedUser: User){

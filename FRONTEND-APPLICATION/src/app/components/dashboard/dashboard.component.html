@@ -42,7 +42,10 @@
       <!-- Start Users Table -->
       <div class="tab-pane fade show active" id="users">
         <div class="table__header">
-          <form class="form-inline my-2 my-lg-0 justify-content-center">
+          <form class="form-inline my-2 my-lg-0 d-flex justify-content-center">
+            <label class="d-flex justify-content-center align-items-center"
+              >SEARCH</label
+            >
             <input
               name="searchTerm"
               #searchInput="ngModel"
@@ -53,7 +56,7 @@
               placeholder="Search users..."
             />
           </form>
-          <div class="d-flex justify-content-end">
+          <div>
             <button
               type="button"
               class="btn btn-success ms-5"
@@ -89,7 +92,23 @@
               <td (click)="onSelectUser(user)">{{ user.lastname }}</td>
               <td (click)="onSelectUser(user)">{{ user.username }}</td>
               <td (click)="onSelectUser(user)">{{ user.email }}</td>
-              <td>{{ user.role }}</td>
+              <td>
+                <span
+                  *ngIf="user.role === 'ROLE_SUPER_ADMIN'"
+                  class="btn btn-sm btn-primary"
+                  >ADMIN</span
+                >
+                <span
+                  *ngIf="user.role === 'ROLE_OWNER'"
+                  class="btn btn-sm btn-info"
+                  >OWNER</span
+                >
+                <span
+                  *ngIf="user.role === 'ROLE_CLIENT'"
+                  class="btn btn-sm btn-secondary"
+                  >CLIENT</span
+                >
+              </td>
               <td>
                 <span [hidden]="!user?.active" class="btn btn-sm btn-success"
                   >Active</span
@@ -126,7 +145,6 @@
         </table>
       </div>
       <!-- Start Users Table -->
-
       <div class="tab-pane fade" id="hotels"><h4>Hotels</h4></div>
       <div class="tab-pane fade" id="rooms"><h4>Rooms</h4></div>
       <div class="tab-pane fade" id="reservations"><h4>Reservations</h4></div>
@@ -288,3 +306,165 @@
   </div>
 </div>
 <!-- End User Information Modal -->
+
+<!-- START ADD USER MODEL -->
+<div
+  class="modal draggable fade bd-example-modal-lg"
+  id="addUserModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center">New User</h5>
+        <button
+          type="button"
+          class="close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div>
+          <form
+            #newUserForm="ngForm"
+            (ngSubmit)="onAddNewUser(newUserForm.value)"
+          >
+            <div class="form-group">
+              <label for="firstname">First Name</label>
+              <input
+                type="text"
+                name="firstname"
+                required
+                ngModel
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="lastname">Last Name</label>
+              <input
+                type="text"
+                name="lastname"
+                required
+                ngModel
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                name="username"
+                required
+                ngModel
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="email">Email</label>
+              <input
+                type="email"
+                name="email"
+                required
+                ngModel
+                class="form-control"
+              />
+            </div>
+            <div class="form-group">
+              <label for="authority">Role</label>
+              <select
+                name="role"
+                required
+                ngModel="ROLE_CLIENT"
+                class="form-control"
+              >
+                <option value="ROLE_CLIENT">CLIENT</option>
+                <option value="ROLE_OWNER">OWNER</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="authority">Role</label>
+              <input
+                type="text"
+                name="role"
+                required
+                ngModel="USER"
+                readonly
+                class="form-control"
+              />
+            </div>
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Profile Picture </span>
+              </div>
+              <div class="custom-file">
+                <input
+                  type="file"
+                  accept="image/*"
+                  name="profileImage"
+                  class="custom-file-input"
+                  (change)="onProfileImageChange($event)"
+                />
+              </div>
+            </div>
+            <fieldset class="form-group">
+              <div class="form-check">
+                <label class="form-check-label">
+                  <input
+                    type="checkbox"
+                    name="active"
+                    ngModel
+                    class="form-check-input"
+                  />
+                  Active
+                </label>
+              </div>
+              <div class="form-check disabled">
+                <label class="form-check-label">
+                  <input
+                    type="checkbox"
+                    name="notLocked"
+                    ngModel
+                    class="form-check-input"
+                  />
+                  Unlocked
+                </label>
+              </div>
+            </fieldset>
+            <button
+              type="submit"
+              style="display: none"
+              id="new-user-save"
+            ></button>
+          </form>
+        </div>
+      </div>
+
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          id="new-user-close"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          [disabled]="newUserForm.invalid"
+          class="btn btn-primary"
+          (click)="saveNewUser()"
+        >
+          Save changes
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- END ADD USER MODEL -->
