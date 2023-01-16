@@ -13,5 +13,5 @@ public interface RoomServiceSpecification {
     Room getRoomById(Integer id);
     List<Room> getRooms();
     List<Room> getRoomsByHotelId(Integer hotelId);
-    void deleteRoom();
+    void deleteRoom(Integer id);
 }

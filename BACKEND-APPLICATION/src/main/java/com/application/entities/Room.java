@@ -23,7 +23,6 @@ public class Room {
     private Float price;
     private boolean isAvailable;
     @ManyToOne
-    @JoinColumn(name = "hotel_id")
     private Hotel hotel;
     @OneToMany(mappedBy = "room")
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)

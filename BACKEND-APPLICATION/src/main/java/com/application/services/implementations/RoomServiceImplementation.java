@@ -26,7 +26,10 @@ public class RoomServiceImplementation implements RoomServiceSpecification {
     private HotelServiceSpecification hotelServiceBean;
 
     @Autowired
-    public RoomServiceImplementation(RoomRepository roomRepositoryBean) { this.roomRepositoryBean = roomRepositoryBean; }
+    public RoomServiceImplementation(RoomRepository roomRepositoryBean, HotelServiceSpecification hotelServiceBean) {
+        this.roomRepositoryBean = roomRepositoryBean;
+        this.hotelServiceBean = hotelServiceBean;
+    }
 
     @Override
     public Room addRoom(Room room) { return roomRepositoryBean.save(room); }
@@ -54,7 +57,7 @@ public class RoomServiceImplementation implements RoomServiceSpecification {
     @Override
     public List<Room> getRoomsByHotelId(Integer hotelId) { return roomRepositoryBean.findByHotelId(hotelId); }
     @Override
-    public void deleteRoom() { }
+    public void deleteRoom(Integer id) { roomRepositoryBean.deleteById(id); }
 
     private String getTemporaryProfileImageUrl(String name) {
         return ServletUriComponentsBuilder.fromCurrentContextPath().path(DEFAULT_ROOM_IMAGE_PATH + name).toUriString();
