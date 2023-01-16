@@ -47,13 +47,14 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     ngOnInit(): void { 
       this.loggedInUser = this.authenticationService.getUserFromLocalStorage();
-      this.getUsers(false);
+      this.getUsers();
       this.getHotels();
       this.getRooms();
       this.getReservations();
+
     }
 
-    public getUsers(displayNotification:boolean): void{
+    public getUsers(): void{
       this.subscriptions.push(
         this.userService.getUsers().subscribe(
           (response: User[]) => {
@@ -120,9 +121,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.userService.addUser(formData).subscribe(
           (response: any) =>{
             document.getElementById("new-user-close")?.click();
-            this.getUsers(false);
+            this.getUsers();
             this.profileImage = null;
-            userForm.reset()
             this.notificationService.notify(NotificationType.SUCCESS, `The new user was added successfully !!.`);
           },  
           (httpErrorResponse: HttpErrorResponse) => {
@@ -141,12 +141,13 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     public saveNewHotel(): void{ document.getElementById("new-hotel-save")?.click(); }
     public onAddNewHotel(hotelForm: any): void{
+      console.log(hotelForm);
       const formData = this.hotelService.createHotelFormData(this.loggedInUser.username ,hotelForm, this.hotelImage);
       this.subscriptions.push(
         this.hotelService.addHotel(formData).subscribe(
           (response: any) =>{
             document.getElementById("new-hotel-close")?.click();
-            this.getUsers(false);
+            this.getHotels();
             this.hotelImage = null;
             this.notificationService.notify(NotificationType.SUCCESS, `The new hotel was added successfully !!.`);
           },  
@@ -171,7 +172,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
           (response: any) =>{
             document.getElementById("closeEditUserModalButton")?.click();
             this.sendErrorNotification(NotificationType.SUCCESS, `The user information were updated successfully !!.`);
-            this.getUsers(false);
+            this.getUsers();
             this.profileImage = null;
           },  
           (httpErrorResponse: HttpErrorResponse) => {
@@ -187,7 +188,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.userService.deleteUser(id).subscribe(
           (response: CustomHttpRespone)=>{
             this.sendErrorNotification(NotificationType.SUCCESS, response.message);
-            this.getUsers(false);
+            this.getUsers();
           },
           (httpErrorResponse: HttpErrorResponse) => {
             this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);

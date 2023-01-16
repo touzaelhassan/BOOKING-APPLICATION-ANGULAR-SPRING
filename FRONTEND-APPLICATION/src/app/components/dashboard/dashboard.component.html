@@ -237,25 +237,22 @@
                 ></i>
               </td>
               <td>
-                <span *ngIf="!hotel.isAvailable" class="btn btn-sm btn-success"
+                <span *ngIf="hotel.available" class="btn btn-sm btn-success"
                   ><i class="fa-solid fa-house"></i
                 ></span>
-                <span
-                  class="btn btn-sm btn-warning"
-                  [hidden]="!hotel.isAvailable"
+                <span class="btn btn-sm btn-warning" [hidden]="hotel.available"
                   ><i class="fa-solid fa-shop-slash"></i
                 ></span>
               </td>
               <td>
-                <span *ngIf="!hotel.isApproved" class="btn btn-sm btn-warning"
+                <span [hidden]="hotel.approved" class="btn btn-sm btn-warning"
                   >Pending</span
                 >
-                <span
-                  [hidden]="!hotel.isApproved"
-                  class="btn btn-sm btn-success"
+                <span *ngIf="hotel.approved" class="btn btn-sm btn-success"
                   >Approved</span
                 >
               </td>
+
               <td>
                 <div class="d-flex justify-content-between">
                   <button class="btn btn-sm btn-success">
@@ -833,7 +830,7 @@
             </div> -->
             <div class="form-group mb-2">
               <label for="authority" class="mb-1">City</label>
-              <select name="role" required ngModel="Rabat" class="form-control">
+              <select name="city" required ngModel="Rabat" class="form-control">
                 <option value="Rabat">Rabat</option>
                 <option value="Fes">Fes</option>
                 <option value="Tanger">Tanger</option>

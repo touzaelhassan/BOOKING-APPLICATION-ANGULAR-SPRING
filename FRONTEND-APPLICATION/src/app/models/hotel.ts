@@ -4,16 +4,16 @@ export class Hotel {
   public name: string;
   public description: string;
   public imageUrl: string;
-  public isAvailable: boolean;
-  public isApproved: boolean;
+  public available: boolean;
+  public approved: boolean;
 
   constructor() {
     this.id = undefined;
     this.name = '';
     this.description = '';
     this.imageUrl = '';
-    this.isAvailable = false;
-    this.isApproved = false;
+    this.available = false;
+    this.approved = false;
   }
 
 }
