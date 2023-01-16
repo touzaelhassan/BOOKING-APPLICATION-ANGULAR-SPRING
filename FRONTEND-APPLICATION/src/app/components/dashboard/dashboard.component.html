@@ -59,7 +59,7 @@
           <div>
             <button
               type="button"
-              class="btn btn-success ms-5"
+              class="btn ms-5 add__btn"
               data-bs-toggle="modal"
               data-bs-target="#addUserModal"
             >
@@ -181,7 +181,7 @@
           <div>
             <button
               type="button"
-              class="btn btn-success ms-5"
+              class="btn ms-5 add__btn"
               data-bs-toggle="modal"
               data-bs-target="#addHotelModal"
             >
@@ -255,7 +255,10 @@
 
               <td>
                 <div class="d-flex justify-content-between">
-                  <button class="btn btn-sm btn-success">
+                  <button
+                    class="btn btn-sm btn-success"
+                    (click)="onEditHotel(hotel)"
+                  >
                     <i class="fas fa-edit"></i>
                   </button>
                   <button class="btn btn-sm btn-danger">
@@ -440,7 +443,7 @@
 </div>
 <!-- End User Information Modal -->
 
-<!-- START ADD USER MODEL -->
+<!-- Start Add User Modal -->
 <div
   class="modal draggable fade bd-example-modal-lg"
   id="addUserModal"
@@ -601,9 +604,9 @@
     </div>
   </div>
 </div>
-<!-- END ADD USER MODEL -->
+<!-- End Add User Modal -->
 
-<!-- Start Edit Modal -->
+<!-- Start Edit User Modal-->
 <div
   class="modal draggable fade bd-example-modal-lg"
   id="editUserModal"
@@ -747,9 +750,10 @@
     </div>
   </div>
 </div>
-<!-- End Edit Modal -->
+<!-- End Edit User Modal -->
 
 <!-- End USER MODALS ============================================================================================================ -->
+
 <!-- START HOTEL MODALS ========================================================================================================= -->
 
 <!-- Start Headen Buttons For Displaying View and Edit Hotel Modals -->
@@ -763,13 +767,13 @@
 <button
   [hidden]="true"
   type="button"
-  id="openUserEdit"
+  id="openHotelEdit"
   data-bs-toggle="modal"
-  data-bs-target="#editUserModal"
+  data-bs-target="#editHotelModal"
 ></button>
 <!-- End Headen Buttons For Displaying View and Edit Modal Hotel Modals -->
 
-<!-- START ADD HOTEL MODEL -->
+<!-- Start Add Hotel Modal -->
 <div
   class="modal draggable fade bd-example-modal-lg"
   id="addHotelModal"
@@ -900,6 +904,130 @@
     </div>
   </div>
 </div>
-<!-- END ADD HOTEL MODEL -->
+<!-- End Add Hotel Modal -->
+
+<!-- Start Edit Hotel Modal -->
+<div
+  class="modal draggable fade bd-example-modal-lg"
+  id="editHotelModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="exampleModalCenterTitle"
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content px-3">
+      <div class="modal-header">
+        <h5 class="modal-title text-center">Edit : {{ editedHotel.name }}</h5>
+        <button
+          type="button"
+          class="close close-btn-modal"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div>
+          <form #editHotelForm="ngForm" method="put">
+            <div class="form-group mb-2">
+              <label for="name" class="mb-1">Hotel Name</label>
+              <input
+                type="text"
+                name="name"
+                required
+                [(ngModel)]="editedHotel.name"
+                class="form-control"
+              />
+            </div>
+            <div class="form-group mb-2">
+              <label for="description" class="mb-1">Description</label>
+              <textarea
+                class="form-control"
+                name="description"
+                required
+                [(ngModel)]="editedHotel.description"
+                rows="3"
+              ></textarea>
+            </div>
+            <div class="form-group mb-2">
+              <label for="authority" class="mb-1">City</label>
+              <select
+                name="city"
+                required
+                [(ngModel)]="editedHotel.city.name"
+                class="form-control"
+              >
+                <option value="Rabat">Rabat</option>
+                <option value="Fes">Fes</option>
+                <option value="Tanger">Tanger</option>
+              </select>
+            </div>
+            <div class="input-group mb-2">
+              <div class="custom-file">
+                <label class="mb-1 me-2 d-block">Hotel Image</label>
+                <input
+                  type="file"
+                  accept="image/*"
+                  name="hotelImgae"
+                  class="custom-file-input"
+                  (change)="onHotelImageChange($event)"
+                />
+              </div>
+            </div>
+            <div class="form-check mb-2">
+              <label class="form-check-label">
+                <input
+                  type="checkbox"
+                  name="isAvailable"
+                  [(ngModel)]="editedHotel.available"
+                  class="form-check-input"
+                />
+                Available
+              </label>
+            </div>
+            <div class="form-check mb-2">
+              <label class="form-check-label">
+                <input
+                  type="checkbox"
+                  name="isApproved"
+                  [(ngModel)]="editedHotel.approved"
+                  class="form-check-input"
+                />
+                Approve
+              </label>
+            </div>
+            <button
+              type="submit"
+              style="display: none"
+              id="new-hotel-save"
+            ></button>
+          </form>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <button
+          type="button"
+          class="btn btn-secondary"
+          data-bs-dismiss="modal"
+          id="closeEditHotelModalButton"
+        >
+          Close
+        </button>
+        <button
+          type="button"
+          [disabled]="editHotelForm.invalid"
+          class="btn btn-primary"
+          (click)="onUpdateHotel()"
+        >
+          Update Hotel
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Edit Hotel Modal -->
 
 <!-- End HOTEL MODALS =========================================================================================================== -->

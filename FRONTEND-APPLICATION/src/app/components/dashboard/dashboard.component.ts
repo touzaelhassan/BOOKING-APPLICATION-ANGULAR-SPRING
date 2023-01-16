@@ -30,8 +30,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     public loggedInUser: any;
     public selectedUser?: any;
-    public editedUser = new User();
     private currentUsername?: string;
+    public editedUser = new User();
+    public editedHotel = new Hotel();
     public profileImage: any;
     public hotelImage: any;
 
@@ -138,8 +139,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.hotelImage = files[0];
     }
 
-
     public saveNewHotel(): void{ document.getElementById("new-hotel-save")?.click(); }
+
     public onAddNewHotel(hotelForm: any): void{
       console.log(hotelForm);
       const formData = this.hotelService.createHotelFormData(this.loggedInUser.username ,hotelForm, this.hotelImage);
@@ -178,6 +179,29 @@ export class DashboardComponent implements OnInit, OnDestroy {
           (httpErrorResponse: HttpErrorResponse) => {
             this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
             this.profileImage = null;
+          }
+        )
+      )
+    }
+
+    public onEditHotel(hotel: Hotel): void{
+      this.editedHotel = hotel;
+      document.getElementById("openHotelEdit")?.click();
+    }
+
+    public onUpdateHotel(): void{
+      const formData = this.hotelService.createHotelFormData(this.loggedInUser.username, this.editedHotel , this.hotelImage);
+      this.subscriptions.push(
+        this.hotelService.updateHotel(formData).subscribe(
+          (response: any) =>{
+            document.getElementById("closeEditHotelModalButton")?.click();
+            this.sendErrorNotification(NotificationType.SUCCESS, `The user information were updated successfully !!.`);
+            this.getHotels();
+            this.hotelImage = null;
+          },  
+          (httpErrorResponse: HttpErrorResponse) => {
+            this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
+            this.hotelImage = null;
           }
         )
       )

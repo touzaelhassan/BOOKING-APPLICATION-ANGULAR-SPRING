@@ -1,9 +1,12 @@
+import { City } from "./city";
+
 export class Hotel {
 
   public id: number | undefined;
   public name: string;
   public description: string;
   public imageUrl: string;
+  public city: City = new City;
   public available: boolean;
   public approved: boolean;
 

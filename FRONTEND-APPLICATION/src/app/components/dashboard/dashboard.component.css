@@ -50,7 +50,7 @@ header {
 }
 
 .table__header label {
-  padding: 5px 10px;
+  padding: 5px 14px;
   color: #fff;
   background-color: #344854;
   font-size: 12px;
@@ -62,6 +62,13 @@ header {
 
 .table__header button {
   border-radius: 2px;
+}
+
+.add__btn {
+  color: #eee;
+  background-color: #344854;
+  font-size: 14px;
+  text-transform: uppercase;
 }
 
 .table {

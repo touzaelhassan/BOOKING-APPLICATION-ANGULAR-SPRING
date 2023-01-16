@@ -17,10 +17,15 @@ export class HotelService {
         return this.http.post<Hotel>(`${this.host}/api/hotel/add`, formData); 
     }
 
+    public updateHotel(formData: FormData): Observable<Hotel | HttpErrorResponse> { 
+        return this.http.put<Hotel>(`${this.host}/api/hotel/update`, formData); 
+    }
+
   public getHotels(): Observable<Hotel[]>{ return this.http.get<Hotel[]>(`${this.host}/api/hotels`); }
 
    public createHotelFormData( ownerUsername: any, hotel: any, hotelImage: File): FormData {
         const formData = new FormData();
+        formData.append('id', hotel.id);
         formData.append('name', hotel.name);
         formData.append('description', hotel.description);
         formData.append('city', hotel.city);
