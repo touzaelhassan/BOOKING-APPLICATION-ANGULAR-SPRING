@@ -55,10 +55,10 @@ public class Application {
 
             Owner owner1 = new Owner();
             owner1.setUserId("534345");
-            owner1.setFirstname("Karim");
+            owner1.setFirstname("Jane");
             owner1.setLastname("Lamomov");
-            owner1.setUsername("karim");
-            owner1.setEmail("karim@gmail.com");
+            owner1.setUsername("jane");
+            owner1.setEmail("jane@gmail.com");
             owner1.setJoinDate(new Date());
             owner1.setPassword(bCryptPasswordEncoder.encode("123456"));
             owner1.setActive(true);
@@ -83,10 +83,10 @@ public class Application {
 
             Client client1 = new Client();
             client1.setUserId("534329");
-            client1.setFirstname("Ismail");
+            client1.setFirstname("Manal");
             client1.setLastname("damolach");
-            client1.setUsername("ismail");
-            client1.setEmail("ismail@gmail.com");
+            client1.setUsername("manal");
+            client1.setEmail("manal@gmail.com");
             client1.setJoinDate(new Date());
             client1.setPassword(bCryptPasswordEncoder.encode("123456"));
             client1.setActive(true);
