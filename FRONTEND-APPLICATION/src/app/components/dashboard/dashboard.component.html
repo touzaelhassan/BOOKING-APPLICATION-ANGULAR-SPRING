@@ -86,16 +86,7 @@
             <tr *ngFor="let user of users" class="text-center">
               <td>{{ user.userId }}</td>
               <td (click)="onSelectUser(user)">
-                <img
-                  [hidden]="user.profileImageUrl"
-                  src="assets/images/profile-image.jpg"
-                  style="width: 60px"
-                />
-                <img
-                  *ngIf="user.profileImageUrl"
-                  src="{{ user.profileImageUrl }}"
-                  style="width: 60px"
-                />
+                <img src="{{ user.profileImageUrl }}" style="width: 60px" />
               </td>
               <td (click)="onSelectUser(user)">{{ user.firstname }}</td>
               <td (click)="onSelectUser(user)">{{ user.lastname }}</td>
@@ -149,7 +140,7 @@
                   </button>
                   <button
                     class="btn btn-sm btn-danger"
-                    (click)="onDelete(user.id)"
+                    (click)="onDeleteUser(user.id)"
                   >
                     <i class="fas fa-trash"></i>
                   </button>
@@ -209,16 +200,7 @@
             <tr *ngFor="let hotel of hotels" class="text-center">
               <td>{{ hotel.id }}</td>
               <td>
-                <img
-                  [hidden]="hotel.imageUrl"
-                  src="assets/images/hotels/hotel-1.jpg"
-                  style="width: 60px"
-                />
-                <img
-                  *ngIf="hotel.imageUrl"
-                  src="{{ hotel.imageUrl }}"
-                  style="width: 60px"
-                />
+                <img src="{{ hotel.imageUrl }}" style="width: 60px" />
               </td>
               <td>{{ hotel.name }}</td>
               <td>Owner</td>
@@ -261,7 +243,10 @@
                   >
                     <i class="fas fa-edit"></i>
                   </button>
-                  <button class="btn btn-sm btn-danger">
+                  <button
+                    class="btn btn-sm btn-danger"
+                    (click)="onDeleteHotel(hotel.id)"
+                  >
                     <i class="fas fa-trash"></i>
                   </button>
                 </div>
@@ -822,16 +807,6 @@
                 rows="3"
               ></textarea>
             </div>
-            <!-- <div class="form-group mb-2">
-              <label for="username" class="mb-1">Owner</label>
-              <input
-                type="text"
-                name="username"
-                required
-                [(ngModel)]="loggedInUser.username"
-                class="form-control"
-              />
-            </div> -->
             <div class="form-group mb-2">
               <label for="authority" class="mb-1">City</label>
               <select name="city" required ngModel="Rabat" class="form-control">
@@ -957,7 +932,7 @@
               <select
                 name="city"
                 required
-                [(ngModel)]="editedHotel.city.name"
+                [(ngModel)]="editedHotel.city"
                 class="form-control"
               >
                 <option value="Rabat">Rabat</option>

@@ -6,7 +6,7 @@ export class Hotel {
   public name: string;
   public description: string;
   public imageUrl: string;
-  public city: City = new City;
+  public city: City;
   public available: boolean;
   public approved: boolean;
 
@@ -14,6 +14,7 @@ export class Hotel {
     this.id = undefined;
     this.name = '';
     this.description = '';
+    this.city = new City();
     this.imageUrl = '';
     this.available = false;
     this.approved = false;

@@ -23,16 +23,21 @@ export class HotelService {
 
   public getHotels(): Observable<Hotel[]>{ return this.http.get<Hotel[]>(`${this.host}/api/hotels`); }
 
-   public createHotelFormData( ownerUsername: any, hotel: any, hotelImage: File): FormData {
+  public deleteHotel(id: number): Observable<any | HttpErrorResponse> {
+        return this.http.delete<any>(`${this.host}/api/hotel/delete/${id}`);
+  } 
+
+
+  public createHotelFormData( ownerUsername: any, hotel: any, hotelImage: File): FormData {
         const formData = new FormData();
         formData.append('id', hotel.id);
         formData.append('name', hotel.name);
         formData.append('description', hotel.description);
-        formData.append('city', hotel.city);
+        formData.append('city', hotel.city.name);
         formData.append('ownerUsername', ownerUsername);
         formData.append('hotelImage', hotelImage);
-        formData.append('isAvailable', JSON.stringify(hotel.isAvailable));
-        formData.append('isApproved', JSON.stringify(hotel.isApproved));
+        formData.append('isAvailable', JSON.stringify(hotel.available));
+        formData.append('isApproved', JSON.stringify(hotel.approved));
         return formData;
     }
 

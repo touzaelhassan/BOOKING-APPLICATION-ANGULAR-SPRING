@@ -186,6 +186,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     public onEditHotel(hotel: Hotel): void{
       this.editedHotel = hotel;
+      console.log(this.editedHotel); 
       document.getElementById("openHotelEdit")?.click();
     }
 
@@ -207,7 +208,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       )
     }
 
-    public onDelete(id: any){
+    public onDeleteUser(id: any){
       this.subscriptions.push(
         this.userService.deleteUser(id).subscribe(
           (response: CustomHttpRespone)=>{
@@ -220,11 +221,22 @@ export class DashboardComponent implements OnInit, OnDestroy {
         )
       )
     }
+    public onDeleteHotel(id: any){
+      this.subscriptions.push(
+        this.hotelService.deleteHotel(id).subscribe(
+          (response: CustomHttpRespone)=>{
+            this.getHotels();
+            this.sendErrorNotification(NotificationType.SUCCESS, response.message);
+          },
+          (httpErrorResponse: HttpErrorResponse) => {
+            this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
+          }
+        )
+      )
+    }
 
     public onSelectUser(selectedUser: User){
       this.selectedUser  = selectedUser;
-      console.log(selectedUser.firstname);
-      console.log(selectedUser.profileImageUrl);
       document.getElementById("openUserInfo")?.click();
     }
 
