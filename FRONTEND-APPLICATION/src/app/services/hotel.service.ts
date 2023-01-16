@@ -23,10 +23,11 @@ export class HotelService {
 
   public getHotels(): Observable<Hotel[]>{ return this.http.get<Hotel[]>(`${this.host}/api/hotels`); }
 
+  public getHotelsByOwnerId(id: number): Observable<Hotel[]>{ return this.http.get<Hotel[]>(`${this.host}/api/owner/hotels/${id}`); }
+
   public deleteHotel(id: number): Observable<any | HttpErrorResponse> {
         return this.http.delete<any>(`${this.host}/api/hotel/delete/${id}`);
   } 
-
 
   public createHotelFormData( ownerUsername: any, hotel: any, hotelImage: File): FormData {
         const formData = new FormData();
