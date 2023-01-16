@@ -4,7 +4,6 @@ import com.application.entities.*;
 import com.application.repositories.CityRepository;
 import com.application.repositories.UserRepository;
 import com.application.services.specifications.HotelServiceSpecification;
-import com.application.services.specifications.ReservationServiceSpecification;
 import com.application.services.specifications.RoomServiceSpecification;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
@@ -20,7 +19,7 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.Date;
 
-import static com.application.constants.FileConstants.USER_FOLDER;
+import static com.application.controllers.constants.FileConstants.USER_FOLDER;
 import static com.application.enums.Role.*;
 
 @SpringBootApplication
@@ -46,7 +45,7 @@ public class Application {
             admin.setUserId("534376");
             admin.setFirstname("El Hassan");
             admin.setLastname("Touza");
-            admin.setUsername("touzaelhassan");
+            admin.setUsername("hassan");
             admin.setEmail("hassan@gmail.com");
             admin.setJoinDate(new Date());
             admin.setPassword(bCryptPasswordEncoder.encode("123456"));
@@ -58,9 +57,9 @@ public class Application {
 
             Owner owner1 = new Owner();
             owner1.setUserId("534345");
-            owner1.setFirstname("karim");
-            owner1.setLastname("lam");
-            owner1.setUsername("lamkarim");
+            owner1.setFirstname("Karim");
+            owner1.setLastname("Lamomov");
+            owner1.setUsername("karim");
             owner1.setEmail("karim@gmail.com");
             owner1.setJoinDate(new Date());
             owner1.setPassword(bCryptPasswordEncoder.encode("123456"));
@@ -72,9 +71,9 @@ public class Application {
 
             Owner owner2 = new Owner();
             owner2.setUserId("534345");
-            owner2.setFirstname("amine");
-            owner2.setLastname("kal");
-            owner2.setUsername("kalamine");
+            owner2.setFirstname("Amine");
+            owner2.setLastname("kalalm");
+            owner2.setUsername("amine");
             owner2.setEmail("amine@gmail.com");
             owner2.setJoinDate(new Date());
             owner2.setPassword(bCryptPasswordEncoder.encode("123456"));
@@ -86,9 +85,9 @@ public class Application {
 
             Client client1 = new Client();
             client1.setUserId("534329");
-            client1.setFirstname("ismail");
-            client1.setLastname("damo");
-            client1.setUsername("damoismail");
+            client1.setFirstname("Ismail");
+            client1.setLastname("damolach");
+            client1.setUsername("ismail");
             client1.setEmail("ismail@gmail.com");
             client1.setJoinDate(new Date());
             client1.setPassword(bCryptPasswordEncoder.encode("123456"));
@@ -100,10 +99,10 @@ public class Application {
 
             Client client2 = new Client();
             client2.setUserId("534329");
-            client2.setFirstname("adil");
-            client2.setLastname("yam");
-            client2.setUsername("yamadil");
-            client2.setEmail("adil@gmail.com");
+            client2.setFirstname("Mohammed");
+            client2.setLastname("yamasoli");
+            client2.setUsername("mohammed");
+            client2.setEmail("mohammed@gmail.com");
             client2.setJoinDate(new Date());
             client2.setPassword(bCryptPasswordEncoder.encode("123456"));
             client2.setActive(true);

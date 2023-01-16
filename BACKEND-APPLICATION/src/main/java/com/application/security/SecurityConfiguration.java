@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import static org.springframework.security.config.http.SessionCreationPolicy.STATELESS;
-import static com.application.constants.SecurityConstants.PUBLIC_URLS;
+import static com.application.controllers.constants.SecurityConstants.PUBLIC_URLS;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

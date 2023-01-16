@@ -14,8 +14,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.io.IOException;
 import java.util.List;
 
-import static com.application.constants.SecurityConstants.OPTIONS_HTTP_METHOD;
-import static com.application.constants.SecurityConstants.TOKEN_PREFIX;
+import static com.application.controllers.constants.SecurityConstants.OPTIONS_HTTP_METHOD;
+import static com.application.controllers.constants.SecurityConstants.TOKEN_PREFIX;
 import static org.springframework.http.HttpHeaders.AUTHORIZATION;
 import static org.springframework.http.HttpStatus.OK;
 

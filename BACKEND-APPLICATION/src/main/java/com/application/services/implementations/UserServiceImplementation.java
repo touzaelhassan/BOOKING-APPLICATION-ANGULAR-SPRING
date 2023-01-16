@@ -31,8 +31,8 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
-import static com.application.constants.FileConstants.*;
-import static com.application.constants.UserServiceImplementationConstants.*;
+import static com.application.controllers.constants.FileConstants.*;
+import static com.application.controllers.constants.UserServiceImplementationConstants.*;
 import static com.application.enums.Role.*;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static org.apache.commons.lang3.StringUtils.EMPTY;
@@ -83,9 +83,9 @@ public class UserServiceImplementation implements UserServiceSpecification, User
 
             Client client = new Client();
             client.setUserId(generateUserId());
-            String password = generatePassword();
+            //String password = generatePassword();
+            String password = "123456";
             String encodedPassword = encodePassword(password);
-
             client.setFirstname(firstname);
             client.setLastname(lastname);
             client.setUsername(username);
@@ -107,9 +107,9 @@ public class UserServiceImplementation implements UserServiceSpecification, User
 
             Owner owner = new Owner();
             owner.setUserId(generateUserId());
-            String password = generatePassword();
+            //String password = generatePassword();
+            String password = "123456";
             String encodedPassword = encodePassword(password);
-
             owner.setFirstname(firstname);
             owner.setLastname(lastname);
             owner.setUsername(username);
@@ -131,9 +131,9 @@ public class UserServiceImplementation implements UserServiceSpecification, User
 
             Admin admin = new Admin();
             admin.setUserId(generateUserId());
-            String password = generatePassword();
+            //String password = generatePassword();
+            String password = "123456";
             String encodedPassword = encodePassword(password);
-
             admin.setFirstname(firstname);
             admin.setLastname(lastname);
             admin.setUsername(username);
@@ -153,9 +153,9 @@ public class UserServiceImplementation implements UserServiceSpecification, User
 
         User user = new User();
         user.setUserId(generateUserId());
-        String password = generatePassword();
+        //String password = generatePassword();
+        String password = "123456";
         String encodedPassword = encodePassword(password);
-
         user.setFirstname(firstname);
         user.setLastname(lastname);
         user.setUsername(username);
@@ -177,7 +177,8 @@ public class UserServiceImplementation implements UserServiceSpecification, User
     public User addUser(String firstname, String lastname, String username, String email, String role, boolean isNotLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, EmailExistException, UsernameExistException, IOException, NotAnImageFileException {
         validateNewUsernameAndEmail(EMPTY, username, email);
         User user = new User();
-        String password = generatePassword();
+        //String password = generatePassword();
+        String password = "123456";
         user.setUserId(generateUserId());
         user.setFirstname(firstname);
         user.setLastname(lastname);
@@ -284,7 +285,9 @@ public class UserServiceImplementation implements UserServiceSpecification, User
     private String generateUserId() { return RandomStringUtils.randomNumeric(10); }
     private String generatePassword() { return RandomStringUtils.randomAlphanumeric(10); }
     private String encodePassword(String password){ return bCryptPasswordEncoder.encode(password); }
-    private String getTemporaryProfileImageUrl(String username) {return ServletUriComponentsBuilder.fromCurrentContextPath().path(DEFAULT_USER_IMAGE_PATH + username).toUriString(); }
+    private String getTemporaryProfileImageUrl(String username) {
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path(DEFAULT_USER_IMAGE_PATH + username).toUriString();
+    }
 
     private void validateLoginAttempt(User user) {
         if(user.isNotLocked()){

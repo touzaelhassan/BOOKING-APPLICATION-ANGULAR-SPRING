@@ -17,4 +17,7 @@ public class CityServiceImplementation implements CityServiceSpecification {
     @Override
     public City addCity(City city) {return cityRepositoryBean.save(city); }
 
+    @Override
+    public City getCityByName(String name) { return cityRepositoryBean.findCityByName(name);  }
+
 }
