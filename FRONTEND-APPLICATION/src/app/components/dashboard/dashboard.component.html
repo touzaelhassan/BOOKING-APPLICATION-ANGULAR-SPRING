@@ -9,10 +9,10 @@
               >Users</a
             >
           </li>
-          <li class="nav__item">
+          <li *ngIf="isAdmin || isOwner" class="nav__item">
             <a class="nav__link" data-bs-toggle="tab" href="#hotels">Hotels</a>
           </li>
-          <li class="nav__item">
+          <li *ngIf="isAdmin || isOwner" class="nav__item">
             <a class="nav__link" data-bs-toggle="tab" href="#rooms">Rooms</a>
           </li>
           <li class="nav__item">
@@ -23,10 +23,13 @@
         </ul>
       </div>
       <div class="nav__left">
-        <ul class="nav__list">
+        <ul class="nav__list d-flex align-items-center">
           <li><a class="nav__link" href="">HOME</a></li>
           <li>
             <a class="nav__link" (click)="onLogout()">LOGOUT</a>
+          </li>
+          <li class="pe-3">
+            <img src="{{ loggedInUser.profileImageUrl }}" style="width: 40px" />
           </li>
         </ul>
       </div>
@@ -40,7 +43,7 @@
   <div class="container">
     <div class="tab-content main__content">
       <!-- Start Users Table -->
-      <div class="tab-pane fade" id="users">
+      <div class="tab-pane fade show active" id="users">
         <div class="table__header">
           <form class="form-inline my-2 my-lg-0 d-flex justify-content-center">
             <label class="d-flex justify-content-center align-items-center"
@@ -58,6 +61,7 @@
           </form>
           <div>
             <button
+              [disabled]="!isAdmin"
               type="button"
               class="btn ms-5 add__btn"
               data-bs-toggle="modal"
@@ -133,12 +137,14 @@
               <td>
                 <div class="d-flex justify-content-between">
                   <button
+                    [disabled]="!isAdmin"
                     class="btn btn-sm btn-success"
                     (click)="onEditUser(user)"
                   >
                     <i class="fas fa-edit"></i>
                   </button>
                   <button
+                    [disabled]="!isAdmin"
                     class="btn btn-sm btn-danger"
                     (click)="onDeleteUser(user.id)"
                   >
@@ -242,6 +248,7 @@
                     <i class="fas fa-edit"></i>
                   </button>
                   <button
+                    [disabled]="!isAdmin"
                     class="btn btn-sm btn-danger"
                     (click)="onDeleteHotel(hotel.id)"
                   >
@@ -256,7 +263,7 @@
       <!-- End Hotels Table -->
 
       <!-- Start Rooms Table -->
-      <div class="tab-pane fade show active" id="rooms">
+      <div class="tab-pane fade" id="rooms">
         <div class="table__header">
           <form class="form-inline my-2 my-lg-0 d-flex justify-content-center">
             <label class="d-flex justify-content-center align-items-center"
@@ -909,6 +916,7 @@
             <div class="form-check mb-2">
               <label class="form-check-label">
                 <input
+                  [disabled]="!isAdmin"
                   type="checkbox"
                   name="isApproved"
                   ngModel
@@ -1021,6 +1029,7 @@
             <div class="form-check mb-2">
               <label class="form-check-label">
                 <input
+                  [disabled]="!isAdmin"
                   type="checkbox"
                   name="isApproved"
                   [(ngModel)]="editedHotel.approved"

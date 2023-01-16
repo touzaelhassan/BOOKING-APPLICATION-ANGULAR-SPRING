@@ -3,6 +3,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NotificationType } from 'src/app/enums/notification-type.enum';
+import { Role } from 'src/app/enums/role.enum';
 import { CustomHttpRespone } from 'src/app/models/custom-http-response';
 import { Hotel } from 'src/app/models/hotel';
 import { Reservation } from 'src/app/models/reservation';
@@ -28,7 +29,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public rooms: Room[] = [];
     public reservations: Reservation[] = [];
     private subscriptions: Subscription[] = [];
-
     public loggedInUser: any;
     public selectedUser?: any;
     private currentUsername?: string;
@@ -57,6 +57,11 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.getRooms();
       this.getReservations();
     }
+
+    public getUserRole(): string { return this.authenticationService.getUserFromLocalStorage().role; }
+    public get isAdmin(): boolean{ return this.getUserRole() === Role.SUPER_ADMIN || this.getUserRole() === Role.ADMIN; }
+    public get isOwner(): boolean{ return this.getUserRole() === Role.OWNER; }
+    public get isClient(): boolean{ return this.getUserRole() === Role.CLIENT }
 
     public getUsers(): void{
       this.subscriptions.push(
@@ -346,6 +351,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       }
     }  
 
-  public ngOnDestroy(): void { this.subscriptions.forEach(sub => sub.unsubscribe()); }
+    public ngOnDestroy(): void { this.subscriptions.forEach(sub => sub.unsubscribe()); }
 
 }

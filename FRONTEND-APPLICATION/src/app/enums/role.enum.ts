@@ -1,0 +1,7 @@
+export enum Role {
+  USER = 'ROLE_USER',
+  CLIENT = 'ROLE_CLIENT',
+  OWNER = 'ROLE_OWNER',
+  ADMIN = 'ROLE_ADMIN',
+  SUPER_ADMIN = 'ROLE_SUPER_ADMIN',
+}

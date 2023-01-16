@@ -1,23 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { ClientreservationsComponent } from './components/clientreservations/clientreservations.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { HomeComponent } from './components/home/home.component';
 import { LoginComponent } from './components/login/login.component';
-import { OwnerreservationsComponent } from './components/ownerreservations/ownerreservations.component';
 import { RegisterComponent } from './components/register/register.component';
-import { ReservationComponent } from './components/reservation/reservation.component';
-import { RoomComponent } from './components/room/room.component';
 
 const routes: Routes = [
     { path: '', component: HomeComponent},
     { path: 'register', component: RegisterComponent},
     { path: 'login', component: LoginComponent},
     { path: 'dashboard', component: DashboardComponent},
-    { path: 'room/:id', component: RoomComponent},
-    { path: 'reservation/:room_id', component: ReservationComponent},
-    { path: 'my-reservations', component: ClientreservationsComponent},
-    { path: 'owner/reservations', component: OwnerreservationsComponent},
 ];
 
 @NgModule({

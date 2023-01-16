@@ -1,7 +1,0 @@
-<!DOCTYPE html>
-<div *ngFor="let reservation of reservations">
-  <span>{{ reservation.id }}</span>
-  <span>{{ reservation.room.name }}</span>
-  <a [routerLink]="['/reservation']">Approve</a>
-  <hr />
-</div>

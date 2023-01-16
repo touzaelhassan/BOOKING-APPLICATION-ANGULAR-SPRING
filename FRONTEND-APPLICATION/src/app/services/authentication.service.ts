@@ -53,7 +53,7 @@ export class AuthenticationService {
     public loadToken(): void { this.token = localStorage.getItem('token'); }
     public getToken(): string { return this.token; }
     public saveUserInLocalStorage(user: User): void { localStorage.setItem('user', JSON.stringify(user)); }
-    public getUserFromLocalStorage(): User | null { 
+    public getUserFromLocalStorage(): any { 
         let userData = localStorage.getItem('user');
         if(!userData){
             return null;
