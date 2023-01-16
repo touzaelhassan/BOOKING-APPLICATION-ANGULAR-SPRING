@@ -31,8 +31,8 @@ import java.nio.file.Paths;
 import java.util.Date;
 import java.util.List;
 
-import static com.application.controllers.constants.FileConstants.*;
-import static com.application.controllers.constants.UserServiceImplementationConstants.*;
+import static com.application.constants.FileConstants.*;
+import static com.application.constants.UserServiceImplementationConstants.*;
 import static com.application.enums.Role.*;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static org.apache.commons.lang3.StringUtils.EMPTY;

@@ -1,6 +1,5 @@
 package com.application;
 
-import com.application.entities.*;
 import com.application.repositories.UserRepository;
 import com.application.services.specifications.HotelServiceSpecification;
 import com.application.services.specifications.RoomServiceSpecification;
@@ -16,10 +15,8 @@ import org.springframework.web.filter.CorsFilter;
 import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.Date;
 
-import static com.application.controllers.constants.FileConstants.USER_FOLDER;
-import static com.application.enums.Role.*;
+import static com.application.constants.FileConstants.USER_FOLDER;
 
 @SpringBootApplication
 public class Application {
@@ -183,9 +180,7 @@ public class Application {
             reservation2.setClient(client);
             reservationServiceBean.addReservation(reservation2);
              */
-
         };
-
     }
 
     @Bean

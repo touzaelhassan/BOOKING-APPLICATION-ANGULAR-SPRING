@@ -11,7 +11,7 @@ public interface HotelServiceSpecification {
     Hotel addHotel(String name, String description, String ownerUsername, boolean isAvailable, boolean isApproved, MultipartFile hotelImage) throws IOException;
     Hotel updateHotel(Hotel hotel);
     Hotel updateHotel(Integer id,String name, String description, String ownerUsername, boolean isAvailable, boolean isApproved,MultipartFile hotelImage) throws IOException;
-    Hotel getHotelById(String id);
+    Hotel getHotelById(Integer id);
     List<Hotel>  getHotels();
     List<Hotel> findHotelsByOwnerId(Integer ownerId);
     void deleteHotel(Integer id);

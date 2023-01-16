@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import static com.application.controllers.constants.SecurityConstants.JWT_TOKEN_HEADER;
+import static com.application.constants.SecurityConstants.JWT_TOKEN_HEADER;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
@@ -61,7 +61,6 @@ public class AuthenticationController extends ExceptionHandlingController {
         authentication(username, password);
         User loggedUser = userServiceBean.findUserByUsername(username);
         UserPrincipal userPrincipal = new UserPrincipal(loggedUser);
-        System.out.println(userPrincipal.getUsername());
         HttpHeaders jwtHeader = getJwtHeader(userPrincipal);
         return  new ResponseEntity<>(loggedUser, jwtHeader, OK);
     }

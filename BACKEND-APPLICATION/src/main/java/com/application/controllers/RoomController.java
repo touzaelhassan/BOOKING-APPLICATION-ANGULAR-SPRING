@@ -1,14 +1,14 @@
 package com.application.controllers;
 
+import com.application.entities.Hotel;
 import com.application.entities.Room;
 import com.application.services.specifications.RoomServiceSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
 
 import static org.springframework.http.HttpStatus.OK;
@@ -21,6 +21,18 @@ public class RoomController {
 
     @Autowired
     public RoomController(RoomServiceSpecification roomServiceBean) { this.roomServiceBean = roomServiceBean; }
+
+    @PostMapping("/room/add")
+    public ResponseEntity<Room> addHotel(
+            @RequestParam("hotelId") Integer hotelId,
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("isAvailable") String isAvailable,
+            @RequestParam(value = "roomImage", required = false) MultipartFile roomImage
+            ) {
+          Room room = roomServiceBean.addRoom(hotelId, name, description, Boolean.parseBoolean(isAvailable), roomImage) ;
+          return new ResponseEntity<>(room, OK);
+    }
 
     @GetMapping("/rooms")
     public ResponseEntity<List<Room>> getRooms() {

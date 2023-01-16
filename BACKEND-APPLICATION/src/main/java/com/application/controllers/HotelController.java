@@ -2,11 +2,6 @@ package com.application.controllers;
 
 import com.application.classes.HttpResponse;
 import com.application.entities.Hotel;
-import com.application.entities.User;
-import com.application.exceptions.classes.EmailExistException;
-import com.application.exceptions.classes.NotAnImageFileException;
-import com.application.exceptions.classes.UserNotFoundException;
-import com.application.exceptions.classes.UsernameExistException;
 import com.application.services.specifications.HotelServiceSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,15 +9,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
-import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static com.application.controllers.constants.FileConstants.*;
+import static com.application.constants.FileConstants.*;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
 

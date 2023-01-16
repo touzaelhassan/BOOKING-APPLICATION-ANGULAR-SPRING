@@ -1,4 +1,4 @@
-package com.application.controllers.constants;
+package com.application.constants;
 
 public class UserServiceImplementationConstants {
 

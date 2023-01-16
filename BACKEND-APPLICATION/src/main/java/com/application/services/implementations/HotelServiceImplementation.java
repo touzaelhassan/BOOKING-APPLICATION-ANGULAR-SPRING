@@ -15,7 +15,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
 
-import static com.application.controllers.constants.FileConstants.*;
+import static com.application.constants.FileConstants.*;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 
 @Service("hotelServiceBean")
@@ -69,7 +69,7 @@ public class HotelServiceImplementation implements HotelServiceSpecification {
     }
 
     @Override
-    public Hotel getHotelById(String id) { return null; }
+    public Hotel getHotelById(Integer id) { return null; }
     @Override
     public List<Hotel> getHotels() { return hotelRepositoryBean.findAll(); }
     @Override
@@ -79,7 +79,7 @@ public class HotelServiceImplementation implements HotelServiceSpecification {
 
 
     private String getTemporaryProfileImageUrl(String name) {
-        return ServletUriComponentsBuilder.fromCurrentContextPath().path(DEFAULT_USER_IMAGE_PATH + name).toUriString();
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path(DEFAULT_HOTEL_IMAGE_PATH + name).toUriString();
     }
 
     private void saveHotelImage(Hotel hotel, MultipartFile hotelImage) throws IOException{

@@ -1,4 +1,4 @@
-package com.application.controllers.constants;
+package com.application.constants;
 
 public class AuthorityConstants {
     public static final String[] USER_AUTHORITIES = { };
