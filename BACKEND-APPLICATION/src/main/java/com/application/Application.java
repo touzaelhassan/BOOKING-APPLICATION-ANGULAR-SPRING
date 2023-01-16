@@ -1,7 +1,6 @@
 package com.application;
 
 import com.application.entities.*;
-import com.application.repositories.CityRepository;
 import com.application.repositories.UserRepository;
 import com.application.services.specifications.HotelServiceSpecification;
 import com.application.services.specifications.RoomServiceSpecification;
@@ -33,14 +32,13 @@ public class Application {
     @Bean
     CommandLineRunner run(
             UserRepository userRepositoryBean,
-            CityRepository cityRepositoryBean,
             HotelServiceSpecification hotelServiceBean,
             RoomServiceSpecification roomServiceBean,
             BCryptPasswordEncoder bCryptPasswordEncoder
     ){
 
         return args -> {
-
+       /*
             Admin admin = new Admin();
             admin.setUserId("534376");
             admin.setFirstname("El Hassan");
@@ -111,16 +109,6 @@ public class Application {
             client2.setAuthorities(ROLE_CLIENT.getAuthorities());
             userRepositoryBean.save(client2);
 
-            City city1 = new City();
-            city1.setName("Fes");
-            City city2= new City();
-            city2.setName("Rabat");
-            City city3 = new City();
-            city3.setName("Tanger");
-            cityRepositoryBean.save(city1);
-            cityRepositoryBean.save(city2);
-            cityRepositoryBean.save(city3);
-
             Hotel hotel1 = new Hotel();
             hotel1.setName("Millenium Hotels & Resorts");
             hotel1.setDescription("A Boutique Hotel To Make Your Dreams of A Lush Island Getaway Come True. A Tropical Island Paradise On Mauritius’ Shores - La Maison D’Été.");
@@ -128,7 +116,6 @@ public class Application {
             hotel1.setAvailable(true);
             hotel1.setApproved(false);
             hotel1.setOwner(owner1);
-            hotel1.setCity(city1);
             hotelServiceBean.addHotel(hotel1);
 
             Hotel hotel2 = new Hotel();
@@ -138,7 +125,6 @@ public class Application {
             hotel2.setAvailable(true);
             hotel2.setApproved(false);
             hotel2.setOwner(owner1);
-            hotel2.setCity(city2);
             hotelServiceBean.addHotel(hotel2);
 
             Hotel hotel3 = new Hotel();
@@ -148,7 +134,6 @@ public class Application {
             hotel3.setAvailable(true);
             hotel3.setApproved(false);
             hotel3.setOwner(owner2);
-            hotel3.setCity(city3);
             hotelServiceBean.addHotel(hotel3);
 
             Room room1 = new Room();

@@ -1,10 +1,8 @@
 package com.application.services.implementations;
 
-import com.application.entities.City;
 import com.application.entities.Hotel;
 import com.application.entities.Owner;
 import com.application.repositories.HotelRepository;
-import com.application.services.specifications.CityServiceSpecification;
 import com.application.services.specifications.HotelServiceSpecification;
 import com.application.services.specifications.UserServiceSpecification;
 import org.springframework.stereotype.Service;
@@ -23,12 +21,10 @@ import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 @Service("hotelServiceBean")
 public class HotelServiceImplementation implements HotelServiceSpecification {
 
-    private final CityServiceSpecification cityServiceBean;
     private final UserServiceSpecification userServiceBean;
     private final HotelRepository hotelRepositoryBean;
 
-    public HotelServiceImplementation(CityServiceSpecification cityServiceBean, UserServiceSpecification userServiceBean, HotelRepository hotelRepositoryBean) {
-        this.cityServiceBean = cityServiceBean;
+    public HotelServiceImplementation(UserServiceSpecification userServiceBean, HotelRepository hotelRepositoryBean) {
         this.userServiceBean = userServiceBean;
         this.hotelRepositoryBean = hotelRepositoryBean;
     }
@@ -37,17 +33,15 @@ public class HotelServiceImplementation implements HotelServiceSpecification {
     public Hotel addHotel(Hotel hotel) { return hotelRepositoryBean.save(hotel); }
 
     @Override
-    public Hotel addHotel(String name, String description, String cityName, String ownerUsername, boolean isAvailable, boolean isApproved, MultipartFile hotelImage) throws IOException {
+    public Hotel addHotel(String name, String description, String ownerUsername, boolean isAvailable, boolean isApproved, MultipartFile hotelImage) throws IOException {
 
         Owner owner = (Owner) userServiceBean.findUserByUsername(ownerUsername);
-        City city = cityServiceBean.getCityByName(cityName);
         Hotel hotel = new Hotel();
         hotel.setName(name);
         hotel.setDescription(description);
         hotel.setAvailable(isAvailable);
         hotel.setApproved(isApproved);
         hotel.setOwner(owner);
-        hotel.setCity(city);
         hotel.setImageUrl(getTemporaryProfileImageUrl(name));
         hotelRepositoryBean.save(hotel);
         this.saveHotelImage(hotel, hotelImage);
@@ -59,16 +53,14 @@ public class HotelServiceImplementation implements HotelServiceSpecification {
     public Hotel updateHotel(Hotel hotel) { return null; }
 
     @Override
-    public Hotel updateHotel(Integer id, String name, String description, String cityName, String ownerUsername, boolean isAvailable, boolean isApproved, MultipartFile hotelImage) throws IOException {
+    public Hotel updateHotel(Integer id, String name, String description, String ownerUsername, boolean isAvailable, boolean isApproved, MultipartFile hotelImage) throws IOException {
         Owner owner = (Owner) userServiceBean.findUserByUsername(ownerUsername);
-        City city = cityServiceBean.getCityByName(cityName);
         Hotel hotel = hotelRepositoryBean.findById(id).orElse(null);
         hotel.setName(name);
         hotel.setDescription(description);
         hotel.setAvailable(isAvailable);
         hotel.setApproved(isApproved);
         hotel.setOwner(owner);
-        hotel.setCity(city);
         hotel.setImageUrl(getTemporaryProfileImageUrl(name));
         hotelRepositoryBean.save(hotel);
         this.saveHotelImage(hotel, hotelImage);

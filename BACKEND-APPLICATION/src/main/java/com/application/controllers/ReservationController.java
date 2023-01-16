@@ -66,5 +66,4 @@ public class ReservationController {
         List<Reservation> reservations = reservationServiceBean.getReservationsByClientId(clientId);
         return new ResponseEntity<>(reservations, OK);
     }
-
 }
