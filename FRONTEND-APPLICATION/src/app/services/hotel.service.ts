@@ -33,7 +33,6 @@ export class HotelService {
         formData.append('id', hotel.id);
         formData.append('name', hotel.name);
         formData.append('description', hotel.description);
-        formData.append('city', hotel.city.name);
         formData.append('ownerUsername', ownerUsername);
         formData.append('hotelImage', hotelImage);
         formData.append('isAvailable', JSON.stringify(hotel.available));
