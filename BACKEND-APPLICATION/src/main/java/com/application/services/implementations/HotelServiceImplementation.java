@@ -41,9 +41,7 @@ public class HotelServiceImplementation implements HotelServiceSpecification {
 
         Owner owner = (Owner) userServiceBean.findUserByUsername(ownerUsername);
         City city = cityServiceBean.getCityByName(cityName);
-
         Hotel hotel = new Hotel();
-
         hotel.setName(name);
         hotel.setDescription(description);
         hotel.setAvailable(isAvailable);
@@ -59,6 +57,25 @@ public class HotelServiceImplementation implements HotelServiceSpecification {
 
     @Override
     public Hotel updateHotel(Hotel hotel) { return null; }
+
+    @Override
+    public Hotel updateHotel(Integer id, String name, String description, String cityName, String ownerUsername, boolean isAvailable, boolean isApproved, MultipartFile hotelImage) throws IOException {
+        Owner owner = (Owner) userServiceBean.findUserByUsername(ownerUsername);
+        City city = cityServiceBean.getCityByName(cityName);
+        Hotel hotel = hotelRepositoryBean.findById(id).orElse(null);
+        hotel.setName(name);
+        hotel.setDescription(description);
+        hotel.setAvailable(isAvailable);
+        hotel.setApproved(isApproved);
+        hotel.setOwner(owner);
+        hotel.setCity(city);
+        hotel.setImageUrl(getTemporaryProfileImageUrl(name));
+        hotelRepositoryBean.save(hotel);
+        this.saveHotelImage(hotel, hotelImage);
+        return  hotel;
+
+    }
+
     @Override
     public Hotel getHotelById(String id) { return null; }
     @Override
@@ -66,7 +83,7 @@ public class HotelServiceImplementation implements HotelServiceSpecification {
     @Override
     public List<Hotel> findHotelsByOwnerId(Integer ownerId) { return hotelRepositoryBean.findByOwnerId(ownerId); }
     @Override
-    public void deleteHotel() { }
+    public void deleteHotel(Integer id) { hotelRepositoryBean.deleteById(id);}
 
 
     private String getTemporaryProfileImageUrl(String name) {

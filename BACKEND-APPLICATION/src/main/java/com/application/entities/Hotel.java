@@ -23,7 +23,6 @@ public class Hotel {
     private boolean isAvailable;
     private boolean isApproved;
     @ManyToOne
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private Owner owner;
     @ManyToOne
     private City city;

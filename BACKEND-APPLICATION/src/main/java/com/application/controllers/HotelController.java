@@ -1,5 +1,6 @@
 package com.application.controllers;
 
+import com.application.classes.HttpResponse;
 import com.application.entities.Hotel;
 import com.application.entities.User;
 import com.application.exceptions.classes.EmailExistException;
@@ -8,6 +9,7 @@ import com.application.exceptions.classes.UserNotFoundException;
 import com.application.exceptions.classes.UsernameExistException;
 import com.application.services.specifications.HotelServiceSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -28,11 +30,11 @@ import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
 @RequestMapping("/api")
 public class HotelController {
 
+    public static final String HOTEL_DELETED_SUCCESSFULLY = "Hotel Deleted Successfully !!.";
     private final HotelServiceSpecification hotelServiceBean;
 
     @Autowired
     public HotelController(HotelServiceSpecification hotelServiceBean) { this.hotelServiceBean = hotelServiceBean; }
-
 
     @PostMapping("/hotel/add")
     public ResponseEntity<Hotel> addHotel(
@@ -48,6 +50,22 @@ public class HotelController {
         Hotel hotel = hotelServiceBean.addHotel(name, description, city, ownerUsername, Boolean.parseBoolean(isAvailable), Boolean.parseBoolean(isApproved), hotelImage);
         return new ResponseEntity<>(hotel, OK);
 
+    }
+
+    @PutMapping("/hotel/update")
+    public ResponseEntity<Hotel> updateHotel(
+            @RequestParam("id") Integer id,
+            @RequestParam("name") String name,
+            @RequestParam("description") String description,
+            @RequestParam("city") String city,
+            @RequestParam("ownerUsername") String ownerUsername,
+            @RequestParam("isAvailable") String isAvailable,
+            @RequestParam("isApproved") String isApproved,
+            @RequestParam(value = "hotelImage", required = false) MultipartFile hotelImage
+    ) throws IOException {
+
+        Hotel hotel = hotelServiceBean.updateHotel(id, name, description, city, ownerUsername, Boolean.parseBoolean(isAvailable), Boolean.parseBoolean(isApproved), hotelImage);
+        return new ResponseEntity<>(hotel, OK);
     }
 
     @GetMapping("/hotels")
@@ -67,4 +85,13 @@ public class HotelController {
         return Files.readAllBytes(Paths.get(USER_FOLDER + username + FORWARD_SLASH + fileName));
     }
 
+    @DeleteMapping("/hotel/delete/{id}")
+    public ResponseEntity<HttpResponse> deleteHotel(@PathVariable("id") Integer id) throws IOException {
+          hotelServiceBean.deleteHotel(id);
+        return response(OK, HOTEL_DELETED_SUCCESSFULLY);
+    }
+
+    private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message) {
+        return new ResponseEntity<>(new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(), message), httpStatus);
+    }
 }

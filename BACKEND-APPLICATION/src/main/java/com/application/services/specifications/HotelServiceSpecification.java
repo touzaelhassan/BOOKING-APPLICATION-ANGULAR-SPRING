@@ -10,9 +10,10 @@ public interface HotelServiceSpecification {
     Hotel addHotel(Hotel hotel);
     Hotel addHotel(String name, String description, String city, String ownerUsername, boolean isAvailable, boolean isApproved, MultipartFile hotelImage) throws IOException;
     Hotel updateHotel(Hotel hotel);
+    Hotel updateHotel(Integer id,String name, String description,String cityName, String ownerUsername, boolean isAvailable, boolean isApproved,MultipartFile hotelImage) throws IOException;
     Hotel getHotelById(String id);
     List<Hotel>  getHotels();
     List<Hotel> findHotelsByOwnerId(Integer ownerId);
-    void deleteHotel();
+    void deleteHotel(Integer id);
 
 }

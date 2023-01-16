@@ -51,7 +51,7 @@ public class UserController extends ExceptionHandlingController {
     }
 
     @PutMapping("/user/update")
-    public ResponseEntity<User> update(
+    public ResponseEntity<User> updateUser(
             @RequestParam("currentUsername") String currentUsername,
             @RequestParam("firstname") String firstname,
             @RequestParam("lastname") String lastname,
