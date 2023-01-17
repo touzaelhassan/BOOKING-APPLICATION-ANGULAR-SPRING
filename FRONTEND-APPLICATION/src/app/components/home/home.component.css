@@ -247,3 +247,12 @@ a {
   text-transform: uppercase;
   cursor: pointer;
 }
+
+footer p {
+  margin-top: 100px;
+  padding: 25px;
+  color: rgb(212, 212, 212);
+  background-color: #344854;
+  text-align: center;
+  font-size: 14px;
+}

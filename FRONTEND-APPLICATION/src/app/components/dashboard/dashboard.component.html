@@ -340,8 +340,87 @@
         </table>
       </div>
       <!-- Start Rooms Table -->
-
-      <div class="tab-pane fade" id="reservations"><h4>Reservations</h4></div>
+      <!-- Start Reservations Table -->
+      <div class="tab-pane fade" id="reservations">
+        <table class="table table-hover table-bordered">
+          <thead class="table-borderless">
+            <tr class="text-center">
+              <th>#</th>
+              <th>Image</th>
+              <th>Client</th>
+              <th>Room</th>
+              <th>Checking</th>
+              <th>Checkout</th>
+              <th>Parking</th>
+              <th>Restaurant</th>
+              <th>Status</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let reservation of reservations" class="text-center">
+              <td>{{ reservation.id }}</td>
+              <td>
+                <img
+                  src="{{ reservation.room.imageUrl }}"
+                  style="width: 60px"
+                />
+              </td>
+              <td>{{ reservation.client.username }}</td>
+              <td>{{ reservation.room.name }}</td>
+              <td>{{ reservation.checking }}</td>
+              <td>{{ reservation.checkout }}</td>
+              <td>
+                <i
+                  class="fa-sharp fa-solid fa-square-check text-success"
+                  style="font-size: 25px"
+                ></i>
+              </td>
+              <td>
+                <i
+                  class="fa-sharp fa-solid fa-square-check text-success"
+                  style="font-size: 25px"
+                ></i>
+              </td>
+              <td>
+                <button
+                  *ngIf="reservation.approved"
+                  [disabled]="!isAdmin"
+                  type="button"
+                  class="btn btn-sm btn-success"
+                  (click)="changeReservationStatus(reservation)"
+                >
+                  RESERVED
+                </button>
+                <button
+                  [hidden]="reservation.approved"
+                  [disabled]="!isAdmin"
+                  type="button"
+                  class="btn btn-sm btn-warning"
+                  (click)="changeReservationStatus(reservation)"
+                >
+                  PENDING
+                </button>
+              </td>
+              <td>
+                <div class="d-flex justify-content-between">
+                  <button class="btn btn-sm btn-success">
+                    <i class="fas fa-edit"></i>
+                  </button>
+                  <button
+                    (click)="deleteReservation(reservation.id)"
+                    [disabled]="!isAdmin"
+                    class="btn btn-sm btn-danger"
+                  >
+                    <i class="fas fa-trash"></i>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <!-- Start Reservations Table -->
     </div>
   </div>
 </main>
@@ -1204,5 +1283,4 @@
   </div>
 </div>
 <!-- End Add Room Modal -->
-
 <!-- END ROOM MODALS =============================================================================================================== -->

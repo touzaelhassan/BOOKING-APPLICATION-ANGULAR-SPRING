@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
     public editedUser = new User();
     public editedHotel = new Hotel();
     public editedRoom = new Room();
+    public editedReservation = new Reservation();
     public profileImage: any;
     public hotelImage: any;
     public roomImage: any;
@@ -252,6 +253,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
       )
     }
 
+    public changeReservationStatus(reservation: Reservation){
+        this.subscriptions.push(
+        this.reservationService.changeReservationStatus(reservation).subscribe(
+          (response: any) =>{
+            this.sendErrorNotification(NotificationType.SUCCESS, `The Reservation status was updated successfully !!.`);
+            this.getReservations();
+          },  
+          (httpErrorResponse: HttpErrorResponse) => {
+            this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
+          }
+        )
+      )
+    }
+
     public onEditRoom(room: Room): void{
       this.editedRoom = room;
       document.getElementById("openRoomEdit")?.click();
@@ -274,6 +289,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         )
       )
     }
+
 
     public onDeleteUser(id: any){
       this.subscriptions.push(
@@ -308,6 +324,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.roomService.deleteRoom(id).subscribe(
           (response: CustomHttpRespone)=>{
             this.getRooms();
+            this.sendErrorNotification(NotificationType.SUCCESS, response.message);
+          },
+          (httpErrorResponse: HttpErrorResponse) => {
+            this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
+          }
+        )
+      )
+    }
+
+    public deleteReservation(id: any){
+      this.subscriptions.push(
+        this.reservationService.deleteReservation(id).subscribe(
+          (response: CustomHttpRespone)=>{
+            this.getReservations();
             this.sendErrorNotification(NotificationType.SUCCESS, response.message);
           },
           (httpErrorResponse: HttpErrorResponse) => {

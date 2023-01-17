@@ -1,0 +1,12 @@
+.reservation {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.reservation__content {
+  padding: 50px;
+  border: 3px solid #eee;
+  width: 1000px;
+}

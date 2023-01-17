@@ -23,7 +23,7 @@ export class RoomService {
 
     public deleteRoom(id: number): Observable<any | HttpErrorResponse> {
         return this.http.delete<any>(`${this.host}/api/room/delete/${id}`);
-  } 
+    } 
 
     public createRoomFormData( ownerUsername: any, room: any, roomImage: File): FormData {
         const formData = new FormData();

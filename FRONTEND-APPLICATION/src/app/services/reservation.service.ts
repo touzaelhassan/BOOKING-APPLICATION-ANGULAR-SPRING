@@ -12,17 +12,34 @@ export class ReservationService {
 
     constructor(private http: HttpClient) { }
 
-    public addReservation(client_id:number, room_id:number): Observable<any>{
-      return this.http.get<any>(`${this.host}/api/reservation/add/${client_id}/${room_id}`); 
+  public addReservation(formData: FormData): Observable<any | HttpErrorResponse> { 
+        return this.http.post<any>(`${this.host}/api/reservation/add`, formData); 
     }
 
-    public getReservations(): Observable<Reservation[]>{ return this.http.get<Reservation[]>(`${this.host}/api/reservations`); }    
+    public getReservations(): Observable<Reservation[]>{ return this.http.get<Reservation[]>(`${this.host}/api/reservations`); } 
     public getReservationsByClientId(clientId: number): Observable<any>{
       return this.http.get<any>(`${this.host}/api/client/reservations/${clientId}`); 
     }
 
+    public changeReservationStatus(reservation: Reservation): Observable<any>{ 
+      return this.http.get<any>(`${this.host}/api/reservation/update/${reservation.id}`); 
+    } 
+
     public getReservationsByOwnerId(ownerId: number): Observable<any>{
       return this.http.get<any>(`${this.host}/api/owner/reservations/${ownerId}`); 
     }
+
+     public deleteReservation(id: number): Observable<any | HttpErrorResponse> {
+        return this.http.delete<any>(`${this.host}/api/reservation/delete/${id}`);
+    } 
+
+    public createReservationFormData(clientId:any, roomId: any, reservation: Reservation): FormData {
+        const formData = new FormData();
+        formData.append('clientId', clientId);
+        formData.append('roomId', roomId);
+        formData.append('checking', reservation.checking);
+        formData.append('checkout', reservation.checkout);
+        return formData;
+  }
 
 }

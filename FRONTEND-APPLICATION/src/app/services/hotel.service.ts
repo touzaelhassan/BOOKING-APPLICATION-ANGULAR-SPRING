@@ -39,6 +39,6 @@ export class HotelService {
         formData.append('isAvailable', JSON.stringify(hotel.available));
         formData.append('isApproved', JSON.stringify(hotel.approved));
         return formData;
-    }
+  }
 
 }

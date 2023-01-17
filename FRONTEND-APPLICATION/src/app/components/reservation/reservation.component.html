@@ -1,1 +1,66 @@
-<p>reservation works!</p>
+<div class="reservation">
+  <div class="reservation__content">
+    <div class="container rounded">
+      <form
+        #newReservationForm="ngForm"
+        (ngSubmit)="onAddNewReservation(newReservationForm.value)"
+      >
+        <div class="row">
+          <div class="col-md-6 col-12 mb-4">
+            <div class="form-control d-flex flex-column">
+              <p class="h-blue">CHEKING</p>
+              <input
+                name="checking"
+                ngModel
+                class="inputbox textmuted p-2"
+                type="date"
+              />
+            </div>
+          </div>
+          <div class="col-md-6 col-12 mb-4">
+            <div class="form-control d-flex flex-column">
+              <p class="h-blue">CHECKOUT</p>
+              <input
+                name="checkout"
+                ngModel
+                class="inputbox textmuted p-2"
+                type="date"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-6">
+            <div class="form-control d-flex flex-column">
+              <p class="h-blue">ADULTS(18+)</p>
+              <select class="border-0 outline-none">
+                <option value="" hidden selected>0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-6">
+            <div class="form-control d-flex flex-column">
+              <p class="h-blue">CHILDREN(0-17)</p>
+              <select class="border-0 outline-none">
+                <option value="" hidden selected>0</option>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <button
+          type="submit"
+          class="d-inline mt-4 btn text-center"
+          style="color: #eee; background-color: #344854"
+        >
+          Book Now
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
