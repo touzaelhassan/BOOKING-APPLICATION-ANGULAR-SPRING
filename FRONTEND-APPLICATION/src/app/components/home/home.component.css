@@ -231,3 +231,19 @@ a {
 .room__details__link {
   color: #253139;
 }
+
+/* Start Modal Styles */
+.close-btn-modal {
+  border: none;
+  background-color: transparent;
+  font-size: 25px;
+}
+/* End Modal Styles */
+
+.add__btn {
+  color: #eee;
+  background-color: #344854;
+  font-size: 14px;
+  text-transform: uppercase;
+  cursor: pointer;
+}

@@ -23,6 +23,7 @@ export class HomeComponent implements OnInit{
     private subscriptions: Subscription[] = [];
     public loggedInUser: any;
     public isUserLoggedIn = false;
+    public selectedRoom = new Room();
 
     constructor(
       private authenticationService: AuthenticationService, 
@@ -63,6 +64,16 @@ export class HomeComponent implements OnInit{
           }
         )
       )
+    }
+
+    public onBooking(roomId:any){
+      document.getElementById("hide-room-details-btn")?.click();
+      this.router.navigateByUrl(`/reservation/${roomId}`);
+    }
+
+    public onSelectRoom(selectedRoom: Room){
+      this.selectedRoom  = selectedRoom;
+      document.getElementById("openRoomInfo")?.click();
     }
 
     public onLogout(){

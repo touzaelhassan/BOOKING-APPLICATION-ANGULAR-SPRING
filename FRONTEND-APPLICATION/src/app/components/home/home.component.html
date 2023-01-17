@@ -187,9 +187,12 @@
                     room.price | currency : "USD"
                   }}</span>
                 </p>
-                <a [routerLink]="['room', room.id]" class="room__details__link"
-                  >Details</a
+                <button
+                  class="room__details__link add__btn btn btn-sm"
+                  (click)="onSelectRoom(room)"
                 >
+                  Details
+                </button>
               </div>
             </div>
           </div>
@@ -201,3 +204,135 @@
 </section>
 
 <footer></footer>
+
+<!-- Start Room Information Button -->
+<button
+  [hidden]="true"
+  type="button"
+  id="openRoomInfo"
+  data-bs-toggle="modal"
+  data-bs-target="#viewRoomModal"
+></button>
+<!-- Start Room Information Button -->
+
+<!-- Start Room Information Modal -->
+<div
+  class="modal fade bd-example-modal-lg"
+  id="viewRoomModal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby=""
+  aria-hidden="true"
+>
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-center" id="exampleModalLongTitle">
+          | {{ selectedRoom.hotel.name }}
+        </h5>
+        <button
+          type="button close-btn-modal"
+          class="close close-btn-modal"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <div>
+          <div class="card">
+            <div class="card-body">
+              <div class="row">
+                <div class="col-12 col-sm-auto">
+                  <div class="mx-auto" style="width: 150px">
+                    <div
+                      class="d-flex justify-content-center align-items-center rounded"
+                    >
+                      <img
+                        class="rounded"
+                        width="150"
+                        src="{{ selectedRoom.imageUrl }}"
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
+                  class="col d-flex flex-column flex-sm-row justify-content-between"
+                >
+                  <div class="text-sm-left mb-sm-0">
+                    <h6 class="p-0 mb-2 text-nowrap">
+                      <span>Name : </span>
+                      <span>
+                        {{ selectedRoom.name }}
+                      </span>
+                    </h6>
+                    <div class="mb-2">
+                      <span>Description : </span>
+                      <span style="color: #666; font-size: 12px">{{
+                        selectedRoom.description
+                      }}</span>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                      <span>Price : </span>
+                      <span style="color: #344854; font-weight: 600">{{
+                        selectedRoom.price | currency : "USD"
+                      }}</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+                <i class="fa-solid fa-utensils me-3"></i>
+                <span>Restaurant</span>
+              </li>
+              <li class="list-group-item">
+                <i class="fa-solid fa-person-swimming me-3"></i>
+                <span>Swiming Pool</span>
+              </li>
+              <li class="list-group-item">
+                <i class="fa-solid fa-square-parking me-3"></i>
+                <span>Parking</span>
+              </li>
+              <li class="list-group-item">
+                <i class="fa-solid fa-wifi me-3"></i>
+                <span>Free Wi-Fi</span>
+              </li>
+              <li class="list-group-item">
+                <span *ngIf="selectedRoom">
+                  <i class="fa fa-unlock float-right me-3" style="color: green">
+                  </i>
+                  <span>Open</span>
+                </span>
+                <span [hidden]="selectedRoom">
+                  <i class="fa fa-lock float-right me-3" style="color: #ffcc00">
+                  </i>
+                  <span>Reserved</span>
+                </span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer d-flex justify-content-between">
+        <button
+          class="btn btn-sm btn-success"
+          (click)="onBooking(selectedRoom.id)"
+        >
+          Book This Room
+        </button>
+        <button
+          type="button"
+          id="hide-room-details-btn"
+          class="btn btn-sm btn-secondary"
+          data-bs-dismiss="modal"
+        >
+          Close
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- End Room Information Modal -->
