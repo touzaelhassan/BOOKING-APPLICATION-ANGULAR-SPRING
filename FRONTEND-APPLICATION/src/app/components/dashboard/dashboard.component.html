@@ -202,13 +202,13 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let hotel of hotels" class="text-center">
+            <tr *ngFor="let hotel of dashboardHotels" class="text-center">
               <td>{{ hotel.id }}</td>
               <td>
                 <img src="{{ hotel.imageUrl }}" style="width: 60px" />
               </td>
               <td>{{ hotel.name }}</td>
-              <td>Owner</td>
+              <td>{{ hotel.owner.username }}</td>
               <td>25</td>
               <td>
                 <i
@@ -248,7 +248,6 @@
                     <i class="fas fa-edit"></i>
                   </button>
                   <button
-                    [disabled]="!isAdmin"
                     class="btn btn-sm btn-danger"
                     (click)="onDeleteHotel(hotel.id)"
                   >
@@ -1234,7 +1233,7 @@
               <label for="authority">Hotel</label>
               <select name="hotelId" required ngModel class="form-control">
                 <option
-                  *ngFor="let hotel of hotelsByOwnerId"
+                  *ngFor="let hotel of dashboardHotels"
                   value="{{ hotel.id }}"
                 >
                   {{ hotel.name }}

@@ -21,6 +21,7 @@ header {
   align-items: center;
   margin-bottom: 60px;
   background-color: #fafafa;
+  border: 2px solid #eee;
 }
 
 .nav__list {
@@ -65,6 +66,7 @@ header {
 }
 
 .add__btn {
+  border: 3px solid #eee;
   color: #eee;
   background-color: #344854;
   font-size: 14px;

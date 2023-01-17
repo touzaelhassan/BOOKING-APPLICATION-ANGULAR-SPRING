@@ -25,8 +25,9 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     public users: User[] = [];
     public hotels: Hotel[] = [];
-    public hotelsByOwnerId: Hotel[] = [];
+    public dashboardHotels: Hotel[] = [];
     public rooms: Room[] = [];
+    public dashboardRooms: Room[] = [];
     public reservations: Reservation[] = [];
     private subscriptions: Subscription[] = [];
     public loggedInUser: any;
@@ -56,6 +57,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.getHotels();
       this.getHotelsByOwnerId(this.loggedInUser.id);
       this.getRooms();
+      this.getRoomsByOwnerId(this.loggedInUser.id);
       this.getReservations();
     }
 
@@ -83,6 +85,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.hotelService.getHotels().subscribe(
           (response: Hotel[]) => {
             this.hotels = response;
+            if(this.isAdmin){ this.dashboardHotels = response; }
           },
           (httpErrorResponse: HttpErrorResponse) => {
             this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
@@ -95,7 +98,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.subscriptions.push(
         this.hotelService.getHotelsByOwnerId(id).subscribe(
           (response: Hotel[]) => {
-            this.hotelsByOwnerId = response;
+            if(!this.isAdmin){ this.dashboardHotels = response; }
           },
           (httpErrorResponse: HttpErrorResponse) => {
             this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
@@ -109,6 +112,20 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.roomService.getRooms().subscribe(
           (response: Room[]) => {
             this.rooms = response;
+            if(this.isAdmin){ this.dashboardRooms = response; }
+          },
+          (httpErrorResponse: HttpErrorResponse) => {
+            this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
+          }
+        )
+      )
+    }
+
+    public getRoomsByOwnerId(id: number): void{
+      this.subscriptions.push(
+        this.roomService.getRoomsByOwnerId(id).subscribe(
+          (response: Room[]) => {
+            if(this.isAdmin){ this.dashboardRooms = response; }
           },
           (httpErrorResponse: HttpErrorResponse) => {
             this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
@@ -236,7 +253,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
     }
 
     public onUpdateHotel(): void{
-      const formData = this.hotelService.createHotelFormData(this.loggedInUser.username, this.editedHotel , this.hotelImage);
+      const hotelOwner = this.editedHotel.owner.username;
+      const formData = this.hotelService.createHotelFormData(hotelOwner, this.editedHotel , this.hotelImage);
       this.subscriptions.push(
         this.hotelService.updateHotel(formData).subscribe(
           (response: any) =>{
@@ -310,6 +328,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.hotelService.deleteHotel(id).subscribe(
           (response: CustomHttpRespone)=>{
             this.getHotels();
+            this.getHotelsByOwnerId(this.loggedInUser.id);
             this.sendErrorNotification(NotificationType.SUCCESS, response.message);
           },
           (httpErrorResponse: HttpErrorResponse) => {
