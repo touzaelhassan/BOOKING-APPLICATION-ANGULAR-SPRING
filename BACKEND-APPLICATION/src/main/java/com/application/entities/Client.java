@@ -11,7 +11,7 @@ import java.util.List;
 @Table(name = "clients")
 public class Client extends User {
 
-    @OneToMany(mappedBy = "client")
+    @OneToMany(mappedBy = "client", cascade = CascadeType.REMOVE)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Reservation> reservations = new ArrayList<>();
 

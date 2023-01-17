@@ -25,6 +25,7 @@ import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
 @RequestMapping("/api")
 public class RoomController {
 
+    public static final String ROOM_DELETED_SUCCESSFULLY = "Room Deleted Successfully !!.";
     private final RoomServiceSpecification roomServiceBean;
 
     @Autowired
@@ -68,7 +69,7 @@ public class RoomController {
     @DeleteMapping("/room/delete/{id}")
     public ResponseEntity<HttpResponse> deleteHotel(@PathVariable("id") Integer id) throws IOException {
         roomServiceBean.deleteRoom(id);
-        return response(OK, HOTEL_DELETED_SUCCESSFULLY);
+        return response(OK, ROOM_DELETED_SUCCESSFULLY);
     }
 
     private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message) {

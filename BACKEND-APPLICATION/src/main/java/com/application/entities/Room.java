@@ -24,7 +24,7 @@ public class Room {
     private boolean isAvailable;
     @ManyToOne
     private Hotel hotel;
-    @OneToMany(mappedBy = "room")
+    @OneToMany(mappedBy = "room", cascade = CascadeType.REMOVE)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private List<Reservation> reservations = new ArrayList<>();
 
