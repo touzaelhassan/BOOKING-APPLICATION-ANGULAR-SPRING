@@ -11,6 +11,9 @@ import java.util.List;
 @Repository("roomRepositoryBean")
 public interface RoomRepository extends JpaRepository<Room, Integer> {
 
-    @Query("SELECT r FROM Room r WHERE r.hotel.id = :hotelId")
+    @Query("SELECT room FROM Room room WHERE room.hotel.id = :hotelId")
     List<Room> findByHotelId(@Param("hotelId") Integer hotelId);
+
+    @Query("SELECT room FROM Room room WHERE room.hotel.id = :ownerId")
+    List<Room> findByOwnerId(@Param("ownerId") Integer hotelId);
 }

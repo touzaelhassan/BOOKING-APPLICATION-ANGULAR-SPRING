@@ -57,6 +57,8 @@ public class RoomServiceImplementation implements RoomServiceSpecification {
     @Override
     public List<Room> getRoomsByHotelId(Integer hotelId) { return roomRepositoryBean.findByHotelId(hotelId); }
     @Override
+    public List<Room> getRoomsByOwnerId(Integer id) { return roomRepositoryBean.findByOwnerId(id); }
+    @Override
     public void deleteRoom(Integer id) { roomRepositoryBean.deleteById(id); }
 
     private String getTemporaryProfileImageUrl(String name) {

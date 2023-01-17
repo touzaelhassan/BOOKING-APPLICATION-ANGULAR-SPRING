@@ -49,6 +49,14 @@ public class RoomController {
         return new ResponseEntity<>(rooms, OK);
     }
 
+    @GetMapping("/rooms/owner/{id}")
+    public ResponseEntity<List<Room>> getRoomsByOwnerId(@PathVariable Integer id) {
+        System.out.println(this);
+        System.out.println("getRoomsByOwnerId");
+        List<Room> rooms = roomServiceBean.getRoomsByOwnerId(id);
+        return new ResponseEntity<>(rooms, OK);
+    }
+
     @GetMapping("/hotel/rooms/{id}")
     public ResponseEntity<List<Room>> getRoomsByHotelId(@PathVariable Integer id) {
         List<Room> rooms = roomServiceBean.getRoomsByHotelId(id);
