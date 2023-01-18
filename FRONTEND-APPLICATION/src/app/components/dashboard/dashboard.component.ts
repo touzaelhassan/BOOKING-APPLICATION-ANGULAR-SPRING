@@ -25,9 +25,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
     public users: User[] = [];
     public hotels: Hotel[] = [];
-    public dashboardHotels: Hotel[] = [];
     public rooms: Room[] = [];
-    public dashboardRooms: Room[] = [];
     public reservations: Reservation[] = [];
     private subscriptions: Subscription[] = [];
     public loggedInUser: any;
@@ -55,9 +53,7 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.loggedInUser = this.authenticationService.getUserFromLocalStorage();
       this.getUsers();
       this.getHotels();
-      this.getHotelsByOwnerId(this.loggedInUser.id);
       this.getRooms();
-      this.getRoomsByOwnerId(this.loggedInUser.id);
       this.getReservations();
     }
 
@@ -85,7 +81,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.hotelService.getHotels().subscribe(
           (response: Hotel[]) => {
             this.hotels = response;
-            if(this.isAdmin){ this.dashboardHotels = response; }
           },
           (httpErrorResponse: HttpErrorResponse) => {
             this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
@@ -98,7 +93,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.subscriptions.push(
         this.hotelService.getHotelsByOwnerId(id).subscribe(
           (response: Hotel[]) => {
-            if(!this.isAdmin){ this.dashboardHotels = response; }
           },
           (httpErrorResponse: HttpErrorResponse) => {
             this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
@@ -112,7 +106,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
         this.roomService.getRooms().subscribe(
           (response: Room[]) => {
             this.rooms = response;
-            if(this.isAdmin){ this.dashboardRooms = response; }
           },
           (httpErrorResponse: HttpErrorResponse) => {
             this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);
@@ -125,7 +118,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
       this.subscriptions.push(
         this.roomService.getRoomsByOwnerId(id).subscribe(
           (response: Room[]) => {
-            if(this.isAdmin){ this.dashboardRooms = response; }
           },
           (httpErrorResponse: HttpErrorResponse) => {
             this.sendErrorNotification(NotificationType.ERROR, httpErrorResponse.error.message);

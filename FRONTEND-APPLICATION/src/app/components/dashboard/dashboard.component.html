@@ -1,43 +1,6 @@
-<!-- Start Header Section -->
-<header>
-  <div class="container">
-    <div class="header__content">
-      <div class="nav__right">
-        <ul class="nav nav__list">
-          <li class="nav__item">
-            <a class="nav__link active" data-bs-toggle="tab" href="#users"
-              >Users</a
-            >
-          </li>
-          <li *ngIf="isAdmin || isOwner" class="nav__item">
-            <a class="nav__link" data-bs-toggle="tab" href="#hotels">Hotels</a>
-          </li>
-          <li *ngIf="isAdmin || isOwner" class="nav__item">
-            <a class="nav__link" data-bs-toggle="tab" href="#rooms">Rooms</a>
-          </li>
-          <li class="nav__item">
-            <a class="nav__link" data-bs-toggle="tab" href="#reservations"
-              >Reservations</a
-            >
-          </li>
-        </ul>
-      </div>
-      <div class="nav__left">
-        <ul class="nav__list d-flex align-items-center">
-          <li><a class="nav__link" href="">HOME</a></li>
-          <li>
-            <a class="nav__link" (click)="onLogout()">LOGOUT</a>
-          </li>
-          <li class="pe-3">
-            <img src="{{ loggedInUser.profileImageUrl }}" style="width: 40px" />
-          </li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</header>
-<!-- End Header Section -->
-
+<!-- Start Header Component -->
+<app-dashboard-header></app-dashboard-header>
+<!-- End Header Component -->
 <!-- Start Main Section -->
 <main class="main">
   <div class="container">
@@ -202,7 +165,7 @@
             </tr>
           </thead>
           <tbody>
-            <tr *ngFor="let hotel of dashboardHotels" class="text-center">
+            <tr *ngFor="let hotel of hotels" class="text-center">
               <td>{{ hotel.id }}</td>
               <td>
                 <img src="{{ hotel.imageUrl }}" style="width: 60px" />
@@ -339,6 +302,7 @@
         </table>
       </div>
       <!-- Start Rooms Table -->
+
       <!-- Start Reservations Table -->
       <div class="tab-pane fade" id="reservations">
         <table class="table table-hover table-bordered">
@@ -424,6 +388,10 @@
   </div>
 </main>
 <!-- Start Main Section -->
+
+<!-- Start Footer Section -->
+<footer></footer>
+<!-- End Footer Section -->
 
 <!-- START USER MODALS ========================================================================================================== -->
 
@@ -1232,10 +1200,7 @@
             <div class="form-group mb-3">
               <label for="authority">Hotel</label>
               <select name="hotelId" required ngModel class="form-control">
-                <option
-                  *ngFor="let hotel of dashboardHotels"
-                  value="{{ hotel.id }}"
-                >
+                <option *ngFor="let hotel of hotels" value="{{ hotel.id }}">
                   {{ hotel.name }}
                 </option>
               </select>

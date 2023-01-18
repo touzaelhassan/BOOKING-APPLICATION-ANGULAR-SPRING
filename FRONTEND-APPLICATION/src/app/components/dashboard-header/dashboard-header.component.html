@@ -1,0 +1,39 @@
+<!-- Start Header Section -->
+<header>
+  <div class="container">
+    <div class="header__content">
+      <div class="nav__right">
+        <ul class="nav nav__list">
+          <li class="nav__item">
+            <a class="nav__link active" data-bs-toggle="tab" href="#users"
+              >Users</a
+            >
+          </li>
+          <li *ngIf="isAdmin || isOwner" class="nav__item">
+            <a class="nav__link" data-bs-toggle="tab" href="#hotels">Hotels</a>
+          </li>
+          <li *ngIf="isAdmin || isOwner" class="nav__item">
+            <a class="nav__link" data-bs-toggle="tab" href="#rooms">Rooms</a>
+          </li>
+          <li class="nav__item">
+            <a class="nav__link" data-bs-toggle="tab" href="#reservations"
+              >Reservations</a
+            >
+          </li>
+        </ul>
+      </div>
+      <div class="nav__left">
+        <ul class="nav__list d-flex align-items-center">
+          <li><a class="nav__link" href="">HOME</a></li>
+          <li>
+            <a class="nav__link" (click)="onLogout()">LOGOUT</a>
+          </li>
+          <li class="pe-3">
+            <img src="{{ loggedInUser.profileImageUrl }}" style="width: 40px" />
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</header>
+<!-- End Header Section -->
