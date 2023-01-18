@@ -14,7 +14,7 @@ import { RegisterComponent } from './components/register/register.component';
 import { HomeComponent } from './components/home/home.component';
 import { FormsModule } from '@angular/forms';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-import { DashboardHeaderComponent } from './components/dashboard-header/dashboard-header.component';
+import { ReservationComponent } from './components/reservation/reservation.component';
 
 @NgModule({
   declarations: [
@@ -22,9 +22,8 @@ import { DashboardHeaderComponent } from './components/dashboard-header/dashboar
     RegisterComponent,
     LoginComponent,
     HomeComponent,
+    ReservationComponent,
     DashboardComponent,
-    DashboardHeaderComponent
-
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { NotificationType } from 'src/app/enums/notification-type.enum';
@@ -22,6 +22,10 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit, OnDestroy {
+
+   @Input() admin: boolean = false; 
+   @Input() owner: boolean = false; 
+   @Input() client: boolean = false; 
 
     public users: User[] = [];
     public hotels: Hotel[] = [];
