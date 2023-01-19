@@ -85,7 +85,9 @@ a {
   margin-top: 40px;
   padding: 17px;
   border: none;
+  font-size: 14px;
   border-radius: 4px;
+  letter-spacing: 1px;
   width: 100%;
   color: #fff;
   background-color: #344854;
@@ -95,12 +97,19 @@ a {
   background-color: #253139;
 }
 
+/* End Hero Section */
+
+/* Start Hotels Section */
 .hotels__section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   height: 100vh;
+  background-color: #eff2ff;
 }
 
 .hotels__section__title {
-  margin: 90px 0;
+  margin-bottom: 50px;
 }
 
 .hotels__section__title h5 {
@@ -126,7 +135,7 @@ a {
   padding: 25px;
   width: 400px;
   text-align: center;
-  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  box-shadow: rgba(100, 100, 111, 0.1) 0px 7px 29px 0px;
 }
 
 .hotel__image {
@@ -145,8 +154,12 @@ a {
   color: #fff;
   background-color: #344854;
   text-decoration: none;
+  font-size: 13px;
+  letter-spacing: 1px;
 }
+/* End Hotels Section */
 
+/* Start Offer Section */
 .offer__section {
   height: 60vh;
   background-image: url("/assets/images/offer-bg.jpg");
@@ -183,9 +196,11 @@ a {
   color: #344854;
   background-color: #fff;
 }
+/* End Hotels Section */
 
+/* Start Rooms Section */
 .rooms__section {
-  height: 100vh;
+  padding: 80px 0;
 }
 
 .rooms__layout {
@@ -231,6 +246,7 @@ a {
 .room__details__link {
   color: #253139;
 }
+/* End Rooms Section */
 
 /* Start Modal Styles */
 .close-btn-modal {
@@ -249,7 +265,7 @@ a {
 }
 
 footer p {
-  margin-top: 100px;
+  margin: 0;
   padding: 25px;
   color: rgb(212, 212, 212);
   background-color: #344854;

@@ -131,21 +131,23 @@
 </section>
 
 <section class="hotels__section">
-  <div class="container">
-    <div class="hotels__section__title">
-      <h5>Discover Our Hotels Collection</h5>
-      <span></span>
-    </div>
-    <div class="row hotels__content">
-      <div *ngFor="let hotel of hotels" class="col-3 hotel__item">
-        <div class="hotel__image">
-          <img src="{{ hotel.imageUrl }}" class="w-100" />
+  <div class="hotels__section__content">
+    <div class="container">
+      <div class="hotels__section__title">
+        <h5>Discover Our Hotels Collection</h5>
+        <span></span>
+      </div>
+      <div class="row hotels__content">
+        <div *ngFor="let hotel of hotels" class="col-3 hotel__item">
+          <div class="hotel__image">
+            <img src="{{ hotel.imageUrl }}" class="w-100" />
+          </div>
+          <h5 class="my-3">{{ hotel.name }}</h5>
+          <p class="hotel__description">{{ hotel.description }}</p>
+          <a routerLink="/hotel/rooms/{{ hotel.id }}" class="see__all_rooms_btn"
+            >SEE ALL ROOMS</a
+          >
         </div>
-        <h3 class="my-3">{{ hotel.name }}</h3>
-        <p class="hotel__description">{{ hotel.description }}</p>
-        <a routerLink="/hotel/rooms/{{ hotel.id }}" class="see__all_rooms_btn"
-          >SEE ALL ROOMS</a
-        >
       </div>
     </div>
   </div>
@@ -178,7 +180,7 @@
               <img src="{{ room.imageUrl }}" class="w-100" />
             </div>
             <div class="col-9 room__text">
-              <h5 class="room__name">{{ room.name }}</h5>
+              <h6 class="room__name">{{ room.name }}</h6>
               <p class="room__description">{{ room.description }}</p>
               <div class="d-flex justify-content-between">
                 <p>
@@ -276,10 +278,11 @@
       </div>
     </div>
   </div>
-  <footer>
-    <p>Copyright &copy; All right reserved.</p>
-  </footer>
 </section>
+
+<footer>
+  <p>Copyright &copy; All right reserved.</p>
+</footer>
 
 <!-- Start Room Information Button -->
 <button
