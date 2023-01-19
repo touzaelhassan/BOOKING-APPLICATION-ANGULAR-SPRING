@@ -73,6 +73,8 @@ a {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
+  background-color: rgba(37, 49, 57, 0.4);
+  background-blend-mode: multiply;
 }
 
 .hero__form {
@@ -244,7 +246,10 @@ a {
 }
 
 .room__details__link {
-  color: #253139;
+  color: #fff;
+  background-color: #2e414d;
+  font-size: 12px;
+  letter-spacing: 1px;
 }
 /* End Rooms Section */
 

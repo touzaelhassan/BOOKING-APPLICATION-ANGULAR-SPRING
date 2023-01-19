@@ -68,18 +68,22 @@ a {
 /* End Header Section */
 
 .login {
-  margin-top: 70px;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 88vh;
+  background-color: #eff2ff;
 }
 
 .login__content {
-  border: 2px solid #eee;
-  padding: 40px;
   border-radius: 5px;
-  width: 500px;
+  width: 400px;
   height: 400px;
+}
+
+.login__icons i {
+  margin-right: 10px;
+  font-size: 20px;
 }
 
 .login__form input {
@@ -87,6 +91,8 @@ a {
 }
 
 .login__form button {
+  border: 0;
   margin-top: 10px;
   padding: 11px;
+  background-color: #253139;
 }
