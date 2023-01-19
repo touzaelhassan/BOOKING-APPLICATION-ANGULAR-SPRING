@@ -34,17 +34,16 @@
       </div>
     </header>
 
-    <div class="container">
-      <div class="login">
-        <div class="login__content">
-          <h3 class="mb-3 text-center">REGISTER</h3>
-          <form
-            class="login__form"
-            #registerForm="ngForm"
-            (ngSubmit)="onRegister(registerForm.value)"
-          >
-            <div class="mb-3">
-              <label for="" class="form-label">Firstname</label>
+    <div class="login">
+      <div class="login__content">
+        <form
+          class="login__form"
+          #registerForm="ngForm"
+          (ngSubmit)="onRegister(registerForm.value)"
+        >
+          <div class="row">
+            <div class="mb-3 col">
+              <label for="" class="form-label">First Name</label>
               <input
                 type="text"
                 class="form-control"
@@ -54,9 +53,8 @@
                 required
               />
             </div>
-            <div class="mb-3">
-              <label for="" class="form-label">Lastname</label>
-
+            <div class="mb-3 col">
+              <label for="" class="form-label">Last Name</label>
               <input
                 type="text"
                 class="form-control"
@@ -65,44 +63,45 @@
                 #lastnameInput="ngModel"
               />
             </div>
-            <div class="mb-3">
-              <label for="" class="form-label">Username</label>
+          </div>
+          <div class="mb-3">
+            <label for="" class="form-label">Username</label>
 
-              <input
-                type="text"
+            <input
+              type="text"
+              class="form-control"
+              name="username"
+              ngModel
+              #usernameInput="ngModel"
+            />
+          </div>
+          <div class="col mb-3">
+            <div class="form-group">
+              <label for="authority" class="select__label">Role</label>
+              <select
+                name="role"
+                required
+                ngModel="ROLE_CLIENT"
                 class="form-control"
-                name="username"
-                ngModel
-                #usernameInput="ngModel"
-              />
+              >
+                <option value="ROLE_CLIENT">CLIENT</option>
+                <option value="ROLE_OWNER">OWNER</option>
+              </select>
             </div>
-            <div class="mb-3">
-              <label for="" class="form-label">Email</label>
-              <input
-                type="text"
-                class="form-control"
-                name="email"
-                ngModel
-                #emailInput="ngModel"
-              />
-            </div>
-            <div class="col mb-3">
-              <div class="form-group">
-                <label for="authority">Role</label>
-                <select
-                  name="role"
-                  required
-                  ngModel="ROLE_CLIENT"
-                  class="form-control"
-                >
-                  <option value="ROLE_CLIENT">CLIENT</option>
-                  <option value="ROLE_OWNER">OWNER</option>
-                </select>
-              </div>
-            </div>
-            <button type="submit" class="w-100 btn btn-primary">Submit</button>
-          </form>
-        </div>
+          </div>
+          <div class="mb-3">
+            <label for="" class="form-label">Email</label>
+            <input
+              type="text"
+              class="form-control"
+              name="email"
+              ngModel
+              #emailInput="ngModel"
+            />
+          </div>
+
+          <button type="submit" class="w-100 btn btn-primary">REGISTER</button>
+        </form>
       </div>
     </div>
   </body>
