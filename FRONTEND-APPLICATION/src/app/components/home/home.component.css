@@ -73,7 +73,7 @@ a {
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;
-  background-color: rgba(37, 49, 57, 0.4);
+  background-color: rgba(37, 49, 57, 0.1);
   background-blend-mode: multiply;
 }
 
