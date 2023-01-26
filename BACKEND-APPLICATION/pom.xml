@@ -73,7 +73,6 @@
             <artifactId>javax.mail</artifactId>
             <version>1.6.2</version>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -87,7 +86,7 @@
         </dependency>
 
     </dependencies>
-
+    <packaging>war</packaging>
     <build>
         <plugins>
             <plugin>
@@ -103,6 +102,7 @@
                 </configuration>
             </plugin>
         </plugins>
+        <finalName>hotel-booking-application</finalName>
     </build>
 
 </project>

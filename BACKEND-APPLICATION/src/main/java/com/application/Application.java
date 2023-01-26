@@ -39,9 +39,6 @@ public class Application {
 
         return args -> {
 
-
-
-
             Admin admin = new Admin();
             admin.setUserId("534376");
             admin.setFirstname("El Hassan");
