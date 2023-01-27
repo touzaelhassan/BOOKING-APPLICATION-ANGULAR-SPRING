@@ -1,4 +1,6 @@
 FROM openjdk:19
-ARG WAR_FILE=target/*.war
-COPY target/hotel-booking-application.war app.war
-ENTRYPOINT ["java", "-jar","app.war"]
+WORKDIR /app
+COPY target/hotel-booking-application.jar app.jar
+EXPOSE 8080
+CMD ["java", "-jar", "app.jar"]
+

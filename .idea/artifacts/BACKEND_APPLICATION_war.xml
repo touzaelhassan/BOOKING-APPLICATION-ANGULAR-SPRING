@@ -1,0 +1,14 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="BACKEND-APPLICATION:war">
+    <output-path>$PROJECT_DIR$/BACKEND-APPLICATION/target</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <module>BACKEND-APPLICATION</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
+    <root id="archive" name="hotel-booking-application.war">
+      <element id="artifact" artifact-name="BACKEND-APPLICATION:war exploded" />
+    </root>
+  </artifact>
+</component>

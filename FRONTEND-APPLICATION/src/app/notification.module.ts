@@ -46,4 +46,5 @@ const customNotifierOptions: NotifierOptions = {
   imports: [NotifierModule.withConfig(customNotifierOptions)],
   exports: [NotifierModule]
 })
+
 export class NotificationModule {} 
