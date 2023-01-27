@@ -119,7 +119,7 @@ public class Application {
             hotelServiceBean.addHotel(hotel1);
 
             Hotel hotel2 = new Hotel();
-            hotel2.setName("Waltzing Matilda Hotel");
+            hotel2.setName("Waltzing Matilda Hotel 55");
             hotel2.setDescription("The Panoramic Hotel is a modern, elegant, nice and glamorous 5-star hotel overlooking the sea, perfect for a romantic, charming and a nice vacation." );
             hotel2.setImageUrl("assets/images/hotels/hotel-2.jpg");
             hotel2.setAvailable(true);
