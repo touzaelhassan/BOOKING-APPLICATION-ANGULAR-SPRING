@@ -110,7 +110,7 @@ public class Application {
             userRepositoryBean.save(client2);
 
             Hotel hotel1 = new Hotel();
-            hotel1.setName("Millenium Hotels & Resorts");
+            hotel1.setName("Mille Hotels & Resorts");
             hotel1.setDescription("A Boutique Hotel To Make Your Dreams of A Lush Island Getaway Come True. A Tropical Island Paradise On Mauritius’ Shores - La Maison D’Été.");
             hotel1.setImageUrl("assets/images/hotels/hotel-1.jpg");
             hotel1.setAvailable(true);
