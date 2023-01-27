@@ -3,7 +3,6 @@ pipeline {
     agent any
 
     stages {
-
         stage('Build') {
             steps {
                 dir("BACKEND-APPLICATION/"){
@@ -11,14 +10,11 @@ pipeline {
                 }
             }
         }
-
         stage('Deploy') {
             steps {
                 bat 'docker-compose build'
                 bat 'docker-compose up -d'
             }
         }
-
     }
-
 }
