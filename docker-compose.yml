@@ -3,13 +3,17 @@ services:
   frontend:
     build: ./FRONTEND-APPLICATION
     ports:
-      - "4200:4200"
+      - "4200:80"
+    depends_on:
+      - backend
   backend:
     build: ./BACKEND-APPLICATION
     ports:
       - "8080:8080"
+    depends_on:
+      - database
     environment:
-      DB_URL: jdbc:postgresql://localhost:5432/hotel_booking_application
+      DB_URL: jdbc:postgresql://database:5432/hotel_booking_application
   database:
     image: postgres:alpine
     environment:
@@ -18,3 +22,5 @@ services:
       POSTGRES_PASSWORD: password
     ports:
       - "5432:5432"
+
+

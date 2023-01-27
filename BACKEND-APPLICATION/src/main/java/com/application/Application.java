@@ -172,17 +172,6 @@ public class Application {
             room4.setHotel(hotel3);
             roomServiceBean.addRoom(room4);
 
-            /*
-            Reservation reservation1 = new Reservation();
-            reservation1.setClient(client);
-            reservation1.setRoom(room1);
-            reservationServiceBean.addReservation(reservation1);
-
-            Reservation reservation2 = new Reservation();
-            reservation2.setRoom(room2);
-            reservation2.setClient(client);
-            reservationServiceBean.addReservation(reservation2);
-             */
         };
     }
 

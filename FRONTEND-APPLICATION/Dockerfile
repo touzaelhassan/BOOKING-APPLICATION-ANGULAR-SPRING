@@ -1,8 +1,10 @@
-FROM node:16
+FROM node:alpine as build
+RUN mkdir -p /app
 WORKDIR /app
-COPY package*.json ./
+COPY package.json /app/
 RUN npm install --force
-COPY . .
-RUN npm run build
-EXPOSE 4200
-CMD ["npm", "start"]
+COPY . /app/
+RUN npm run build --prod
+FROM nginx:alpine
+COPY --from=build /app/dist/frontend-application /usr/share/nginx/html
+
