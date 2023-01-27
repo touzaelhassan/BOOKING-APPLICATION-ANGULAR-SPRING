@@ -2,7 +2,6 @@ pipeline {
     agent any
 
     stages {
-       g
         stage('Build') {
             steps {
                 dir("BACKEND-APPLICATION/"){
