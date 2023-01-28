@@ -1,7 +1,5 @@
 ### HOTEL BOOKING APPLICATION
 
---
-
 #### Spring Boot - Spring Security - Angular - Docker - Jenkins Project
 
 Hotel Booking Application is online booking application that allows guests to make secure online reservations through hotel website and helps hotels to accept bookings and collect payments online
