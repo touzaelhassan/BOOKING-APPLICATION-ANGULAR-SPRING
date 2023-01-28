@@ -1,4 +1,6 @@
-### HOTEL BOOKING APPLICATION 
+### HOTEL BOOKING APPLICATION
+
+--
 
 #### Spring Boot - Spring Security - Angular - Docker - Jenkins Project
 
