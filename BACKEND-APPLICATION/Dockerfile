@@ -1,5 +1,4 @@
-FROM openjdk:19
+FROM openjdk:17-alpine
 WORKDIR /app
 COPY target/hotel-booking-application.jar app.jar
-EXPOSE 8081
 CMD ["java", "-jar", "app.jar"]

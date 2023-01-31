@@ -1,11 +1,14 @@
 version: "3.8"
+
 services:
+
   frontend:
     build: ./FRONTEND-APPLICATION
     ports:
       - "4200:80"
     depends_on:
       - backend
+
   backend:
     build: ./BACKEND-APPLICATION
     ports:
@@ -14,6 +17,7 @@ services:
       - database
     environment:
       DB_URL: jdbc:postgresql://database:5432/hotel_booking_application
+      
   database:
     image: postgres:alpine
     environment:
